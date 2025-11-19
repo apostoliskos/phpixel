@@ -17,24 +17,31 @@ const { seo } = Astro.props as Props;
 ---
 
 <Layout seo={seo}>
-	<Header rightMenu navData={nav} slot="header">
+
+	<div id="page">
+		<Header rightMenu navData={nav} slot="header">
 		<span slot="logo">
 			<Logo />
 		</span>
-		<Button slot="action-item" href="/theme/get-started">Get Started</Button>
-	</Header>
-	<div id="page">
+			<Button slot="action-item" href="/theme/get-started">Get Started</Button>
+		</Header>
+
+
+
 		<slot />
+
+
+		<Footer
+			slot="footer"
+			background="var(--theme-surface-1)"
+			color="var(--theme-on-surface-1)"
+			footerLists={footerLists}
+			footerSocials={footerSocials}
+			copyrightName={settings.name}
+			showPlug={settings.showPlug}
+		>
+			<Logo slot="logo" />
+		</Footer>
 	</div>
-	<Footer
-		slot="footer"
-		background="var(--theme-surface-1)"
-		color="var(--theme-on-surface-1)"
-		footerLists={footerLists}
-    footerSocials={footerSocials}
-		copyrightName={settings.name}
-    showPlug={settings.showPlug}
-	>
-		<Logo slot="logo" />
-	</Footer>
+
 </Layout>
