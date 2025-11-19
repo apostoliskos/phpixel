@@ -1,12 +1,16 @@
 ---
-import { Container, FeatureCard } from '@components/odyssey-theme';
+import { AnnouncementBar, Container, FeatureCard } from '@components/odyssey-theme';
 
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
 import What_we_do from '../components/sections/heros/What_we_do.astro';
 import Stats from '../components/sections/heros/Stats.astro';
 ---
-
+<AnnouncementBar
+	text="keimeno catch phrase"
+	href="/blog/posts/remote-work-mental-health/"
+	slot="announcement-bar"
+/>
 <Layout>
 
 
