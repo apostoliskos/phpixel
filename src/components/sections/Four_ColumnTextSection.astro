@@ -1,0 +1,52 @@
+---
+import Container from '../core/Container.astro';
+---
+
+<Container>
+	<section class="four-col-text__section">
+		<div class="four-col-text__column">
+			<slot name="column-1-body"></slot>
+		</div>
+		<div class="four-col-text__column">
+			<slot name="column-2-body"></slot>
+		</div>
+		<div class="four-col-text__column">
+			<slot name="column-3-body"></slot>
+		</div>
+		<div class="four-col-text__column">
+			<slot name="column-4-body"></slot>
+		</div>
+	</section>
+</Container>
+
+<style>
+    .four-col-text__section {
+        --column-count: 4;
+        --column-width: calc(100% / var(--column-count));
+        margin: var(--section-margin) auto;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: space-evenly;
+    }
+    .four-col-text__column {
+        width: var(--column-width);
+        margin-bottom: 2rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media(max-width: 1200px) {
+        .four-col-text__section {
+            --column-count: 2;
+        }
+    }
+    @media(max-width: 768px) {
+        .four-col-text__section {
+            --column-count: 1;
+        }
+    }
+</style>
