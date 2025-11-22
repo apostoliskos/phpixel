@@ -28,11 +28,21 @@ const {reversed} = Astro.props;
     grid-template-columns: 4fr 6fr;
   }
   .sticky-text-image__section--reversed .sticky-text-image__text {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
     order: 2;
   }
+  .sticky-text-image__image{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
   .sticky-text-image__image :global(:first-child) {
-    position: sticky;
-    top: 0;
+    //position: sticky;
+    //top: 0;
   }
   .sticky-text-image__section :global(img) {
     border-radius: var(--theme-shape-radius);
