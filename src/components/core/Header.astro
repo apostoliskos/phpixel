@@ -41,27 +41,52 @@ const { navData, rightMenu } = Astro.props;
 
 <header id="odysseyNavHeader" class={`${rightMenu ? "header--right" : ``.trim()}`}>
   <div class="header-logo-menu__container">
-  <button id="menuButton" title="Open Main Menu">
-    <span id="menuButtonIconHam">
-      <Icon name="ic:baseline-menu" width="24px" height="24px" />
-    </span>
-    <span id="menuButtonIconClose" hidden>
-      <Icon name="ic:baseline-close" width="24px" height="24px" />
-    </span>
-  </button>
-  <a class="header-logo__link" href="/">
-    <slot name="logo">
-    </slot>
-  </a>
+    <button id="menuButton" title="Open Main Menu">
+      <span id="menuButtonIconHam">
+        <Icon name="ic:baseline-menu" width="24px" height="24px" />
+      </span>
+      <span id="menuButtonIconClose" hidden>
+        <Icon name="ic:baseline-close" width="24px" height="24px" />
+      </span>
+    </button>
+    <a class="header-logo__link" href="/">
+      <slot name="logo">
+      </slot>
+    </a>
   </div>
   <div class="header-nav__container">
     <slot name="nav">
       {navData && <nav>
         <ul>
           {navData.map(navItem => (
-            (<li><a href={navItem.slug} >{navItem.title}</a></li>)
+            <li class={navItem.children ? 'has-dropdown' : ''}>
+              <a href={navItem.slug}>
+                {navItem.title}
+
+                {navItem.children && (
+                  <Icon
+                    name="mdi:keyboard-arrow-down"
+                    width="18px"
+                    height="18px"
+                    class="dropdown-arrow"
+                  />
+                )}
+              </a>
+
+              {navItem.children && (
+                <ul class="dropdown">
+                  {navItem.children.map(child => (
+                    <li>
+                      <a href={child.slug}>{child.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
         </ul>
+
+
       </nav>}
     </slot>
   </div>
@@ -161,4 +186,54 @@ const { navData, rightMenu } = Astro.props;
        margin-bottom: 1rem;
      }
   }
+  /* ——————————— */
+  /* Desktop Dropdown */
+  /* ——————————— */
+  nav {
+    ul {
+      li {
+        position: relative;
+
+        &.has-dropdown {
+          a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+          }
+        }
+        .dropdown {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #fff;
+          padding: 0.5rem 0;
+          list-style: none;
+          margin: 0;
+          border: 1px solid #eee;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+          z-index: 999;
+
+          li {
+            white-space: nowrap;
+            padding: 0.3rem 1rem;
+
+            a {
+              margin: 0;
+              opacity: 1;
+              display: block;
+            }
+          }
+        }
+
+        &:hover {
+          .dropdown {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+
 </style>

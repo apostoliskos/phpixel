@@ -12,7 +12,13 @@ export const nav = [
 		slug: '/about',
 	},
 	{
-		title: 'Contact',
-		slug: '/contact',
+		title: 'Services',
+		slug: '/services',
+		children: [
+			{
+				title: 'Κατασκευή e-shop',
+				slug: '/ecommerce'
+			},
+		],
 	},
 ];
