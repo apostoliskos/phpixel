@@ -16,9 +16,68 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 <Layout>
 
 
-	<HomeHeroSection />
+	<!--<HomeHeroSection />-->
 	<What_we_do />
 	<Stats />
+
+
+
+
+
+
+
+
+
+	<TextAndImageHero reversed>
+		<div slot="text-container">
+			<h1>Don't Reinvent the Wheel</h1>
+			<p>Use Odyssey Theme to jumpstart your company's marketing website.</p>
+		</div>
+		<div slot="btns-container">
+			<Button href="/theme/get-started" customIcon
+			>Get Started <Fragment slot="icon">
+				<Icon name="ic:baseline-chevron-right" />
+			</Fragment></Button
+			>
+		</div>
+		<picture slot="image-container">
+			<img
+				src="/assets/images/landing-1/landing-hero-1.jpg"
+				alt="Astro Odyssee"
+				id="home-hero-image"
+			/>
+		</picture>
+	</TextAndImageHero>
+
+
+	<TextAndImageHero>
+		<div slot="text-container">
+			<h1>Don't Reinvent the Wheel</h1>
+			<p>Use Odyssey Theme to jumpstart your company's marketing website.</p>
+		</div>
+		<div slot="btns-container">
+			<Button href="/theme/get-started" customIcon
+			>Get Started <Fragment slot="icon">
+				<Icon name="ic:baseline-chevron-right" />
+			</Fragment></Button
+			>
+		</div>
+		<picture slot="image-container">
+			<img
+				src="/assets/images/landing-1/landing-hero-1.jpg"
+				alt="Astro Odyssee"
+				id="home-hero-image"
+			/>
+		</picture>
+	</TextAndImageHero>
+
+
+
+
+
+
+
+
 	<StickyTextImageSection>
 		<div slot="text-container">
 			<h2>Features</h2>
@@ -104,49 +163,6 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 
 
 
-	<TextAndImageHero reversed>
-		<div slot="text-container">
-			<h1>Don't Reinvent the Wheel</h1>
-			<p>Use Odyssey Theme to jumpstart your company's marketing website.</p>
-		</div>
-		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon
-			>Get Started <Fragment slot="icon">
-				<Icon name="ic:baseline-chevron-right" />
-			</Fragment></Button
-			>
-		</div>
-		<picture slot="image-container">
-			<img
-				src="/assets/images/landing-1/landing-hero-1.jpg"
-				alt="Astro Odyssee"
-				id="home-hero-image"
-			/>
-		</picture>
-	</TextAndImageHero>
-
-
-	<TextAndImageHero>
-		<div slot="text-container">
-			<h1>Don't Reinvent the Wheel</h1>
-			<p>Use Odyssey Theme to jumpstart your company's marketing website.</p>
-		</div>
-		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon
-			>Get Started <Fragment slot="icon">
-				<Icon name="ic:baseline-chevron-right" />
-			</Fragment></Button
-			>
-		</div>
-		<picture slot="image-container">
-			<img
-				src="/assets/images/landing-1/landing-hero-1.jpg"
-				alt="Astro Odyssee"
-				id="home-hero-image"
-			/>
-		</picture>
-	</TextAndImageHero>
-
 	<CustomerQuoteSection
 		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
 		customerName="Happy Customer"
@@ -159,9 +175,9 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 			<!--	ad campaign.-->
 			<!--</p>-->
 			<div class="feature-card__grid">
-				<FeatureCard href="/landing-pages/landing-1" title="Κατασκευή website" imgSrc="/assets/images/home/screenshots/landing-1">
+				<FeatureCard href="/landing-pages/landing-1" title="Κατασκευή website" imgSrc="/assets/images/home/screenshots/landing-1" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
-				<FeatureCard href="/landing-pages/landing-2" title="Κατασκευή e-shop" imgSrc="/assets/images/home/screenshots/landing-2">
+				<FeatureCard href="/landing-pages/landing-2" title="Κατασκευή e-shop" imgSrc="/assets/images/home/screenshots/landing-2" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
 			</div>
 		</section>
@@ -175,24 +191,16 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 				legal pages, blog posts, etc.
 			</p>
 			<div class="feature-card__grid">
-				<FeatureCard href="/company/about" title="Search Engine Optimization" imgSrc="/assets/images/home/screenshots/about">
+				<FeatureCard href="/about" title="Search Engine Optimization" imgSrc="/assets/images/home/screenshots/about" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
-				<FeatureCard href="/company/contact" title="Σχεδιασμός Ψηφιακών Προϊόντων & UI/UX" imgSrc="/assets/images/home/screenshots/contact">
+				<FeatureCard href="/contact" title="Σχεδιασμός Ψηφιακών Προϊόντων & UI/UX" imgSrc="/assets/images/home/screenshots/contact" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
-				<FeatureCard href="/blog/" title="Social Media Marketing" imgSrc="/assets/images/home/screenshots/blog">
+				<FeatureCard href="/blog/" title="Social Media Marketing" imgSrc="/assets/images/home/screenshots/blog" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
-				<FeatureCard
-					href="/blog/posts/remote-work-mental-health"
-					title="Web Hosting"
-          imgSrc="/assets/images/home/screenshots/blog-post"
-				>
+				<FeatureCard href="/blog/posts/remote-work-mental-health"	title="Web Hosting" imgSrc="/assets/images/home/screenshots/blog-post" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
-				<!--<FeatureCard-->
-				<!--	href="/company/legal"-->
-				<!--	imgSrc="/assets/images/home/screenshots/legal"-->
-				<!--	title="Legal Page"-->
-				<!--&gt;-->
-				<!--</FeatureCard>-->
+				<FeatureCard href="/legal" imgSrc="/assets/images/home/screenshots/legal"	title="Legal Page" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
+				</FeatureCard>
 			</div>
 		</section>
 	</Container>
@@ -202,17 +210,9 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 			<h2>Theme Pages</h2>
 			<p>Learn more about how to set up and use the Odyssey Theme.</p>
 			<div class="feature-card__grid">
-				<FeatureCard
-					href="/theme/get-started"
-					imgSrc="/assets/images/home/screenshots/get-started"
-					title="Get Started"
-				>
+				<FeatureCard href="/theme/get-started" imgSrc="/assets/images/home/screenshots/get-started"	title="Get Started" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
-				<FeatureCard
-					href="/theme/style-guide"
-					imgSrc="/assets/images/home/screenshots/style-guide"
-					title="Style Guide"
-				>
+				<FeatureCard href="/theme/style-guide" imgSrc="/assets/images/home/screenshots/style-guide"	title="Style Guide" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
 				</FeatureCard>
 			</div>
 		</section>

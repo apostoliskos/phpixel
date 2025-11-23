@@ -1,5 +1,5 @@
 ---
-const {href, imgSrc, title} = Astro.props;
+const {href, imgSrc, title, txt} = Astro.props;
 ---
 
 <style>
@@ -53,6 +53,7 @@ const {href, imgSrc, title} = Astro.props;
         <source srcset={`${imgSrc}.webp`} type="image/webp" >
         <img class="feature-card__img" src={`${imgSrc}.png`} alt={title} loading="lazy" width="780" height="585" decoding="async" >
       </picture>
+      <p style="margin-top: 50px"> {txt} </p>
     </div>
   </a>
 </div> 
