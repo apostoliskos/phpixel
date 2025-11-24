@@ -32,7 +32,7 @@ const { seo } = Astro.props;
 		</style>
 		<BaseHead {...seo} />
 	</head>
-	<body>
+	<body STYLE="html, body { background: #000 !important }">
 		<SkipLink />
     <slot name="announcement-bar" />
 		<slot name="header" />
