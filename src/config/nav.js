@@ -11,6 +11,10 @@ export const nav = [
 				title: 'Κατασκευή e-shop',
 				slug: '/ecommerce'
 			},
+			{
+				title: 'Κατασκευή Ιστοσελίδας,<br> Landing Page',
+				slug: '/istoselides-landingpage'
+			},
 		],
 	},
 	{

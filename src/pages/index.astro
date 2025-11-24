@@ -174,8 +174,12 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 			business or startup.
 		</p>
 		<div class="two_buttons">
-			<Button href="tel:6977383488" customIcon> 6977383488 <Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
-			<Button href="/theme/get-started" customIcon> Επικοινωνία  <Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
+			<!-- Icon after text (default) -->
+			<Button href="/contact" customIcon iconPosition="before">Επικοινωνία<Fragment slot="icon"><Icon name="ic:baseline-mail" /></Fragment></Button>
+
+			<!-- Icon before text -->
+			<Button href="tel:6977383488" customIcon iconPosition="before">6977383488<Fragment slot="icon"><Icon name="ic:baseline-phone" /></Fragment></Button>
+
 		</div>
 
 	</CtaCardSection>

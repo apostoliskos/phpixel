@@ -69,7 +69,14 @@ const { navData, rightMenu } = Astro.props;
           {navData.map(navItem => (
             <li class={navItem.children ? 'has-dropdown' : ''}>
               <div class="dropdown-wrapper">
-                <a href={navItem.slug}>{navItem.title}</a>
+                <a href={navItem.slug}>
+                  {navItem.title.split('<br>').map((line, i) => (
+                    <>
+                      {line}
+                      {i < navItem.title.split('<br>').length - 1 && <br />}
+                    </>
+                  ))}
+                </a>
                 {navItem.children && (
                   <button class="dropdown-toggle" type="button">
                     <Icon
@@ -86,7 +93,14 @@ const { navData, rightMenu } = Astro.props;
                 <ul class="dropdown">
                   {navItem.children.map(child => (
                     <li>
-                      <a href={child.slug}>{child.title}</a>
+                      <a href={child.slug}>
+                        {child.title.split('<br>').map((line, i) => (
+                          <>
+                            {line}
+                            {i < child.title.split('<br>').length - 1 && <br />}
+                          </>
+                        ))}
+                      </a>
                     </li>
                   ))}
                 </ul>
