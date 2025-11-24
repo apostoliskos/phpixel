@@ -16,18 +16,12 @@ import Stats from '../components/sections/heros/Stats.astro';
 import { Icon } from 'astro-icon/components';
 import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
 ---
-<AnnouncementBar
-	text="From idea to pixel and code"
-	href="/blog/posts/remote-work-mental-health/"
-	slot="announcement-bar"
-/>
+<AnnouncementBar text="From idea to pixel and code" href="/blog/posts/remote-work-mental-health/" slot="announcement-bar" />
 <Layout>
-
-
 	<!--<HomeHeroSection />-->
 	<What_we_do />
-	<Stats />
 
+	<Stats />
 
 	<TextAndImageHero reversed>
 		<div slot="text-container">
@@ -51,23 +45,12 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 			</ul>
 		</div>
 		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon
-			>Get Started
-				<Fragment slot="icon">
-					<Icon name="ic:baseline-chevron-right" />
-				</Fragment>
-			</Button
-			>
+			<Button href="/theme/get-started" customIcon>Get Started<Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
 		</div>
 		<picture slot="image-container">
-			<img
-				src="/assets/images/landing-1/landing-hero-1.jpg"
-				alt="Astro Odyssee"
-				id="home-hero-image"
-			/>
+			<img src="/assets/images/landing-1/landing-hero-1.jpg" alt="Astro Odyssee" id="home-hero-image" />
 		</picture>
 	</TextAndImageHero>
-
 
 	<TextAndImageHero>
 		<div slot="text-container">
@@ -90,27 +73,14 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 			</ul>
 		</div>
 		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon
-			>Get Started
-				<Fragment slot="icon">
-					<Icon name="ic:baseline-chevron-right" />
-				</Fragment>
-			</Button
-			>
+			<Button href="/theme/get-started" customIcon>Get Started<Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
 		</div>
 		<picture slot="image-container">
-			<img
-				src="/assets/images/landing-1/landing-hero-1.jpg"
-				alt="Astro Odyssee"
-				id="home-hero-image"
-			/>
+			<img src="/assets/images/landing-1/landing-hero-1.jpg" alt="Astro Odyssee" id="home-hero-image" />
 		</picture>
 	</TextAndImageHero>
 
-
-	<CustomerQuoteSection
-		quoteText="Κατασκευή Ιστοσελίδων, E-shop & Digital Marketing"
-	/>
+	<CustomerQuoteSection quoteText="Κατασκευή Ιστοσελίδων, E-shop & Digital Marketing" />
 	<!--<Container>-->
 	<!--	<section class="feature-card__section">-->
 	<!--		<h2>Landing Pages</h2>-->
@@ -169,10 +139,7 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 
 	<CtaCardSection background="var(--theme-surface-2)" color="var(--theme-on-surface-2)">
 		<h2>Start Your Website Today</h2>
-		<p>
-			It only takes a couple clicks to have a new, modern website for your
-			business or startup.
-		</p>
+		<p>It only takes a couple clicks to have a new, modern website for your business or startup.</p>
 		<div class="two_buttons">
 			<!-- Icon after text (default) -->
 			<Button href="/contact" customIcon iconPosition="before">Επικοινωνία<Fragment slot="icon"><Icon name="ic:baseline-mail" /></Fragment></Button>
