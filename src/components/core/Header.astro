@@ -16,7 +16,7 @@ const { navData, rightMenu } = Astro.props;
   function toggleMenu() {
     menuButtonIconHam.toggleAttribute('hidden');
     menuButtonIconClose.toggleAttribute('hidden');
-    
+
     if (navHeader.hasAttribute('mobile-menu-open', true)) {
       menuButton.title = "Open Main Menu"
       // unlock scroll position
@@ -34,10 +34,19 @@ const { navData, rightMenu } = Astro.props;
       bodyElement.style.top = `-${scrollPosition}px`;
       bodyElement.style.width = '100%';
     }
-    
+
     navHeader.toggleAttribute('mobile-menu-open');
   }
-</script>  
+
+  // Mobile dropdown toggles
+  document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent LI hover conflict
+      const li = btn.closest('li');
+      li.classList.toggle('open');
+    });
+  });
+</script>
 
 <header id="odysseyNavHeader" class={`${rightMenu ? "header--right" : ``.trim()}`}>
   <div class="header-logo-menu__container">
@@ -50,8 +59,7 @@ const { navData, rightMenu } = Astro.props;
       </span>
     </button>
     <a class="header-logo__link" href="/">
-      <slot name="logo">
-      </slot>
+      <slot name="logo"></slot>
     </a>
   </div>
   <div class="header-nav__container">
@@ -60,18 +68,19 @@ const { navData, rightMenu } = Astro.props;
         <ul>
           {navData.map(navItem => (
             <li class={navItem.children ? 'has-dropdown' : ''}>
-              <a href={navItem.slug}>
-                {navItem.title}
-
+              <div class="dropdown-wrapper">
+                <a href={navItem.slug}>{navItem.title}</a>
                 {navItem.children && (
-                  <Icon
-                    name="mdi:keyboard-arrow-down"
-                    width="18px"
-                    height="18px"
-                    class="dropdown-arrow"
-                  />
+                  <button class="dropdown-toggle" type="button">
+                    <Icon
+                      name="mdi:keyboard-arrow-down"
+                      width="18px"
+                      height="18px"
+                      class="dropdown-arrow"
+                    />
+                  </button>
                 )}
-              </a>
+              </div>
 
               {navItem.children && (
                 <ul class="dropdown">
@@ -83,16 +92,14 @@ const { navData, rightMenu } = Astro.props;
                 </ul>
               )}
             </li>
+
           ))}
         </ul>
-
-
       </nav>}
     </slot>
   </div>
   <div class="header-action-item__container">
-    <slot name="action-item">
-    </slot>
+    <slot name="action-item"></slot>
   </div>
 </header>
 
@@ -139,7 +146,7 @@ const { navData, rightMenu } = Astro.props;
     vertical-align: middle;
   }
   nav {
-  display: flex;
+    display: flex;
   }
   nav ul {
     margin: 0;
@@ -147,9 +154,11 @@ const { navData, rightMenu } = Astro.props;
     list-style: none;
     display: flex;
   }
+  nav ul li .dropdown-wrapper {
+    margin-right: 1rem;
+  }
   nav ul li a {
     text-decoration: none;
-    margin-right: 1rem;
     color: inherit;
     opacity: 0.72;
     transition: opacity linear 150ms;
@@ -157,9 +166,10 @@ const { navData, rightMenu } = Astro.props;
   nav ul li a:hover {
     opacity: 1;
   }
+
   @media(max-width: 600px) {
     #menuButton {
-      display: block;  
+      display: block;
       z-index: 100;
     }
     .header-nav__container {
@@ -181,11 +191,12 @@ const { navData, rightMenu } = Astro.props;
       align-items: center;
       flex-direction: column;
     }
-     header[mobile-menu-open] nav ul li {
-       font-size: var(--font-size-lg);
-       margin-bottom: 1rem;
-     }
+    header[mobile-menu-open] nav ul li {
+      font-size: var(--font-size-lg);
+      margin-bottom: 1rem;
+    }
   }
+
   /* ——————————— */
   /* Desktop Dropdown */
   /* ——————————— */
@@ -201,6 +212,7 @@ const { navData, rightMenu } = Astro.props;
             gap: 4px;
           }
         }
+
         .dropdown {
           display: none;
           position: absolute;
@@ -235,5 +247,99 @@ const { navData, rightMenu } = Astro.props;
     }
   }
 
+  /* Dropdown toggle button */
+  .dropdown-toggle {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media(max-width: 600px) {
+    /* Disable hover opening on mobile */
+    nav ul li:hover .dropdown {
+      display: none;
+    }
+
+    nav ul li.open .dropdown {
+      display: block;
+    }
+
+    nav ul li.has-dropdown {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    nav ul li .dropdown {
+      position: relative;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding-left: 1rem;
+    }
+
+    nav ul li .dropdown li {
+      padding-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  /* Dropdown wrapper keeps text + arrow inline */
+  .dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .dropdown-toggle {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    transition: transform 0.3s ease;
+  }
+
+  /* Rotate arrow when open */
+  nav ul li.open .dropdown-toggle .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Desktop hover dropdown */
+  nav ul li:hover .dropdown {
+    display: block;
+  }
+
+  /* Mobile dropdown smooth transition */
+  @media(max-width: 600px) {
+    nav ul li .dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    nav ul li.open .dropdown {
+      max-height: 500px; /* enough to show all items */
+      opacity: 1;
+    }
+
+    nav ul li.has-dropdown {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    nav ul li .dropdown li {
+      padding-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  }
 
 </style>
