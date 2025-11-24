@@ -1,5 +1,13 @@
 ---
-import { CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, FeatureCard } from '@components/odyssey-theme';
+import {
+	CustomerQuoteSection,
+	Button,
+	CtaCardSection,
+	StickyTextImageSection,
+	AnnouncementBar,
+	Container,
+	FeatureCard
+} from '@components/odyssey-theme';
 
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
@@ -21,23 +29,34 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 	<Stats />
 
 
-
-
-
-
-
-
-
 	<TextAndImageHero reversed>
 		<div slot="text-container">
-			<h1>Don't Reinvent the Wheel</h1>
-			<p>Use Odyssey Theme to jumpstart your company's marketing website.</p>
+			<h2>Κατασκευή Ιστοσελίδων</h2>
+			<p>Δώστε στην επιχείρησή σας τη διαδικτυακή παρουσία που της αξίζει!</p>
+			<p>Φέρτε την επιχείρησή σας online με έναν επαγγελματικό ιστότοπο. Ο ιστότοπός σας είναι το κέντρο της ψηφιακής
+				σας παρουσίας, συνδέοντας εσάς με τους πελάτες σας και προβάλλοντας την επωνυμία σας. Ένας καλά σχεδιασμένος
+				ιστότοπος αυξάνει την προβολή, δημιουργεί leads και ενισχύει τις πωλήσεις σας. Μην αφήνετε το διαδίκτυο να
+				περάσει ανεκμετάλλευτο – ας δημιουργήσουμε έναν ιστότοπο που αναδεικνύει τη μοναδικότητά σας και φέρνει
+				αποτελέσματα.</p>
+			<ul>
+				<li>
+					Προσαρμοσμένο Θέμα & Σχεδιασμός: Ο ιστότοπός σας αποκτά μοναδική εμφάνιση που ταιριάζει στην επωνυμία σας.
+				</li>
+				<li>
+					Τελευταίες Τεχνολογίες Σχεδίασης: Σύγχρονη αισθητική και λειτουργικότητα.
+				</li>
+				<li>
+					SEO-Φιλικός Σχεδιασμός: Οι πελάτες σας θα σας βρίσκουν εύκολα στις μηχανές αναζήτησης.
+				</li>
+			</ul>
 		</div>
 		<div slot="btns-container">
 			<Button href="/theme/get-started" customIcon
-			>Get Started <Fragment slot="icon">
-				<Icon name="ic:baseline-chevron-right" />
-			</Fragment></Button
+			>Get Started
+				<Fragment slot="icon">
+					<Icon name="ic:baseline-chevron-right" />
+				</Fragment>
+			</Button
 			>
 		</div>
 		<picture slot="image-container">
@@ -52,14 +71,31 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 
 	<TextAndImageHero>
 		<div slot="text-container">
-			<h1>Don't Reinvent the Wheel</h1>
-			<p>Use Odyssey Theme to jumpstart your company's marketing website.</p>
+			<h2>Κατασκευή e-Shop</h2>
+			<p>Ανεβάστε την επιχείρησή σας στο επόμενο επίπεδο με ένα e-Shop!</p>
+			<p>Με ένα ηλεκτρονικό κατάστημα οι πελάτες σας μπορούν να αγοράζουν προϊόντα ή υπηρεσίες οποιαδήποτε στιγμή, 24/7.
+				Είναι άνετο για τους πελάτες και ανοίγει νέες αγορές για την επιχείρησή σας. Δημιουργούμε e-shops που είναι
+				εύχρηστα, ασφαλή και προσαρμοσμένα στην επωνυμία σας. Με ένα επαγγελματικό e-shop, αυξάνετε τις πωλήσεις και
+				διευρύνετε την πελατειακή σας βάση, ενώ μειώνετε τα λειτουργικά κόστη.</p>
+			<ul>
+				<li>
+					Πωλήσεις 24/7
+				</li>
+				<li>
+					Σύνδεση με ERP (αν διαθέτετε)
+				</li>
+				<li>
+					Υποστήριξη ηλεκτρονικών πληρωμών
+				</li>
+			</ul>
 		</div>
 		<div slot="btns-container">
 			<Button href="/theme/get-started" customIcon
-			>Get Started <Fragment slot="icon">
-				<Icon name="ic:baseline-chevron-right" />
-			</Fragment></Button
+			>Get Started
+				<Fragment slot="icon">
+					<Icon name="ic:baseline-chevron-right" />
+				</Fragment>
+			</Button
 			>
 		</div>
 		<picture slot="image-container">
@@ -72,95 +108,98 @@ import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astr
 	</TextAndImageHero>
 
 
-
-
-
-
 	<CustomerQuoteSection
-		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
-		customerName="Happy Customer"
+		quoteText="Κατασκευή Ιστοσελίδων, E-shop & Digital Marketing"
 	/>
-	<Container>
-		<section class="feature-card__section">
-			<!--<h2>Landing Pages</h2>-->
-			<!--<p>-->
-			<!--	Use one of our landing pages to jumpstart your website or-->
-			<!--	ad campaign.-->
-			<!--</p>-->
-			<div class="feature-card__grid">
-				<FeatureCard href="/landing-pages/landing-1" title="Κατασκευή website" imgSrc="/assets/images/home/screenshots/landing-1" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
-				</FeatureCard>
-				<FeatureCard href="/landing-pages/landing-2" title="Κατασκευή e-shop" imgSrc="/assets/images/home/screenshots/landing-2" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
-				</FeatureCard>
-			</div>
-		</section>
-	</Container>
+	<!--<Container>-->
+	<!--	<section class="feature-card__section">-->
+	<!--		<h2>Landing Pages</h2>-->
+	<!--		<p>-->
+	<!--			Use one of our landing pages to jumpstart your website or-->
+	<!--			ad campaign.-->
+	<!--		</p>-->
+	<!--		<div class="feature-card__grid">-->
+	<!--			<FeatureCard href="/landing-pages/landing-1" title="Κατασκευή website" imgSrc="/assets/images/home/screenshots/landing-1" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
+	<!--			</FeatureCard>-->
+	<!--			<FeatureCard href="/landing-pages/landing-2" title="Κατασκευή e-shop" imgSrc="/assets/images/home/screenshots/landing-2" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
+	<!--			</FeatureCard>-->
+	<!--		</div>-->
+	<!--	</section>-->
+	<!--</Container>-->
 
 	<Container>
 		<section class="feature-card__section">
-			<h2>Υπηρεσίες Marketing</h2>
+			<h2>Υπηρεσίες Marketing & Σχεδιασμού</h2>
 			<p>
-				Use one of our prebuilt company pages for your about page, contact page,
-				legal pages, blog posts, etc.
+				Search Engine Optimization (SEO).
 			</p>
 			<div class="feature-card__grid">
-				<FeatureCard href="/about" title="Search Engine Optimization" imgSrc="/assets/images/home/screenshots/about" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
+				<FeatureCard href="/about" title="Search Engine Optimization" imgSrc="/assets/images/home/screenshots/about"
+										 txt="Ανεβάστε την ιστοσελίδα σας ψηλότερα στις μηχανές αναζήτησης με ολοκληρωμένες υπηρεσίες SEO.">
 				</FeatureCard>
-				<FeatureCard href="/contact" title="Σχεδιασμός Ψηφιακών Προϊόντων & UI/UX" imgSrc="/assets/images/home/screenshots/contact" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
+				<FeatureCard href="/contact" title="Σχεδιασμός Ψηφιακού Προϊόντος & UI/UX"
+										 imgSrc="/assets/images/home/screenshots/contact"
+										 txt="Μετατρέψτε τις ιδέες σας σε ψηφιακά προϊόντα με υπηρεσίες σχεδιασμού διεπαφής και εμπειρίας χρήστη (UI/UX).">
 				</FeatureCard>
-				<FeatureCard href="/blog/" title="Social Media Marketing" imgSrc="/assets/images/home/screenshots/blog" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
+				<FeatureCard href="/blog/" title="Social Media Marketing" imgSrc="/assets/images/home/screenshots/blog"
+										 txt="Αυξήστε την απήχηση της επιχείρησής σας και προσεγγίστε νέους πελάτες μέσα από στρατηγικές social media που λειτουργούν για εσάς, 24/7.">
 				</FeatureCard>
-				<FeatureCard href="/blog/posts/remote-work-mental-health"	title="Web Hosting" imgSrc="/assets/images/home/screenshots/blog-post" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
+				<FeatureCard href="/blog/posts/remote-work-mental-health" title="Ανάπτυξη Λογισμικού"
+										 imgSrc="/assets/images/home/screenshots/blog-post"
+										 txt="Κάντε πραγματικότητα το λογισμικό που φαντάζεστε με τις υπηρεσίες ανάπτυξης software μας.">
 				</FeatureCard>
-				<FeatureCard href="/legal" imgSrc="/assets/images/home/screenshots/legal"	title="Legal Page" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
-				</FeatureCard>
+				<!--<FeatureCard href="/legal" imgSrc="/assets/images/home/screenshots/legal"	title="Legal Page" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
+				<!--</FeatureCard>-->
 			</div>
 		</section>
 	</Container>
 
-	<Container>
-		<section class="feature-card__section">
-			<h2>Theme Pages</h2>
-			<p>Learn more about how to set up and use the Odyssey Theme.</p>
-			<div class="feature-card__grid">
-				<FeatureCard href="/theme/get-started" imgSrc="/assets/images/home/screenshots/get-started"	title="Get Started" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
-				</FeatureCard>
-				<FeatureCard href="/theme/style-guide" imgSrc="/assets/images/home/screenshots/style-guide"	title="Style Guide" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">
-				</FeatureCard>
-			</div>
-		</section>
-	</Container>
+	<!--<Container>-->
+	<!--	<section class="feature-card__section">-->
+	<!--		<h2>Theme Pages</h2>-->
+	<!--		<p>Learn more about how to set up and use the Odyssey Theme.</p>-->
+	<!--		<div class="feature-card__grid">-->
+	<!--			<FeatureCard href="/theme/get-started" imgSrc="/assets/images/home/screenshots/get-started"	title="Get Started" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
+	<!--			</FeatureCard>-->
+	<!--			<FeatureCard href="/theme/style-guide" imgSrc="/assets/images/home/screenshots/style-guide"	title="Style Guide" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
+	<!--			</FeatureCard>-->
+	<!--		</div>-->
+	<!--	</section>-->
+	<!--</Container>-->
 
-
-	<CtaCardSection
-		background="var(--theme-surface-2)"
-		color="var(--theme-on-surface-2)"
-	>
+	<CtaCardSection background="var(--theme-surface-2)" color="var(--theme-on-surface-2)">
 		<h2>Start Your Website Today</h2>
 		<p>
 			It only takes a couple clicks to have a new, modern website for your
 			business or startup.
 		</p>
-		<Button href="/theme/get-started" customIcon
-		>Get Started <Fragment slot="icon">
-			<Icon name="ic:baseline-chevron-right" />
-		</Fragment></Button
-		>
+		<div class="two_buttons">
+			<Button href="tel:6977383488" customIcon> 6977383488 <Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
+			<Button href="/theme/get-started" customIcon> Επικοινωνία  <Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
+		</div>
+
 	</CtaCardSection>
 </Layout>
 
 <style>
-	.feature-card__section {
-		margin: var(--section-margin) auto;
-	}
-	.feature-card__grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--theme-grid-gap);
-	}
-	@media (max-width: 768px) {
-		.feature-card__grid {
-			grid-template-columns: 1fr;
-		}
-	}
+    .feature-card__section {
+        margin: var(--section-margin) auto;
+    }
+    .two_buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+				justify-content: center;
+    }
+    .feature-card__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--theme-grid-gap);
+    }
+
+    @media (max-width: 768px) {
+        .feature-card__grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
