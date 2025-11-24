@@ -12,30 +12,6 @@ const { seo } = Astro.props;
 
 <html lang="en">
 	<head>
-		<link rel="preload" href="/src/styles/reset.css" as="style" onload="this.rel='stylesheet'">
-		<link rel="preload" href="/src/styles/global.css" as="style" onload="this.rel='stylesheet'">
-		<link rel="preload" href="/src/styles/index.css" as="style" onload="this.rel='stylesheet'">
-		<link rel="preload" href="/src/styles/theme.css" as="style" onload="this.rel='stylesheet'">
-		<link rel="preload" href="/src/styles/typography.css" as="style" onload="this.rel='stylesheet'">
-
-		<noscript>
-			<link rel="stylesheet" href="/src/styles/reset.css">
-			<link rel="stylesheet" href="/src/styles/global.css">
-			<link rel="stylesheet" href="/src/styles/index.css">
-			<link rel="stylesheet" href="/src/styles/theme.css">
-			<link rel="stylesheet" href="/src/styles/typography.css">
-		</noscript>
-
-		<style is:global>
-        /* Kill ALL white flashes BEFORE Astro renders */
-        html, body {
-            background: #000 !important;
-            color: #fff !important;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-		</style>
 		<BaseHead {...seo} />
 	</head>
 	<body>
