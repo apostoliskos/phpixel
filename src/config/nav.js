@@ -15,6 +15,14 @@ export const nav = [
 				title: 'Κατασκευή Ιστοσελίδας,<br> Landing Page',
 				slug: '/istoselides-landingpage'
 			},
+			{
+				title: 'Social Media Marketing',
+				slug: '/social-media-marketing'
+			},
+			{
+				title: 'Search Engine<br> Optimization (SEO)',
+				slug: '/software-development'
+			},
 		],
 	},
 	{
