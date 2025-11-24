@@ -15,7 +15,24 @@ import { nav } from '../config/nav.js';
 
 const { seo } = Astro.props as Props;
 ---
-
+<style>
+    .announcement-banner__container {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* centers content vertically */
+        background-color: var(--theme-primary);
+        color: var(--theme-on-primary);
+        position: relative;
+        z-index: 100;
+        height: 100vh; /* full viewport height */
+    }
+    .announcement-banner__container p {
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
 <Layout seo={seo}>
 
 	<div id="page">
