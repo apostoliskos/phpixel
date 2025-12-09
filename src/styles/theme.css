@@ -35,8 +35,9 @@
 	--theme-font-family-serif: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 	--theme-font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 
-	.flash_color{
-		color: red;
-	}
 
+
+}
+.flash_color{
+	color: red;
 }
