@@ -3,13 +3,11 @@ import Container from '../core/Container.astro';
 
 const {background, color} = Astro.props;
 ---
-<Container>
   <section class="cta-card__section" style={background && `--section-bg:${background}; --section-color:${color}`}>
     <div class="cta-card__container">
       <slot></slot>
     </div>
   </section>
-</Container>
 
 <style>
   .cta-card__section {

@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Page.astro';
-import { CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, FeatureCard } from '@components/odyssey-theme';
+import { CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, Feature_card_small } from '@components/odyssey-theme';
 import { Icon } from 'astro-icon/components';
 
 ---
@@ -11,65 +11,45 @@ import { Icon } from 'astro-icon/components';
 		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
 		customerName="Happy Customer"
 	/>
-	<StickyTextImageSection>
-		<div slot="text-container">
-			<h2>Features</h2>
-			<h3>SEO</h3>
+	<div class="outer_fwdth">
+	<Container>
+		<section class="feature-card__section">
+			<h2>e-comerce servises</h2>
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
+				txt.
 			</p>
-			<h3>Responsive</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Themeable</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-		</div>
-		<picture slot="image-container">
-			<img src="/assets/images/landing-1/landing-sticky.jpg" alt="Astro Odyssey" loading="lazy" />
-		</picture>
-	</StickyTextImageSection>
-	<StickyTextImageSection reversed>
-		<div slot="text-container">
-			<h2>Features</h2>
-			<h3>SEO</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Responsive</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Themeable</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-		</div>
-		<picture slot="image-container">
-			<img src="/assets/images/landing-1/landing-sticky.jpg" alt="Astro Odyssey" loading="lazy" />
-		</picture>
-	</StickyTextImageSection>
-
+			<div class="feature-card__row for_two">
+				<Feature_card_small
+					title="Search Engine Optimization"
+					imgSrc="/assets/images/home/screenshots/about"
+					txt="Ανεβάστε την ιστοσελίδα σας ψηλότερα στις μηχανές αναζήτησης με ολοκληρωμένες υπηρεσίες SEO.">
+				</Feature_card_small>
+				<Feature_card_small
+					title="Σχεδιασμός Ψηφιακού Προϊόντος & UI/UX"
+					imgSrc="/assets/images/home/screenshots/contact"
+					txt="Μετατρέψτε τις ιδέες σας σε ψηφιακά προϊόντα με υπηρεσίες σχεδιασμού διεπαφής και εμπειρίας χρήστη (UI/UX).">
+				</Feature_card_small>
+			</div>
+			<div class="feature-card__row for_three">
+				<Feature_card_small
+					title="Search Engine Optimization"
+					imgSrc="/assets/images/home/screenshots/about"
+					txt="Ανεβάστε την ιστοσελίδα σας ψηλότερα στις μηχανές αναζήτησης με ολοκληρωμένες υπηρεσίες SEO.">
+				</Feature_card_small>
+				<Feature_card_small
+					title="Σχεδιασμός Ψηφιακού Προϊόντος & UI/UX"
+					imgSrc="/assets/images/home/screenshots/contact"
+					txt="Μετατρέψτε τις ιδέες σας σε ψηφιακά προϊόντα με υπηρεσίες σχεδιασμού διεπαφής και εμπειρίας χρήστη (UI/UX).">
+				</Feature_card_small>
+				<Feature_card_small
+					title="Social Media Marketing"
+					imgSrc="/assets/images/home/screenshots/blog"
+					txt="Αυξήστε την απήχηση της επιχείρησής σας και προσεγγίστε νέους πελάτες μέσα από στρατηγικές social media που λειτουργούν για εσάς, 24/7.">
+				</Feature_card_small>
+			</div>
+		</section>
+	</Container>
+	</div>
 	<CtaCardSection background="var(--theme-surface-2)" color="var(--theme-on-surface-2)">
 		<h2>Start Your Website Today</h2>
 		<p>
@@ -80,3 +60,27 @@ import { Icon } from 'astro-icon/components';
 	</CtaCardSection>
 
 </layout>
+
+<style>
+		.outer_fwdth{
+				background: red;
+				padding: 25px;
+		}
+    .feature-card__row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+				margin-bottom: 10px;
+    }
+		.for_three{
+				.feature-card__card{
+            width: calc(33.333% - 7px);
+				}
+		}
+		.for_two{
+				.feature-card__card{
+						width: calc(50% - 5px);
+				}
+		}
+</style>
