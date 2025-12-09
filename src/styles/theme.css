@@ -1,8 +1,8 @@
 :root {
 	/* Theme Colors */
-	--theme-primary: red;
+	--theme-primary: #000;
 	--theme-primary-hover: #333;
-	--theme-on-primary: yellow;
+	--theme-on-primary: #fff;
 
 	--theme-bg: #fff;
 	--theme-on-bg: #000;

@@ -1,19 +1,6 @@
 ---
 const {text, href, newTab} = Astro.props;
 ---
-
-<div class="announcement-banner__container">
-  <p>
-    {newTab ?
-      <a class="flash_color" href={href} target="_blank" rel="noopener noreferrer">
-        {text}
-      </a> :
-      <a href={href}>
-        {text}
-      </a>}
-  </p>
-</div>
-
 <style>
   .announcement-banner__container {
     padding: 0.5rem;
@@ -31,5 +18,17 @@ const {text, href, newTab} = Astro.props;
     margin: 0 auto;
     text-align: center;
   }
-
 </style>
+<div class="announcement-banner__container">
+  <p>
+    {newTab ?
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {text}
+      </a> :
+      <a href={href}>
+        {text}
+      </a>}
+  </p>
+</div>
+
+
