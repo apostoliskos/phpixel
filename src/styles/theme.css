@@ -15,7 +15,7 @@
 
 	/* Theme Shapes */
 	/* Set this to 0 if you want all of the rounded cards, images, etc to be straight edges */
-	--theme-shape-radius: clamp(0.2rem, 0.3rem, 0.4rem);
+	--theme-shape-radius: clamp(0rem, 0rem, 0rem);
 	--theme-button-border-radius: 0.3rem;
 
 	/* Theme Transition */
@@ -34,4 +34,9 @@
 	/*--theme-font-family-serif: 'Roboto', Georgia, Cambria, 'Times New Roman', Times, serif;*/
 	--theme-font-family-serif: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 	--theme-font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+
+	.flash_color{
+		color: red;
+	}
+
 }

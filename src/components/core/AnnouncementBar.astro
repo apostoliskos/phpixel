@@ -5,7 +5,7 @@ const {text, href, newTab} = Astro.props;
 <div class="announcement-banner__container">
   <p>
     {newTab ?
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a class="flash_color" href={href} target="_blank" rel="noopener noreferrer">
         {text}
       </a> :
       <a href={href}>
