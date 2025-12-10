@@ -32,6 +32,6 @@
 
 	/* Theme Fonts */
 	/*--theme-font-family-serif: 'Roboto', Georgia, Cambria, 'Times New Roman', Times, serif;*/
-	--theme-font-family-serif: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-	--theme-font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+	--theme-font-family-serif: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+	--theme-font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
 }

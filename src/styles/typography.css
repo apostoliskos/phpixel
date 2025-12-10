@@ -85,30 +85,28 @@ h1,
 h2,
 h3 {
 	font-family: var(--theme-font-family-serif);
-	font-weight: 700;
 }
 
 h1 {
-	font-size: var(--font-size-xxl);
-}
-
-h2 {
-	font-size: var(--font-size-xl);
-}
-
-h3 {
 	font-size: var(--font-size-lg);
 }
 
-h1,
 h2 {
-	line-height: 1.1;
-	font-weight: 700;
+	font-size: var(--font-size-md);
 }
 
-h3 {
+
+
+h1 {
+	font-weight: 600;
+}
+h2 {
 	font-weight: 500;
 }
+h3 {
+    font-weight: 500;
+}
+
 
 h6 {
 	font-size: var(--font-size-sm);
@@ -123,7 +121,9 @@ h6,
 p {
 	margin: 0 0 1rem 0;
 }
-
+p{
+    font-weight: 400;
+}
 blockquote {
 	/*font-style: italic;*/
 	font-size: var(--font-size-base);

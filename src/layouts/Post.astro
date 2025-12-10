@@ -21,15 +21,7 @@ const seo = {
 ---
 <Layout seo={seo}> 
   <div class="post-header__container"> 
-    <ul class="post-tags__list">
-      {allTagsData.map(tag => (
-        <li class="post-tags__tag">
-          <a href={`/blog/tags/${tag.slug}`}>
-            {tag.title}
-          </a>
-        </li>
-      ))}
-    </ul>
+
     <h1>{title}</h1>
     <p class="post-layout__date">
       <time><em>{publishDate}</em></time>
@@ -40,12 +32,24 @@ const seo = {
     <article id="article">
         <slot></slot>
     </article>
+
+    <ul class="post-tags__list">
+      {allTagsData.map((tag, index) => (
+        <li class="post-tags__tag">
+          <a href={`/blog/tags/${tag.slug}`}>
+            {tag.title}{index < allTagsData.length - 1 ? ',' : ''}
+          </a>
+        </li>
+      ))}
+    </ul>
+
   </Container>
+
 </Layout>
 
 <style>
   #article {
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
   }
   .post-header__container {
     max-width: var(--theme-blog-post-header-width);
@@ -72,4 +76,15 @@ const seo = {
     margin-bottom: 1rem;
     opacity: 0.84;
   }
+
+  .post-tags__list {
+    display: flex;
+    flex-wrap: wrap; /* optional */
+    gap: 6px;        /* space between tags */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 25px;
+  }
+
 </style>
