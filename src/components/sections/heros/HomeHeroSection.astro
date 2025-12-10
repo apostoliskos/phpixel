@@ -5,22 +5,17 @@ import settings from '../../../config/settings.js';
 import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 ---
 
-<Container>
+<!--<Container>-->
 	<section class="hero-section__section">
 		<div class="hero-section__text">
-				<h1>Welcome to Odyssey</h1>
+				<h1>Δημιούργησε το Μέλλον της Επιχείρησής Σου Σήμερα!</h1>
 				<p>
-					A marketing website theme built with <a
-						href="https://astro.build"
-						target="_blank"
-						rel="noreferrer">Astro</a
-					> and carefully crafted for startups and businesses.
+					Ανάπτυξη Λογισμικού, Σχεδίαση Ιστοσελίδων, eShop, Mobile Apps, SEO, Υπηρεσίες Ψηφιακής Αξιοπιστίας
 				</p>
 				<div class="hero-btns__container">
-					<Button href="/theme/get-started" customIcon>Get Started<Fragment slot="icon"><Icon name="ic:baseline-chevron-right"/></Fragment></Button>
-					<Button href="/theme/style-guide" unelevated>Style Guide</Button>
+					<Button href="contact" customIcon> Επικοινωνία <Fragment slot="icon"><Icon name="ic:baseline-chevron-right"/></Fragment></Button>
 				</div>
-        {settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}
+        <!--{settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}-->
 		</div>
 		<div class="hero-section__image">
 				<picture>
@@ -32,7 +27,7 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 				</picture>
 		</div>
 	</section>
-</Container>
+<!--</Container>-->
 
 <style>
 	.hero-section__section {

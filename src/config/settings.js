@@ -1,5 +1,5 @@
 export default {
-	title: `phpixel | Κατασκευή Ιστοσελίδων, E-shop & Digital Marketing`,
+	title: `Κατασκευή Ιστοσελίδων, E-shop & Digital Marketing | phpixel`,
 	description: `ΚΑΤΑΣΚΕΥΉ WEBSITE, ESHOP, ΑΝΑΠΤΥΞΗ ΕΦΑΡΜΟΓΩΝ, DIGITAL MARKETING.`,
 	url: `https://phpixel.gr`,
 	name: `phpixel.gr`,

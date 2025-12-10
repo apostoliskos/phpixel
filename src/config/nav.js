@@ -26,7 +26,7 @@ export const nav = [
 		],
 	},
 	{
-		title: 'Project',
+		title: 'Projects',
 		slug: '/software-development'
 	},
 	{

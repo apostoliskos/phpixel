@@ -3,39 +3,109 @@ import { Button, Container, TextCardSection } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 
 const seo = {
-	title: 'Get Started using the Astro Odyssey Theme',
-	description: 'Get started on how to setup and use this Astro theme.',
+	title: 'Σελίδα Δεν Βρέθηκε | phpixel',
+	description: 'Φαίνεται πως αυτή η σελίδα… κάνει διακοπές. Πάμε πίσω στην αρχική για να βρούμε ό,τι χρειάζεσαι!',
 };
 ---
 
 <Layout {seo}>
 	<Container>
 		<TextCardSection>
-			<h1>404</h1>
-			<h2>Page Not Found 👀</h2>
-			<div class="cta-buttons__container">
-				<Button href="/">Return Home</Button>
+			<div class="error-wrapper">
+				<div class="error-text">
+					<h1>404</h1>
+					<h2>Page Not Found 👀</h2>
+					<p class="error-desc">Η σελίδα δεν υπάρχει ή μετακόμισε αλλού.</p>
+
+					<div class="cta-buttons__container">
+						<Button href="/">Return Home</Button>
+					</div>
+				</div>
+
+				<div class="error-image">
+					<img src="/assets/images/error/travolta.gif" alt="Confused Travolta GIF">
+				</div>
 			</div>
 		</TextCardSection>
 	</Container>
 </Layout>
 
 <style>
+    /* Main wrapper */
+    .error-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    /* Text side */
+    .error-text h1 {
+        font-size: 4rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .error-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-desc {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Image styling */
+    .error-image img {
+        max-width: 280px;
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    /* Buttons */
     .cta-buttons__container {
         display: flex;
         flex-wrap: wrap;
+				justify-content: center;
     }
+
     .cta-buttons__container :global(a) {
         margin-right: 1rem;
         margin-bottom: 1rem;
     }
-    .code-buttons__container {
-        margin: 1rem auto;
-        display: flex;
-        flex-wrap: wrap;
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .error-wrapper {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .error-text h1 {
+            font-size: 3.2rem;
+        }
+
+        .error-text h2 {
+            font-size: 1.7rem;
+        }
+
+        .error-image img {
+            max-width: 240px;
+        }
     }
-    .code-buttons__container > a {
-        margin-right: 1rem;
-        margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+        .error-text h1 {
+            font-size: 2.6rem;
+        }
+
+        .error-text h2 {
+            font-size: 1.4rem;
+        }
+
+        .error-image img {
+            max-width: 200px;
+        }
     }
 </style>

@@ -2,10 +2,29 @@
 import Layout from '../layouts/Page.astro';
 import { CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, Feature_card_small } from '@components/odyssey-theme';
 import { Icon } from 'astro-icon/components';
-
+import HeroSection from '../components/sections/heros/HeroSection.astro';
+const seo = {
+	title: 'Κατασκευή eShop B2C, Β2Β',
+	description: 'Κατασκευή eShop B2C, Β2Β. Προσαρμοσμένο στις ανάγκες σας',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
+
+	<HeroSection>
+		<div slot="text-container">
+			<h1>Κατασκευή e-shop</h1>
+			<p>Κλείστε ραντεβού για να αναζητήσουμε μαζί την βέλτιστη λύση για εσας και την επιχείρησή σας!</p>
+			<div class="hero-btns__container">
+				<Button href="/contact" customIcon> Επικοινωνία <Fragment slot="icon"><Icon name="ic:baseline-chevron-right"/></Fragment></Button>
+			</div>
+		</div>
+
+		<div slot="image-container">
+			<img src="/assets/images/hero-image1.jpg" alt="Image" />
+		</div>
+	</HeroSection>
+
 
 	<CustomerQuoteSection
 		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
