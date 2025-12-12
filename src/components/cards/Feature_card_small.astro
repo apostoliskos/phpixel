@@ -38,7 +38,17 @@ const {href, imgSrc, title, txt} = Astro.props;
 
     .feature-card__title {
         font-family: var(--theme-font-family-sans);
+				text-align: center;
     }
+
+    @media(max-width: 600px) {
+        .feature-card__card{
+						margin-bottom: 10px;
+				}
+
+
+    }
+
 </style>
 
 
@@ -52,7 +62,7 @@ const {href, imgSrc, title, txt} = Astro.props;
 				<img class="feature-card__img" src={`${imgSrc}.png`} alt={title} loading="lazy" width="780" height="585" decoding="async" >
 			</picture>
 			<h3 class="feature-card__title">{title}</h3>
-			<p style="margin-top: 50px"> {txt} </p>
+			<p style="text-align: center;"> {txt} </p>
 		</div>
 	</a>
 </div>
