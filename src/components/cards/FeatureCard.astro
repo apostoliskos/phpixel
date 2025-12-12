@@ -40,6 +40,8 @@ const {href, imgSrc, title, txt} = Astro.props;
   }
   .feature-card__title {
     font-family: var(--theme-font-family-sans);
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
 </style>
 
@@ -47,13 +49,14 @@ const {href, imgSrc, title, txt} = Astro.props;
 <div class="feature-card__card">
   <a class="feature-card__link" href={href}>
     <div class="featured-card__content">
-      <h3 class="feature-card__title">{title}</h3>
       <!-- I would like to swap this out with Astro's Image integration soon but was having some issues with it at the moment so we're going old school here. -->
       <picture>
         <source srcset={`${imgSrc}.webp`} type="image/webp" >
         <img class="feature-card__img" src={`${imgSrc}.png`} alt={title} loading="lazy" width="780" height="585" decoding="async" >
       </picture>
-      <p style="margin-top: 50px"> {txt} </p>
+      <h3 class="feature-card__title">{title}</h3>
+
+      <p style="text-align: center;"> {txt} </p>
     </div>
   </a>
 </div> 
