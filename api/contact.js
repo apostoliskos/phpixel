@@ -1,14 +1,14 @@
 import nodemailer from "nodemailer";
 
-export default async function handler(req, res) {
-	if (req.method !== "POST") {
-		return res.status(405).json({ message: "Method not allowed" });
-	}
+export async function POST({ request }) {
+	const formData = await request.formData();
 
-	const { Name, Email, Message } = req.body;
+	const Name = formData.get("Name");
+	const Email = formData.get("Email");
+	const Message = formData.get("Message");
+	const Source = formData.get("Source");
 
 	try {
-		// Set up transporter (using Gmail example)
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {
@@ -18,19 +18,32 @@ export default async function handler(req, res) {
 		});
 
 		await transporter.sendMail({
-			from: process.env.MAIL_USER,
+			from: `"PHPixel Contact" <${process.env.MAIL_USER}>`,
 			to: "hello@phpixel.gr",
+			replyTo: Email,
 			subject: "New Contact Form Submission",
 			text: `
 Name: ${Name}
 Email: ${Email}
-Message: ${Message}
+Source: ${Source}
+
+Message:
+${Message}
       `,
 		});
 
-		res.status(200).json({ success: true });
+		return new Response(null, {
+			status: 302,
+			headers: {
+				Location: "/contact-thank-you",
+			},
+		});
 	} catch (error) {
 		console.error("Email error:", error);
-		res.status(500).json({ success: false });
+
+		return new Response(
+			JSON.stringify({ success: false }),
+			{ status: 500 }
+		);
 	}
 }
