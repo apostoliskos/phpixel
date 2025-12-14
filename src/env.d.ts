@@ -1,6 +1,5 @@
-/// <reference path="../.astro/types.d.ts" />
-/// <reference types="@astrojs/image/client" />
-
+// src/env.d.ts
+/// <reference types="astro/client" />
 
 interface ImportMetaEnv {
 	// Declare the new SMTP variables we are using in contact.ts

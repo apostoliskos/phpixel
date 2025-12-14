@@ -1,12 +1,20 @@
 import type { APIRoute } from "astro";
 import nodemailer from "nodemailer";
+import { parse } from 'querystring'; // <-- NEW IMPORT
 
 export const POST: APIRoute = async ({ request, redirect }) => {
-	const data = await request.formData();
-	const name = data.get("Name");
-	const email = data.get("Email");
-	const source = data.get("Source"); // Don't forget this field!
-	const message = data.get("Message");
+		// 🛑 CHANGE 1: Read the raw text body
+		const bodyText = await request.text();
+	console.log('11111111111111111'); // <-- Log the raw string
+	console.log('Raw Body Text:', bodyText); // <-- Log the raw string
+		// 🛑 CHANGE 2: Parse the raw query string
+		const dataObject = parse(bodyText);
+
+	// Extract variables from the parsed object (you must now use dataObject.*)
+	const name = dataObject.Name as string;
+	const email = dataObject.Email as string;
+	const source = dataObject.Source as string;
+	const message = dataObject.Message as string;
 
 	// Basic validation
 	if (!name || !email || !message) {
@@ -14,19 +22,28 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 	}
 
 	// 1. Create a transporter using your hosting details
+// src/pages/api/contact.ts
+
 	const transporter = nodemailer.createTransport({
 		host: import.meta.env.SMTP_HOST,
-		port: parseInt(import.meta.env.SMTP_PORT), // Make sure port is a number
-		secure: import.meta.env.SMTP_PORT === '465', // Often true if using port 465
+		port: parseInt(import.meta.env.SMTP_PORT),
+		secure: true, // MUST be true for Port 465
 		auth: {
 			user: import.meta.env.SMTP_USER,
 			pass: import.meta.env.SMTP_PASS,
 		},
-		// Adding this option may help if you have issues connecting from Vercel's IP
-		// tls: {
-		//   rejectUnauthorized: false
-		// }
+		tls: {
+			// 🛑 CRITICAL FIX: Bypass the certificate hostname mismatch
+			rejectUnauthorized: false
+			// You can optionally add this, as sometimes the server requires
+			// a different domain name for the certificate check:
+			// servername: 'mail.phpixel.gr'
+		},
+		// 💡 Optional: Explicitly tell Nodemailer to enforce TLS/SSL,
+		// though 'secure: true' should handle this.
+		// requireTLS: true,
 	});
+// ... rest of your code
 
 	try {
 		// 2. Define the email content

@@ -27,6 +27,8 @@
 		"prettier-plugin-astro": "^0.0.12"
 	},
 	"dependencies": {
-		"nodemailer": "^7.0.11"
+		"@astrojs/vercel": "^8.0.4",
+		"nodemailer": "^7.0.11",
+		"querystring": "^0.2.1"
 	}
 }
