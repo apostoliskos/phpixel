@@ -20,15 +20,21 @@ const {text, href, newTab} = Astro.props;
   }
 </style>
 <div class="announcement-banner__container">
-  <p>
-    {newTab ?
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        {text}
-      </a> :
-      <a href={href}>
-        {text}
-      </a>}
-  </p>
+  <div>
+    <p>
+      {newTab ?
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a> :
+        <a href={href}>
+          {text}
+        </a>}
+    </p>
+    <p>
+      <a>asfsadfsaf </a>
+    </p>
+  </div>
+
 </div>
 
 
