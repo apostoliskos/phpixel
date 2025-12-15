@@ -2,7 +2,8 @@ import type { APIRoute } from "astro";
 import nodemailer from "nodemailer";
 import { parse } from 'querystring';
 
-export const POST: APIRoute = async ({ request, redirect }) => {
+
+export const POST: APIRoute = async ({ request, redirect, cookies }) => {
 	const bodyText = await request.text();
 	const dataObject = parse(bodyText);
 
@@ -28,6 +29,12 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 		}
 	});
 
+	const cookieOptions = {
+		httpOnly: true,
+		maxAge: 3600,
+		path: '/'
+	};
+
 	try {
 		await transporter.sendMail({
 			from: import.meta.env.SMTP_USER,
@@ -44,11 +51,18 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       `,
 		});
 
+		cookies.set('form_status', 'sent', cookieOptions);
+		cookies.set('form_name', name, cookieOptions);
+		cookies.set('form_email', email, cookieOptions);
+
 		return redirect("/success");
 
 	} catch (error) {
-		console.error("Email sending failed:", error);
 
-		return new Response(JSON.stringify({ message: "Failed to send email. Check server logs." }), { status: 500 });
+		cookies.set('form_status', 'error', cookieOptions);
+		cookies.set('form_name', name, cookieOptions);
+		cookies.set('form_email', email, cookieOptions);
+
+		return redirect("/fail");
 	}
 };

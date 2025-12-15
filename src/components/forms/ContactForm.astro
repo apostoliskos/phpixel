@@ -9,37 +9,15 @@ const selectOptions = [
 ---
 
 <form method="POST" action="/api/contact" enctype="application/x-www-form-urlencoded">
-  <FormInput
-    type="text"
-    label="Όνομα"
-    name="Name"
-    placeholder=""
-    required
-  />
+  <FormInput type="text" label="Όνομα" name="Name" placeholder="" required />
 
-  <FormInput
-    type="email"
-    label="Email"
-    name="Email"
-    placeholder=""
-    required
-  />
+  <FormInput type="email" label="Email" name="Email" placeholder="" required />
 
-  <FormSelect
-    label="How Did You Hear About Us?"
-    name="Source"
-    options={selectOptions}
-    required
-  />
+  <FormSelect label="How Did You Hear About Us?" name="Source" options={selectOptions} required />
 
-  <FormTextarea
-    label="Το μήνυμα σας"
-    name="Message"
-    placeholder=""
-    required
-  />
+  <FormTextarea label="Το μήνυμα σας" name="Message" placeholder="" required />
 
-  <Button type="submit">MAIL US</Button>
+  <Button type="submit" big_button >MAIL US</Button>
 </form>
 
 <style>
