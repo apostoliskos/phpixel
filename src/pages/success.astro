@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Page.astro';
+import { TextSection,CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, Feature_card_small } from '@components/odyssey-theme';
+import { Icon } from 'astro-icon/components';
+import HeroSection from '../components/sections/heros/HeroSection.astro';
+
+
+const seo = {
+	title: 'Κατασκευή eShop B2C, Β2Β',
+	description: 'Κατασκευή eShop B2C, Β2Β. Προσαρμοσμένο στις ανάγκες σας',
+};
+---
+
+<Layout seo={seo}>
+
+	<TextSection narrow>
+		<p>
+			success page
+		</p>
+	</TextSection>
+
+
+</layout>
+
+<style>
+    .outer_fwdth{
+        background: red;
+        padding: 10px;
+    }
+    @media (min-width: 768px) {
+        .feature-card__row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .for_three {
+            .feature-card__card {
+                width: calc(33.333% - 7px);
+            }
+        }
+
+        .for_two {
+            .feature-card__card {
+                width: calc(50% - 5px);
+            }
+        }
+
+    }
+
+
+
+
+
+
+</style>
