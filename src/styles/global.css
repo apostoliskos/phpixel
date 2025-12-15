@@ -25,3 +25,28 @@ pre .language-id {
 	gap: 20px;
 	justify-content: center;
 }
+
+
+.form-field__container label:has(~ input[required]),
+.form-field__container label:has(~ select[required]),
+.form-field__container label:has(~ textarea[required]) {
+	position: relative;
+}
+
+.form-field__container label:has(~ input[required]):after,
+.form-field__container label:has(+ select[required]):after,
+.form-field__container label:has(~ textarea[required]):after {
+	content: " *";
+	color: red;
+	font-size: 15px;
+	position: relative;
+	top: -5px;
+}
+
+.consent-container:has(input[required]) label:after {
+	content: " *";
+	color: red;
+	font-size: 15px;
+	position: relative;
+	top: -5px;
+}

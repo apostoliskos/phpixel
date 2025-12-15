@@ -29,6 +29,7 @@ export { default as BlogPostsList } from './blog/BlogPostsList.astro';
 export { default as BlogPostPreview } from './blog/BlogPostPreview.astro';
 
 // Form Fields
+export { default as Form_Input_checkbox } from './form-fields/Form_Input_checkbox.astro';
 export { default as FormInput } from './form-fields/FormInput.astro';
 export { default as FormTextarea } from './form-fields/FormTextarea.astro';
 export { default as FormSelect } from './form-fields/FormSelect.astro';

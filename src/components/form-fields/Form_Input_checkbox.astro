@@ -1,0 +1,52 @@
+---
+export interface Props {
+	name: string;
+	label: string;
+	privacyPolicyLink: string;
+	required?: boolean;
+}
+
+const {name, label, privacyPolicyLink, required} = Astro.props;
+
+// Create a unique ID for accessibility (linking the input to the label)
+const id = `checkbox-${name.toLowerCase()}`;
+---
+
+<div class="consent-container">
+	<input
+		type="checkbox"
+		id={id}
+		name={name}
+		value="Accepted"
+		required={required}
+	/>
+	<label for={id}>
+		{label}
+	</label>
+</div>
+
+<style>
+
+    .consent-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .consent-container input[type="checkbox"] {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .consent-container label {
+        font-size: 0.9em;
+        line-height: 1.4;
+        cursor: pointer;
+    }
+
+    .consent-container a {
+        text-decoration: underline;
+    }
+</style>

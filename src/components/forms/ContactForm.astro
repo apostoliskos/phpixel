@@ -1,5 +1,5 @@
 ---
-import { Button, FormInput, FormSelect, FormTextarea } from '@components/odyssey-theme';
+import { Button, FormInput, FormSelect, FormTextarea, Form_Input_checkbox } from '@components/odyssey-theme';
 
 const selectOptions = [
   "Google Search",
@@ -17,6 +17,8 @@ const selectOptions = [
 
   <FormTextarea label="Το μήνυμα σας" name="Message" placeholder="" required />
 
+  <Form_Input_checkbox label="Συμφωνώ να αποθηκευτούν τα στοιχεία μου ώστε να επικοινωνήσει μαζί μου η phpixel.gr" name="policy" placeholder="" required />
+
   <Button type="submit" big_button >MAIL US</Button>
 </form>
 
@@ -26,4 +28,5 @@ const selectOptions = [
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
 </style>
