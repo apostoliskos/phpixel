@@ -19,6 +19,7 @@ const { seo } = Astro.props as Props;
 <Layout seo={seo}>
 
 	<div id="page">
+		<slot name="announcement-bar" />
 		<Header rightMenu navData={nav} slot="header">
 		<span slot="logo">
 			<Logo />
