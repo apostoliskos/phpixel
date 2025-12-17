@@ -1,5 +1,10 @@
 ---
-const {text, href, newTab} = Astro.props;
+
+import { Icon } from 'astro-icon/components';
+import {
+  Button,
+  CtaCardSection,
+} from '@components/odyssey-theme';
 ---
 
 <style>
@@ -8,30 +13,68 @@ const {text, href, newTab} = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* centers content vertically */
-    background-color: var(--theme-primary);
-    color: var(--theme-on-primary);
+    justify-content: center;
+    background-color: #fff;
+    color: #fff;
     position: relative;
     z-index: 100;
-    height: 100vh; /* full viewport height */
+    height: 100vh;
+
+    background-image: url("/assets/images/pixelated.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
   .announcement-banner__container p {
-    margin: 0 auto;
     text-align: center;
   }
+
+  /* Ensure the container is the reference point */
+  .announcement-banner__container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* The shadow overlay */
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5; /* Change this value (0.1 to 0.9) to make it lighter or darker */
+    z-index: 1;
+  }
+
+  /* Ensure content sits on top of the shadow */
+  .anouncement_main_content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+  }
+  .fitpac {
+    font-size: var(--font-size-xxl);
+  }
+
 </style>
 <div class="announcement-banner__container">
-  <div>
-    <p>
-      {newTab ?
-        <a href={href} target="_blank" rel="noopener noreferrer">
-          {text}
-        </a> :
-        <a href={href}>
-          {text}
-        </a>}
-    </p>
-<a> adsdfsd asdasdasdasdasdasdasdasdasdasdasdasdasdasdasd </a>
+  <div class="shadow"></div>
+  <div class="anouncement_main_content">
+    <h2 class="fitpac">From idea to pixel and code</h2>
+    <CtaCardSection background="transparent">
+      <p>Μην διστάσεις να επικοινωνήσεις μαζί μας για να γίνει η ιδέα σου πραγματικότητα.</p>
+      <div class="two_buttons">
+        <!-- Icon after text (default) -->
+        <Button href="/contact" customIcon iconPosition="before">Επικοινωνία<Fragment slot="icon"><Icon name="ic:baseline-mail" /></Fragment></Button>
+
+        <!-- Icon before text -->
+        <Button href="tel:6977383488" customIcon iconPosition="before">6977383488<Fragment slot="icon"><Icon name="ic:baseline-phone" /></Fragment></Button>
+
+      </div>
+
+    </CtaCardSection>
   </div>
 
 </div>
