@@ -136,26 +136,48 @@ import {
   let isSnapping = false;
   let touchStartY = 0;
 
+  // Get scroll target position (with optional mobile offset)
   const getSnapTarget = () => {
     const el = document.querySelector('.header--right');
-    if (!el) return 0; // fallback
-    return el.getBoundingClientRect().top + window.scrollY;
+    if (!el) return 0;
+    const OFFSET = 24; // adjust for mobile top bar if needed
+    return el.getBoundingClientRect().top + window.scrollY - OFFSET;
   };
 
-  function snapScroll() {
+  // Smooth scroll to target while blocking momentum
+  const snapScroll = () => {
     const target = getSnapTarget();
-    window.scrollTo({
-      top: target,
-      behavior: 'smooth'
-    });
+    if (!target) return;
 
-    setTimeout(() => (isSnapping = false), 700);
-  }
+    // Disable scrolling temporarily
+    document.body.style.overflow = 'hidden';
 
-  // Desktop
-  window.addEventListener('wheel', e => {
-    if (window.scrollY !== 0) return;       // only at top
-    if (e.deltaY <= 0) return;              // only scroll down
+    // Smooth scroll manually using requestAnimationFrame to prevent momentum
+    let start = null;
+    const duration = 700;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const current = window.scrollY + (target - window.scrollY) * progress;
+      window.scrollTo(0, current);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        // Re-enable scrolling after animation
+        document.body.style.overflow = '';
+        isSnapping = false;
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  // Desktop: wheel scroll
+  window.addEventListener('wheel', (e) => {
+    if (window.scrollY !== 0) return;    // only at top
+    if (e.deltaY <= 0) return;           // only scroll down
     if (isSnapping) return;
 
     isSnapping = true;
@@ -163,16 +185,15 @@ import {
     snapScroll();
   }, { passive: false });
 
-  // Mobile
-  window.addEventListener('touchstart', e => {
+  // Mobile: touch
+  window.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
 
-  window.addEventListener('touchmove', e => {
+  window.addEventListener('touchmove', (e) => {
     const deltaY = touchStartY - e.touches[0].clientY;
-
-    if (window.scrollY !== 0) return;
-    if (deltaY <= 0) return;
+    if (window.scrollY !== 0) return;    // only at top
+    if (deltaY <= 0) return;             // only swipe down
     if (isSnapping) return;
 
     isSnapping = true;
