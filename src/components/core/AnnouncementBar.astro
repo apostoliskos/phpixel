@@ -138,7 +138,6 @@ import {
 
   // Adjust offsets for fixed header and mobile bars
   const FIXED_HEADER_SELECTOR = '.site-header'; // your fixed header, if any
-  const MOBILE_BAR_OFFSET = 24; // adjust for mobile top bar
 
   const getSnapTarget = () => {
     const el = document.querySelector('.header--right');
@@ -151,9 +150,8 @@ import {
     const FIXED_HEADER_HEIGHT = fixedHeader ? fixedHeader.offsetHeight : 0;
 
     // Extra offset for mobile bars
-    const MOBILE_OFFSET = window.innerWidth < 768 ? MOBILE_BAR_OFFSET : 0;
 
-    return rectTop - FIXED_HEADER_HEIGHT - MOBILE_OFFSET;
+    return rectTop - FIXED_HEADER_HEIGHT;
   };
 
   // Smooth scroll while blocking momentum
