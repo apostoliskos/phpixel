@@ -136,19 +136,16 @@ import {
   let isSnapping = false;
   let touchStartY = 0;
 
-  const getSnapOffset = () => {
-    if (!window.visualViewport) return window.innerHeight;
-
-    const visible = window.visualViewport.height;
-    const layout = window.innerHeight;
-    const uiDelta = layout - visible;
-
-    return visible + uiDelta;
+  const getSnapTarget = () => {
+    const el = document.querySelector('.header--right');
+    if (!el) return 0; // fallback
+    return el.getBoundingClientRect().top + window.scrollY;
   };
 
   function snapScroll() {
+    const target = getSnapTarget();
     window.scrollTo({
-      top: getSnapOffset(),
+      top: target,
       behavior: 'smooth'
     });
 
@@ -157,8 +154,8 @@ import {
 
   // Desktop
   window.addEventListener('wheel', e => {
-    if (window.scrollY !== 0) return;
-    if (e.deltaY <= 0) return;
+    if (window.scrollY !== 0) return;       // only at top
+    if (e.deltaY <= 0) return;              // only scroll down
     if (isSnapping) return;
 
     isSnapping = true;
