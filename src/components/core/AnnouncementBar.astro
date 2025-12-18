@@ -136,18 +136,23 @@ import {
   let isSnapping = false;
   let touchStartY = 0;
 
-  const getViewportHeight = () =>
-    window.visualViewport?.height || window.innerHeight;
+  const getSnapOffset = () => {
+    if (!window.visualViewport) return window.innerHeight;
+
+    const visible = window.visualViewport.height;
+    const layout = window.innerHeight;
+    const uiDelta = layout - visible;
+
+    return visible + uiDelta;
+  };
 
   function snapScroll() {
     window.scrollTo({
-      top: getViewportHeight(),
+      top: getSnapOffset(),
       behavior: 'smooth'
     });
 
-    setTimeout(() => {
-      isSnapping = false;
-    }, 700);
+    setTimeout(() => (isSnapping = false), 700);
   }
 
   // Desktop
@@ -178,4 +183,5 @@ import {
     snapScroll();
   }, { passive: false });
 </script>
+
 
