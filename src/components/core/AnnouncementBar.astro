@@ -132,3 +132,80 @@ import {
     <span></span>
   </div>
 </div>
+<script is:inline>
+  let isSnapping = false;
+  let touchStartY = 0;
+
+  const FIXED_HEADER_SELECTOR = '.site-header'; // your sticky header
+  const MOBILE_EXTRA = 24; // optional extra for mobile top bar
+
+  const getSnapTarget = () => {
+    const el = document.querySelector('.header--right');
+    if (!el) return 0;
+
+    const rectTop = el.getBoundingClientRect().top + window.scrollY;
+
+    const fixedHeader = document.querySelector(FIXED_HEADER_SELECTOR);
+    const FIXED_HEADER_HEIGHT = fixedHeader ? fixedHeader.offsetHeight : 0;
+
+    // Mobile viewport height compensation
+    let target = rectTop - FIXED_HEADER_HEIGHT;
+    if (window.innerWidth < 768) {
+      const vh = window.visualViewport?.height || window.innerHeight;
+      const delta = window.innerHeight - vh;
+      target -= delta;         // compensate for shrinking mobile address bar
+      target -= MOBILE_EXTRA;  // optional extra
+    }
+
+    return Math.max(0, target);
+  };
+
+  const snapScroll = () => {
+    const target = getSnapTarget();
+    if (!target) return;
+
+    // Smooth scroll using requestAnimationFrame without overflow: hidden
+    let start = null;
+    const duration = 700;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const current = window.scrollY + (target - window.scrollY) * progress;
+      window.scrollTo(0, current);
+
+      if (progress < 1) requestAnimationFrame(step);
+      else isSnapping = false;
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  // Desktop: wheel scroll
+  window.addEventListener('wheel', (e) => {
+    if (window.scrollY !== 0) return; // only at top
+    if (e.deltaY <= 0) return;        // only scroll down
+    if (isSnapping) return;
+
+    isSnapping = true;
+    e.preventDefault();
+    snapScroll();
+  }, { passive: false });
+
+  // Mobile: touch
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    const deltaY = touchStartY - e.touches[0].clientY;
+
+    if (window.scrollY !== 0) return; // only at top
+    if (deltaY <= 0) return;          // only swipe down
+    if (isSnapping) return;
+
+    isSnapping = true;
+    e.preventDefault();
+    snapScroll();
+  }, { passive: false });
+</script>
