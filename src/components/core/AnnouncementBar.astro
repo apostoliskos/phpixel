@@ -134,21 +134,14 @@ import {
 </div>
 <script is:inline>
   let isSnapping = false;
+  let touchStartY = 0;
 
-  function handleScrollSnap(e) {
-    // Only when at the very top
-    if (window.scrollY !== 0) return;
+  const getViewportHeight = () =>
+    window.visualViewport?.height || window.innerHeight;
 
-    // ONLY scroll DOWN
-    if (e.deltaY <= 0) return;
-
-    if (isSnapping) return;
-
-    isSnapping = true;
-    e.preventDefault();
-
+  function snapScroll() {
     window.scrollTo({
-      top: window.innerHeight,
+      top: getViewportHeight(),
       behavior: 'smooth'
     });
 
@@ -157,6 +150,32 @@ import {
     }, 700);
   }
 
-  window.addEventListener('wheel', handleScrollSnap, { passive: false });
-  window.addEventListener('touchmove', handleScrollSnap, { passive: false });
+  // Desktop
+  window.addEventListener('wheel', e => {
+    if (window.scrollY !== 0) return;
+    if (e.deltaY <= 0) return;
+    if (isSnapping) return;
+
+    isSnapping = true;
+    e.preventDefault();
+    snapScroll();
+  }, { passive: false });
+
+  // Mobile
+  window.addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', e => {
+    const deltaY = touchStartY - e.touches[0].clientY;
+
+    if (window.scrollY !== 0) return;
+    if (deltaY <= 0) return;
+    if (isSnapping) return;
+
+    isSnapping = true;
+    e.preventDefault();
+    snapScroll();
+  }, { passive: false });
 </script>
+
