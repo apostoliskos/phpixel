@@ -13,8 +13,6 @@ export default defineConfig({
   output: 'server',
   adapter: vercel(),
   build: {
-    build: {
-      inlineStylesheets: 'always',
-    },
+    inlineStylesheets: 'always', // Remove the extra 'build' nesting here
   },
 });
