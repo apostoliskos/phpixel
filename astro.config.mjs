@@ -12,4 +12,9 @@ export default defineConfig({
   integrations: [sitemap(), mdx(), lit(), icon()],
   output: 'server',
   adapter: vercel(),
+  build: {
+    build: {
+      inlineStylesheets: 'always',
+    },
+  },
 });
