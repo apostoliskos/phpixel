@@ -136,33 +136,40 @@ import {
   let isSnapping = false;
   let touchStartY = 0;
 
-  // Adjust offsets for fixed header and mobile bars
-  const FIXED_HEADER_SELECTOR = '.site-header'; // your fixed header, if any
-  const MOBILE_BAR_OFFSET = 24; // adjust for mobile top bar
+  const FIXED_HEADER_SELECTOR = '.site-header'; // optional fixed header
+  const MOBILE_EXTRA = 24; // small compensation for mobile bar
 
   const getSnapTarget = () => {
     const el = document.querySelector('.header--right');
     if (!el) return 0;
 
-    const rectTop = el.getBoundingClientRect().top + window.scrollY;
-
-    // Fixed header height
     const fixedHeader = document.querySelector(FIXED_HEADER_SELECTOR);
     const FIXED_HEADER_HEIGHT = fixedHeader ? fixedHeader.offsetHeight : 0;
 
-    // Extra offset for mobile bars
-    const MOBILE_OFFSET = window.innerWidth < 768 ? MOBILE_BAR_OFFSET : 0;
+    // Mobile viewport height
+    const vh = window.visualViewport?.height || window.innerHeight;
 
-    return rectTop - FIXED_HEADER_HEIGHT - MOBILE_OFFSET;
+    // Distance from top of page
+    const elementTop = el.getBoundingClientRect().top + window.scrollY;
+
+    // Calculate final scroll target
+    let target = elementTop - FIXED_HEADER_HEIGHT;
+
+    // If on mobile, add the visualViewport difference to fill the screen
+    if (window.innerWidth < 768) {
+      const delta = window.innerHeight - vh;
+      target -= delta; // compensate for shrinking bar
+      target -= MOBILE_EXTRA; // optional extra to make gap disappear
+    }
+
+    return Math.max(0, target);
   };
 
-  // Smooth scroll while blocking momentum
   const snapScroll = () => {
     const target = getSnapTarget();
     if (!target) return;
 
     document.body.style.overflow = 'hidden';
-
     let start = null;
     const duration = 700;
 
@@ -172,9 +179,8 @@ import {
       const current = window.scrollY + (target - window.scrollY) * progress;
       window.scrollTo(0, current);
 
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
+      if (progress < 1) requestAnimationFrame(step);
+      else {
         document.body.style.overflow = '';
         isSnapping = false;
       }
@@ -185,8 +191,8 @@ import {
 
   // Desktop: wheel scroll
   window.addEventListener('wheel', (e) => {
-    if (window.scrollY !== 0) return; // only at top
-    if (e.deltaY <= 0) return;        // only scroll down
+    if (window.scrollY !== 0) return;
+    if (e.deltaY <= 0) return;
     if (isSnapping) return;
 
     isSnapping = true;
@@ -201,9 +207,8 @@ import {
 
   window.addEventListener('touchmove', (e) => {
     const deltaY = touchStartY - e.touches[0].clientY;
-
-    if (window.scrollY !== 0) return; // only at top
-    if (deltaY <= 0) return;          // only swipe down
+    if (window.scrollY !== 0) return;
+    if (deltaY <= 0) return;
     if (isSnapping) return;
 
     isSnapping = true;
@@ -211,5 +216,6 @@ import {
     snapScroll();
   }, { passive: false });
 </script>
+
 
 
