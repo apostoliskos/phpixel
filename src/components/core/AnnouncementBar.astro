@@ -109,7 +109,11 @@ import {
 
 </style>
 <div class="announcement-banner__container">
-  <div class="shadow"></div>
+  <div class="shadow">
+    <div class="canva_wraper">
+      <canvas id="network"></canvas>
+    </div>
+  </div>
   <div class="anouncement_main_content">
     <h2 class="fitpac">From idea to pixel and code</h2>
     <CtaCardSection background="transparent">
@@ -209,3 +213,179 @@ import {
     snapScroll();
   }, { passive: false });
 </script>
+
+
+
+
+<script>
+  const CONFIG = {
+    // DENSITY: Controls the population of dots.
+    // Math: (Canvas Width * Canvas Height) / Density.
+    // Lower (6000) = Crowded/Busy. Higher (12000) = Clean/Minimal.
+    density: 6000,
+
+    // CONNECTIONS: The max range (in pixels) for lines to draw between dots.
+    maxDistance: 120,
+
+    // PHYSICS: Initial energy and resistance.
+    speed: 0.15,      // How fast dots move when they are first created.
+    friction: 0.96,   // 0.96 means dots lose 4% of their speed every frame.
+                      // This prevents them from flying away forever.
+
+    // MOUSE: User interaction settings.
+    mouse: {
+      radius: 160,    // The "circle of influence" around your cursor.
+      strength: 0.02  // Gravity power. How fast dots are pulled toward the mouse.
+    },
+
+    // BOUNCE: Personal space for dots (Repulsion).
+    bounce: {
+      repulsionRadius: 30,    // Dots try to stay at least this far apart.
+      repulsionStrength: 0.05 // How hard they "kick" each other away when they touch.
+    },
+
+    // VISUALS: Colors and sizes.
+    style: {
+      dotColor: '#6bbcff',
+      dotSize: 2,
+      lineColorRGB: '107, 188, 255', // RGB format so we can add transparency later.
+      lineWidth: 1
+    }
+  };
+
+  const canvas = document.getElementById('network');
+  const ctx = canvas.getContext('2d');
+  const wrapper = canvas.parentElement;
+
+  let width, height;
+  let dots = []; // Start empty, will be filled by resize()
+
+  function resize() {
+    width = canvas.width = wrapper.clientWidth;
+    height = canvas.height = wrapper.clientHeight;
+
+    // Calculate how many dots we SHOULD have based on current area
+    const area = width * height;
+    const targetCount = Math.floor(area / CONFIG.density);
+
+    // Adjust the dots array without "flickering"
+    if (dots.length < targetCount) {
+      // Add more dots if the screen got bigger
+      for (let i = dots.length; i < targetCount; i++) {
+        dots.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * CONFIG.speed,
+          vy: (Math.random() - 0.5) * CONFIG.speed,
+        });
+      }
+    } else if (dots.length > targetCount) {
+      // Remove dots if the screen got smaller
+      dots.splice(targetCount);
+    }
+  }
+
+  const ro = new ResizeObserver(resize);
+  ro.observe(wrapper);
+  resize();
+
+  const mouse = { x: null, y: null };
+
+  window.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. UPDATE POSITIONS & MOUSE MAGNETISM
+    for (const d of dots) {
+      d.x += d.vx;
+      d.y += d.vy;
+      d.vx *= CONFIG.friction;
+      d.vy *= CONFIG.friction;
+
+      if (mouse.x !== null) {
+        const dx = mouse.x - d.x;
+        const dy = mouse.y - d.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONFIG.mouse.radius && dist > 0) {
+          const force = (CONFIG.mouse.radius - dist) / CONFIG.mouse.radius;
+          d.vx += (dx / dist) * force * CONFIG.mouse.strength;
+          d.vy += (dy / dist) * force * CONFIG.mouse.strength;
+        }
+      }
+
+      // Bounce edges
+      if (d.x < 0) { d.x = 0; d.vx *= -1; }
+      if (d.x > width) { d.x = width; d.vx *= -1; }
+      if (d.y < 0) { d.y = 0; d.vy *= -1; }
+      if (d.y > height) { d.y = height; d.vy *= -1; }
+
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, CONFIG.style.dotSize, 0, Math.PI * 2);
+      ctx.fillStyle = CONFIG.style.dotColor;
+      ctx.fill();
+    }
+
+    // 2. INTER-DOT LOGIC (Lines AND Bouncing)
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dotA = dots[i];
+        const dotB = dots[j];
+
+        const dx = dotA.x - dotB.x;
+        const dy = dotA.y - dotB.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < CONFIG.bounce.repulsionRadius && dist > 0) {
+          const force = (CONFIG.bounce.repulsionRadius - dist) / CONFIG.bounce.repulsionRadius;
+          const pushX = (dx / dist) * force * CONFIG.bounce.repulsionStrength;
+          const pushY = (dy / dist) * force * CONFIG.bounce.repulsionStrength;
+
+          dotA.vx += pushX;
+          dotA.vy += pushY;
+          dotB.vx -= pushX;
+          dotB.vy -= pushY;
+        }
+
+        if (dist < CONFIG.maxDistance) {
+          const opacity = 1 - (dist / CONFIG.maxDistance);
+          ctx.strokeStyle = `rgba(${CONFIG.style.lineColorRGB}, ${opacity})`;
+          ctx.lineWidth = CONFIG.style.lineWidth;
+          ctx.beginPath();
+          ctx.moveTo(dotA.x, dotA.y);
+          ctx.lineTo(dotB.x, dotB.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+
+<style>
+  .canva_wraper {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  canvas {
+    background: #0b1320;
+    display: block; /* Removes baseline spacing */
+    width: 100%;
+    height: 100vh;
+  }
+</style>

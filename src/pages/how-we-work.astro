@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Page.astro';
+import { TextSection,CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, Feature_card_small } from '@components/odyssey-theme';
+import { Icon } from 'astro-icon/components';
+import HeroSection from '../components/sections/heros/HeroSection.astro';
+
+
+const seo = {
+	title: 'Κατασκευή eShop B2C, Β2Β',
+	description: 'Κατασκευή eShop B2C, Β2Β. Προσαρμοσμένο στις ανάγκες σας',
+};
+---
+
+<Layout seo={seo}>
+
+	<HeroSection>
+		<div slot="text-container">
+			<h1>Πως Δουλεύουμε</h1>
+			<p>Η επικοινωνία είναι το Α και το Ω σε μία επιτυχημένη συνεργασία</p>
+			<div class="hero-btns__container">
+				<Button href="/contact" customIcon> Επικοινωνία <Fragment slot="icon"><Icon name="ic:baseline-chevron-right"/></Fragment></Button>
+			</div>
+		</div>
+
+		<div slot="image-container">
+			<img src="/assets/images/hero-image1.jpg" alt="Image" />
+		</div>
+	</HeroSection>
+
+	<TextSection narrow>
+		<p>
+			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo asperiores alias illo accusamus voluptatem ea cum nemo odit! Consequatur quidem quo iusto quam ea neque nisi dolorum quod, recusandae id!
+			Repudiandae, fugit labore voluptatum beatae modi omnis adipisci corrupti aut aliquid cumque inventore iure possimus doloremque iste incidunt nulla architecto. Nobis iusto sunt voluptatem necessitatibus laborum, earum doloremque fugit rerum!
+		</p>
+		<p>Fugit asperiores harum consectetur sapiente deleniti. Optio enim tenetur impedit reprehenderit labore, illo eius in, consequatur odio dolore iste assumenda explicabo, nisi similique qui obcaecati possimus delectus reiciendis quod modi.</p>
+	</TextSection>
+
+	<CustomerQuoteSection
+		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
+		customerName="Happy Customer"
+	/>
+
+	<CtaCardSection background="var(--theme-surface-2)" color="var(--theme-on-surface-2)">
+		<h2>Start Your Website Today</h2>
+		<p>It only takes a couple clicks to have a new, modern website for your business or startup.</p>
+		<div class="two_buttons">
+			<!-- Icon after text (default) -->
+			<Button href="/contact" customIcon iconPosition="before">Επικοινωνία<Fragment slot="icon"><Icon name="ic:baseline-mail" /></Fragment></Button>
+
+			<!-- Icon before text -->
+			<Button href="tel:6977383488" customIcon iconPosition="before">6977383488<Fragment slot="icon"><Icon name="ic:baseline-phone" /></Fragment></Button>
+
+		</div>
+
+	</CtaCardSection>
+
+</layout>
+
+<style>
+    .outer_fwdth{
+        background: red;
+        padding: 10px;
+    }
+    @media (min-width: 768px) {
+        .feature-card__row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .for_three {
+            .feature-card__card {
+                width: calc(33.333% - 7px);
+            }
+        }
+
+        .for_two {
+            .feature-card__card {
+                width: calc(50% - 5px);
+            }
+        }
+
+    }
+
+
+
+
+
+
+</style>

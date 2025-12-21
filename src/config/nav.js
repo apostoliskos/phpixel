@@ -30,6 +30,10 @@ export const nav = [
 		slug: '/software-development'
 	},
 	{
+		title: 'Πως δουλεύουμε',
+		slug: '/how-we-work'
+	},
+	{
 		title: 'About',
 		slug: '/about',
 	},
