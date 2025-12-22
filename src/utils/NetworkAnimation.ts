@@ -6,7 +6,6 @@ interface NetworkConfig {
 	friction: number;
 	mouse: { radius: number; strength: number };
 	bounce: { repulsionRadius: number; repulsionStrength: number };
-	// NEW: Force field settings for the canvas edges
 	edgeRepulsion: { radius: number; strength: number };
 	wander: { strength: number };
 	click: { radius: number; strength: number };
@@ -14,6 +13,7 @@ interface NetworkConfig {
 		dotColor: string;
 		dotSize: number;
 		lineColorRGB: string;
+		mouseLineColorRGB: string; // NEW: Specific color for mouse connections
 		lineWidth: number;
 	};
 }
@@ -52,13 +52,14 @@ export class NetworkAnimation {
 			friction: 0.96,
 			mouse: { radius: 160, strength: 0.02 },
 			bounce: { repulsionRadius: 40, repulsionStrength: 0.2 },
-			edgeRepulsion: { radius: 25, strength: 0.15 }, // Cushion at edges
+			edgeRepulsion: { radius: 25, strength: 0.15 },
 			wander: { strength: 0.05 },
 			click: { radius: 200, strength: 8 },
 			style: {
 				dotColor: '#6bbcff',
 				dotSize: 2,
 				lineColorRGB: '107, 188, 255',
+				mouseLineColorRGB: '255, 0, 0', // White for the mouse web
 				lineWidth: 1
 			}
 		};
@@ -71,13 +72,14 @@ export class NetworkAnimation {
 			friction: 0.96,
 			mouse: { radius: 100, strength: 0.03 },
 			bounce: { repulsionRadius: 25, repulsionStrength: 0.15 },
-			edgeRepulsion: { radius: 25, strength: 0.1 },
+			edgeRepulsion: { radius: 30, strength: 0.1 },
 			wander: { strength: 0.05 },
 			click: { radius: 150, strength: 8 },
 			style: {
 				dotColor: '#6bbcff',
 				dotSize: 2,
 				lineColorRGB: '107, 188, 255',
+				mouseLineColorRGB: '255, 0, 0', // Yellow/Gold for mobile interaction
 				lineWidth: 1
 			}
 		};
@@ -163,32 +165,29 @@ export class NetworkAnimation {
 		this.ctx.clearRect(0, 0, this.width, this.height);
 
 		for (const d of this.dots) {
-			// 1. Wandering
 			d.vx += (Math.random() - 0.5) * this.config.wander.strength;
 			d.vy += (Math.random() - 0.5) * this.config.wander.strength;
 
-			// 2. Physics & Friction
 			d.x += d.vx;
 			d.y += d.vy;
 			d.vx *= this.config.friction;
 			d.vy *= this.config.friction;
 
-			// 3. FEATURE: Soft Edge Repulsion (The "Bounce" you requested)
+			// Soft Edge Repulsion
 			const edgeR = this.config.edgeRepulsion.radius;
 			const edgeS = this.config.edgeRepulsion.strength;
+			if (d.x < edgeR) d.vx += (edgeR - d.x) * edgeS / edgeR;
+			if (d.x > this.width - edgeR) d.vx -= (d.x - (this.width - edgeR)) * edgeS / edgeR;
+			if (d.y < edgeR) d.vy += (edgeR - d.y) * edgeS / edgeR;
+			if (d.y > this.height - edgeR) d.vy -= (d.y - (this.height - edgeR)) * edgeS / edgeR;
 
-			if (d.x < edgeR) d.vx += (edgeR - d.x) * edgeS / edgeR; // Left
-			if (d.x > this.width - edgeR) d.vx -= (d.x - (this.width - edgeR)) * edgeS / edgeR; // Right
-			if (d.y < edgeR) d.vy += (edgeR - d.y) * edgeS / edgeR; // Top
-			if (d.y > this.height - edgeR) d.vy -= (d.y - (this.height - edgeR)) * edgeS / edgeR; // Bottom
-
-			// 4. Hard Constraint (Prevent sticking outside)
+			// Prevent sticking
 			if (d.x < 0) { d.x = 0; d.vx *= -0.5; }
 			if (d.x > this.width) { d.x = this.width; d.vx *= -0.5; }
 			if (d.y < 0) { d.y = 0; d.vy *= -0.5; }
 			if (d.y > this.height) { d.y = this.height; d.vy *= -0.5; }
 
-			// 5. Mouse Interaction
+			// Mouse Pulse
 			d.targetSize = this.config.style.dotSize;
 			if (this.mouse.x !== null && this.mouse.y !== null) {
 				const dx = this.mouse.x - d.x;
@@ -204,25 +203,25 @@ export class NetworkAnimation {
 
 			d.size += (d.targetSize - d.size) * 0.1;
 
-			// 6. Draw Dot
 			this.ctx.beginPath();
 			this.ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
 			this.ctx.fillStyle = this.config.style.dotColor;
 			this.ctx.fill();
 		}
 
-		// 7. Connections & Inter-dot Repulsion
 		for (let i = 0; i < this.dots.length; i++) {
 			const a = this.dots[i];
 
+			// FEATURE: Mouse Connections using custom color
 			if (this.mouse.x !== null && this.mouse.y !== null) {
 				const mdx = a.x - this.mouse.x;
 				const mdy = a.y - this.mouse.y;
 				const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 				if (mdist < this.config.maxDistance) {
 					const mOpacity = 1 - (mdist / this.config.maxDistance);
-					this.ctx.strokeStyle = `rgba(${this.config.style.lineColorRGB}, ${mOpacity * 0.5})`;
-					this.ctx.lineWidth = this.config.style.lineWidth;
+					// Using mouseLineColorRGB here
+					this.ctx.strokeStyle = `rgba(${this.config.style.mouseLineColorRGB}, ${mOpacity * 0.8})`;
+					this.ctx.lineWidth = this.config.style.lineWidth * 1.5; // Slightly thicker
 					this.ctx.beginPath();
 					this.ctx.moveTo(a.x, a.y);
 					this.ctx.lineTo(this.mouse.x, this.mouse.y);
