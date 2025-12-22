@@ -72,9 +72,9 @@ export class NetworkAnimation {
 			click: { radius: 150, strength: 8 },
 			style: {
 				dotColor: '#6bbcff',
-				dotSize: 1.5,      // Smaller dots look sharper on mobile
+				dotSize: 2,      // Smaller dots look sharper on mobile
 				lineColorRGB: '107, 188, 255',
-				lineWidth: 0.8
+				lineWidth: 1
 			}
 		};
 
