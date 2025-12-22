@@ -62,14 +62,14 @@ export class NetworkAnimation {
 
 		// 2. Define the Mobile Config (Optimized for performance and small screens)
 		const mobileDefaults: NetworkConfig = {
-			density: 7000,       // Higher number = FEWER dots (crucial for mobile CPU)
+			density: 3000,       // Higher number = FEWER dots (crucial for mobile CPU)
 			maxDistance: 90,     // Shorter lines for smaller screens
 			speed: 0.15,         // Slightly slower for elegance
 			friction: 0.96,
 			mouse: { radius: 100, strength: 0.03 },
 			bounce: { repulsionRadius: 25, repulsionStrength: 0.15 },
-			wander: { strength: 0.04 },
-			click: { radius: 150, strength: 10 },
+			wander: { strength: 0.05 },
+			click: { radius: 150, strength: 8 },
 			style: {
 				dotColor: '#6bbcff',
 				dotSize: 1.5,      // Smaller dots look sharper on mobile
