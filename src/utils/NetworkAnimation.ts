@@ -12,9 +12,13 @@ interface NetworkConfig {
 		repulsionRadius: number;
 		repulsionStrength: number;
 	};
-	// NEW: wandering movement settings
 	wander: {
-		strength: number; // How much random "jitter" is added each frame
+		strength: number;
+	};
+	// NEW: Configuration for the click explosion
+	click: {
+		radius: number;
+		strength: number;
 	};
 	style: {
 		dotColor: string;
@@ -29,6 +33,8 @@ interface Dot {
 	y: number;
 	vx: number;
 	vy: number;
+	size: number;       // Current animated size
+	targetSize: number; // The size the dot wants to be
 }
 
 export class NetworkAnimation {
@@ -62,9 +68,13 @@ export class NetworkAnimation {
 				repulsionRadius: 40,
 				repulsionStrength: 0.2
 			},
-			// NEW: Default wandering strength
 			wander: {
-				strength: 0.11
+				strength: 0.05
+			},
+			// Default click explosion settings
+			click: {
+				radius: 200,
+				strength: 8,
 			},
 			style: {
 				dotColor: '#6bbcff',
@@ -86,6 +96,7 @@ export class NetworkAnimation {
 	private initEventListeners() {
 		window.addEventListener('mousemove', this.handleMouseMove);
 		window.addEventListener('mouseleave', this.handleMouseLeave);
+		window.addEventListener('mousedown', this.handleMouseDown);
 	}
 
 	private handleMouseMove = (e: MouseEvent) => {
@@ -99,10 +110,27 @@ export class NetworkAnimation {
 		this.mouse.y = null;
 	};
 
+	private handleMouseDown = () => {
+		if (this.mouse.x === null || this.mouse.y === null) return;
+
+		// Logic: Iterate through all dots and apply an outward force
+		for (const d of this.dots) {
+			const dx = d.x - this.mouse.x;
+			const dy = d.y - this.mouse.y;
+			const dist = Math.sqrt(dx * dx + dy * dy);
+
+			if (dist < this.config.click.radius) {
+				// Power increases the closer the dot is to the click center
+				const power = (this.config.click.radius - dist) / this.config.click.radius;
+				d.vx += (dx / dist) * power * this.config.click.strength;
+				d.vy += (dy / dist) * power * this.config.click.strength;
+			}
+		}
+	};
+
 	private resize() {
 		this.width = this.canvas.width = this.wrapper.clientWidth;
 		this.height = this.canvas.height = this.wrapper.clientHeight;
-
 		const targetCount = Math.floor((this.width * this.height) / this.config.density);
 
 		if (this.dots.length < targetCount) {
@@ -112,6 +140,8 @@ export class NetworkAnimation {
 					y: Math.random() * this.height,
 					vx: (Math.random() - 0.5) * this.config.speed,
 					vy: (Math.random() - 0.5) * this.config.speed,
+					size: this.config.style.dotSize,
+					targetSize: this.config.style.dotSize
 				});
 			}
 		} else {
@@ -123,15 +153,18 @@ export class NetworkAnimation {
 		this.ctx.clearRect(0, 0, this.width, this.height);
 
 		for (const d of this.dots) {
-			// --- ADDED: Constant Movement (Wander Force) ---
-			// This applies a tiny random push so dots never fully stop.
+			// 1. Wandering (Drift movement)
 			d.vx += (Math.random() - 0.5) * this.config.wander.strength;
 			d.vy += (Math.random() - 0.5) * this.config.wander.strength;
 
+			// 2. Physics & Friction
 			d.x += d.vx;
 			d.y += d.vy;
 			d.vx *= this.config.friction;
 			d.vy *= this.config.friction;
+
+			// 3. Mouse Interaction & Pulse Effect
+			d.targetSize = this.config.style.dotSize;
 
 			if (this.mouse.x !== null && this.mouse.y !== null) {
 				const dx = this.mouse.x - d.x;
@@ -142,28 +175,56 @@ export class NetworkAnimation {
 					const force = (this.config.mouse.radius - dist) / this.config.mouse.radius;
 					d.vx += (dx / dist) * force * this.config.mouse.strength;
 					d.vy += (dy / dist) * force * this.config.mouse.strength;
+
+					// Animate dot size growth when mouse is near
+					d.targetSize = this.config.style.dotSize * (1 + force * 1.5);
 				}
 			}
 
+			// Smooth size transition (lerp)
+			d.size += (d.targetSize - d.size) * 0.1;
+
+			// 4. Edge Handling
 			if (d.x < 0) { d.x = 0; d.vx *= -1; }
 			if (d.x > this.width) { d.x = this.width; d.vx *= -1; }
 			if (d.y < 0) { d.y = 0; d.vy *= -1; }
 			if (d.y > this.height) { d.y = this.height; d.vy *= -1; }
 
+			// 5. Render Dot
 			this.ctx.beginPath();
-			this.ctx.arc(d.x, d.y, this.config.style.dotSize, 0, Math.PI * 2);
+			this.ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
 			this.ctx.fillStyle = this.config.style.dotColor;
 			this.ctx.fill();
 		}
 
+		// 6. Draw Connections
 		for (let i = 0; i < this.dots.length; i++) {
+			const a = this.dots[i];
+
+			// Draw lines to the mouse node
+			if (this.mouse.x !== null && this.mouse.y !== null) {
+				const mdx = a.x - this.mouse.x;
+				const mdy = a.y - this.mouse.y;
+				const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+				if (mdist < this.config.maxDistance) {
+					const mOpacity = 1 - (mdist / this.config.maxDistance);
+					this.ctx.strokeStyle = `rgba(${this.config.style.lineColorRGB}, ${mOpacity * 0.5})`;
+					this.ctx.lineWidth = this.config.style.lineWidth;
+					this.ctx.beginPath();
+					this.ctx.moveTo(a.x, a.y);
+					this.ctx.lineTo(this.mouse.x, this.mouse.y);
+					this.ctx.stroke();
+				}
+			}
+
+			// Draw lines between dots & calculate repulsion
 			for (let j = i + 1; j < this.dots.length; j++) {
-				const a = this.dots[i];
 				const b = this.dots[j];
 				const dx = a.x - b.x;
 				const dy = a.y - b.y;
 				const dist = Math.sqrt(dx * dx + dy * dy);
 
+				// Repulsion (Bounce) logic
 				if (dist < this.config.bounce.repulsionRadius && dist > 0) {
 					const force = (this.config.bounce.repulsionRadius - dist) / this.config.bounce.repulsionRadius;
 					const px = (dx / dist) * force * this.config.bounce.repulsionStrength;
@@ -172,6 +233,7 @@ export class NetworkAnimation {
 					b.vx -= px; b.vy -= py;
 				}
 
+				// Line drawing logic
 				if (dist < this.config.maxDistance) {
 					const opacity = 1 - (dist / this.config.maxDistance);
 					this.ctx.strokeStyle = `rgba(${this.config.style.lineColorRGB}, ${opacity})`;
@@ -192,5 +254,6 @@ export class NetworkAnimation {
 		this.resizeObserver.disconnect();
 		window.removeEventListener('mousemove', this.handleMouseMove);
 		window.removeEventListener('mouseleave', this.handleMouseLeave);
+		window.removeEventListener('mousedown', this.handleMouseDown);
 	}
 }
