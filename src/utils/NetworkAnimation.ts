@@ -6,6 +6,8 @@ interface NetworkConfig {
 	friction: number;
 	mouse: { radius: number; strength: number };
 	bounce: { repulsionRadius: number; repulsionStrength: number };
+	// NEW: Force field settings for the canvas edges
+	edgeRepulsion: { radius: number; strength: number };
 	wander: { strength: number };
 	click: { radius: number; strength: number };
 	style: {
@@ -42,7 +44,7 @@ export class NetworkAnimation {
 		this.ctx = this.canvas.getContext('2d')!;
 		this.wrapper = this.canvas.parentElement!;
 
-		// 1. Define the Desktop Config (The one you like)
+		// 1. Desktop Config
 		const desktopDefaults: NetworkConfig = {
 			density: 6000,
 			maxDistance: 120,
@@ -50,6 +52,7 @@ export class NetworkAnimation {
 			friction: 0.96,
 			mouse: { radius: 160, strength: 0.02 },
 			bounce: { repulsionRadius: 40, repulsionStrength: 0.2 },
+			edgeRepulsion: { radius: 50, strength: 0.15 }, // Cushion at edges
 			wander: { strength: 0.05 },
 			click: { radius: 200, strength: 8 },
 			style: {
@@ -60,29 +63,29 @@ export class NetworkAnimation {
 			}
 		};
 
-		// 2. Define the Mobile Config (Optimized for performance and small screens)
+		// 2. Mobile Config
 		const mobileDefaults: NetworkConfig = {
-			density: 3000,       // Higher number = FEWER dots (crucial for mobile CPU)
-			maxDistance: 90,     // Shorter lines for smaller screens
-			speed: 0.15,         // Slightly slower for elegance
+			density: 3000,
+			maxDistance: 90,
+			speed: 0.15,
 			friction: 0.96,
 			mouse: { radius: 100, strength: 0.03 },
 			bounce: { repulsionRadius: 25, repulsionStrength: 0.15 },
+			edgeRepulsion: { radius: 30, strength: 0.1 },
 			wander: { strength: 0.05 },
 			click: { radius: 150, strength: 8 },
 			style: {
 				dotColor: '#6bbcff',
-				dotSize: 2,      // Smaller dots look sharper on mobile
+				dotSize: 2,
 				lineColorRGB: '107, 188, 255',
 				lineWidth: 1
 			}
 		};
 
-		// 3. Detect device and merge configs
 		const isMobile = window.innerWidth < 768;
 		this.config = {
 			...(isMobile ? mobileDefaults : desktopDefaults),
-			...customConfig // customConfig still takes final priority
+			...customConfig
 		};
 
 		this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -94,12 +97,9 @@ export class NetworkAnimation {
 	}
 
 	private initEventListeners() {
-		// Desktop Input
 		window.addEventListener('mousemove', this.handleInputMove);
 		window.addEventListener('mouseleave', this.handleInputEnd);
 		window.addEventListener('mousedown', this.handleMouseDown);
-
-		// Mobile Input
 		window.addEventListener('touchstart', this.handleTouch, { passive: true });
 		window.addEventListener('touchmove', this.handleTouch, { passive: true });
 		window.addEventListener('touchend', this.handleInputEnd, { passive: true });
@@ -141,8 +141,6 @@ export class NetworkAnimation {
 	private resize() {
 		this.width = this.canvas.width = this.wrapper.clientWidth;
 		this.height = this.canvas.height = this.wrapper.clientHeight;
-
-		// Recalculate target count based on active config (mobile vs desktop)
 		const targetCount = Math.floor((this.width * this.height) / this.config.density);
 
 		if (this.dots.length < targetCount) {
@@ -165,15 +163,33 @@ export class NetworkAnimation {
 		this.ctx.clearRect(0, 0, this.width, this.height);
 
 		for (const d of this.dots) {
+			// 1. Wandering
 			d.vx += (Math.random() - 0.5) * this.config.wander.strength;
 			d.vy += (Math.random() - 0.5) * this.config.wander.strength;
+
+			// 2. Physics & Friction
 			d.x += d.vx;
 			d.y += d.vy;
 			d.vx *= this.config.friction;
 			d.vy *= this.config.friction;
 
-			d.targetSize = this.config.style.dotSize;
+			// 3. FEATURE: Soft Edge Repulsion (The "Bounce" you requested)
+			const edgeR = this.config.edgeRepulsion.radius;
+			const edgeS = this.config.edgeRepulsion.strength;
 
+			if (d.x < edgeR) d.vx += (edgeR - d.x) * edgeS / edgeR; // Left
+			if (d.x > this.width - edgeR) d.vx -= (d.x - (this.width - edgeR)) * edgeS / edgeR; // Right
+			if (d.y < edgeR) d.vy += (edgeR - d.y) * edgeS / edgeR; // Top
+			if (d.y > this.height - edgeR) d.vy -= (d.y - (this.height - edgeR)) * edgeS / edgeR; // Bottom
+
+			// 4. Hard Constraint (Prevent sticking outside)
+			if (d.x < 0) { d.x = 0; d.vx *= -0.5; }
+			if (d.x > this.width) { d.x = this.width; d.vx *= -0.5; }
+			if (d.y < 0) { d.y = 0; d.vy *= -0.5; }
+			if (d.y > this.height) { d.y = this.height; d.vy *= -0.5; }
+
+			// 5. Mouse Interaction
+			d.targetSize = this.config.style.dotSize;
 			if (this.mouse.x !== null && this.mouse.y !== null) {
 				const dx = this.mouse.x - d.x;
 				const dy = this.mouse.y - d.y;
@@ -188,22 +204,17 @@ export class NetworkAnimation {
 
 			d.size += (d.targetSize - d.size) * 0.1;
 
-			// Wrap-around logic for smoother mobile experience
-			if (d.x < 0) d.x = this.width;
-			if (d.x > this.width) d.x = 0;
-			if (d.y < 0) d.y = this.height;
-			if (d.y > this.height) d.y = 0;
-
+			// 6. Draw Dot
 			this.ctx.beginPath();
 			this.ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
 			this.ctx.fillStyle = this.config.style.dotColor;
 			this.ctx.fill();
 		}
 
+		// 7. Connections & Inter-dot Repulsion
 		for (let i = 0; i < this.dots.length; i++) {
 			const a = this.dots[i];
 
-			// Line to mouse node
 			if (this.mouse.x !== null && this.mouse.y !== null) {
 				const mdx = a.x - this.mouse.x;
 				const mdy = a.y - this.mouse.y;
@@ -244,7 +255,6 @@ export class NetworkAnimation {
 				}
 			}
 		}
-
 		this.animationFrameId = requestAnimationFrame(this.animate);
 	};
 
