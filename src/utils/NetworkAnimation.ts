@@ -12,6 +12,10 @@ interface NetworkConfig {
 		repulsionRadius: number;
 		repulsionStrength: number;
 	};
+	// NEW: wandering movement settings
+	wander: {
+		strength: number; // How much random "jitter" is added each frame
+	};
 	style: {
 		dotColor: string;
 		dotSize: number;
@@ -58,16 +62,19 @@ export class NetworkAnimation {
 				repulsionRadius: 40,
 				repulsionStrength: 0.2
 			},
+			// NEW: Default wandering strength
+			wander: {
+				strength: 0.11
+			},
 			style: {
 				dotColor: '#6bbcff',
 				dotSize: 2,
 				lineColorRGB: '107, 188, 255',
 				lineWidth: 1
 			},
-			...customConfig // Overwrite defaults if custom ones are provided
+			...customConfig
 		};
 
-		// Initialize
 		this.resizeObserver = new ResizeObserver(() => this.resize());
 		this.resizeObserver.observe(this.wrapper);
 
@@ -81,7 +88,6 @@ export class NetworkAnimation {
 		window.addEventListener('mouseleave', this.handleMouseLeave);
 	}
 
-	// Use arrow functions to keep "this" context
 	private handleMouseMove = (e: MouseEvent) => {
 		const rect = this.canvas.getBoundingClientRect();
 		this.mouse.x = e.clientX - rect.left;
@@ -116,8 +122,12 @@ export class NetworkAnimation {
 	private animate = () => {
 		this.ctx.clearRect(0, 0, this.width, this.height);
 
-		// Update and Draw Dots
 		for (const d of this.dots) {
+			// --- ADDED: Constant Movement (Wander Force) ---
+			// This applies a tiny random push so dots never fully stop.
+			d.vx += (Math.random() - 0.5) * this.config.wander.strength;
+			d.vy += (Math.random() - 0.5) * this.config.wander.strength;
+
 			d.x += d.vx;
 			d.y += d.vy;
 			d.vx *= this.config.friction;
@@ -146,7 +156,6 @@ export class NetworkAnimation {
 			this.ctx.fill();
 		}
 
-		// Lines and Repulsion
 		for (let i = 0; i < this.dots.length; i++) {
 			for (let j = i + 1; j < this.dots.length; j++) {
 				const a = this.dots[i];
@@ -178,9 +187,6 @@ export class NetworkAnimation {
 		this.animationFrameId = requestAnimationFrame(this.animate);
 	};
 
-	/**
-	 * IMPORTANT: Call this when the component unmounts to prevent memory leaks!
-	 */
 	public destroy() {
 		cancelAnimationFrame(this.animationFrameId);
 		this.resizeObserver.disconnect();
