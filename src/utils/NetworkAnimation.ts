@@ -101,7 +101,7 @@ export class NetworkAnimation {
 			},
 			click: {
 				radius: 150,
-				strength: 8
+				strength: -8
 			},
 			style: {
 				dotColor: '#6bbcff',
