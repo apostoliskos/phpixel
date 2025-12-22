@@ -52,7 +52,7 @@ export class NetworkAnimation {
 			friction: 0.96,
 			mouse: { radius: 160, strength: 0.02 },
 			bounce: { repulsionRadius: 40, repulsionStrength: 0.2 },
-			edgeRepulsion: { radius: 50, strength: 0.15 }, // Cushion at edges
+			edgeRepulsion: { radius: 25, strength: 0.15 }, // Cushion at edges
 			wander: { strength: 0.05 },
 			click: { radius: 200, strength: 8 },
 			style: {
@@ -71,7 +71,7 @@ export class NetworkAnimation {
 			friction: 0.96,
 			mouse: { radius: 100, strength: 0.03 },
 			bounce: { repulsionRadius: 25, repulsionStrength: 0.15 },
-			edgeRepulsion: { radius: 30, strength: 0.1 },
+			edgeRepulsion: { radius: 25, strength: 0.1 },
 			wander: { strength: 0.05 },
 			click: { radius: 150, strength: 8 },
 			style: {
