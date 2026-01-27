@@ -126,20 +126,20 @@ import {
 
 
 
-<script>
-  // Dynamic import: This doesn't block the initial page load
-  const initAnimation = async () => {
-    const canvas1 = document.getElementById('network') as HTMLCanvasElement;
+<!--<script>-->
+<!--  // Dynamic import: This doesn't block the initial page load-->
+<!--  const initAnimation = async () => {-->
+<!--    const canvas1 = document.getElementById('network') as HTMLCanvasElement;-->
 
-    if (canvas1) {
-      const { NetworkAnimation } = await import('@utils/NetworkAnimation');
-      new NetworkAnimation(canvas1, {});
-    }
-  };
+<!--    if (canvas1) {-->
+<!--      const { NetworkAnimation } = await import('@utils/NetworkAnimation');-->
+<!--      new NetworkAnimation(canvas1, {});-->
+<!--    }-->
+<!--  };-->
 
-  // Run it after the page is ready
-  initAnimation();
-</script>
+<!--  // Run it after the page is ready-->
+<!--  initAnimation();-->
+<!--</script>-->
 
 
 <style>
