@@ -1,35 +1,12 @@
 ---
 
+import { Icon } from 'astro-icon/components';
+import {
+  Button,
+  CtaCardSection,
+} from '@components/odyssey-theme';
 ---
-<script>
-  // We use is:inline so this small block of code is part of the HTML
-  // and doesn't create a "Network Chain"
 
-  const startAnimation = async () => {
-    const canvas = document.getElementById('network');
-
-    if (canvas) {
-      try {
-        // We use the full path to the bundled file
-        // Note: You may need to check your 'dist' folder for the exact path
-        // if '@utils' doesn't resolve in an inline script.
-        const module = await import('/_astro/NetworkAnimation.js');
-        new module.NetworkAnimation(canvas, {});
-      } catch (e) {
-        console.error("Animation failed to load", e);
-      }
-    }
-  };
-
-  // 'load' ensures the canvas and all images/styles are ready
-  window.addEventListener('load', () => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(startAnimation);
-    } else {
-      setTimeout(startAnimation, 200);
-    }
-  });
-</script>
 <style>
   .announcement-banner__container {
     padding: 0.5rem;
@@ -144,25 +121,99 @@
     <span></span>
   </div>
 </div>
+<!--<script is:inline>-->
+<!--  let isSnapping = false;-->
+<!--  let touchStartY = 0;-->
 
+<!--  const FIXED_HEADER_SELECTOR = '.site-header'; // your sticky header-->
+<!--  const MOBILE_EXTRA = 0; // optional extra for mobile top bar-->
 
+<!--  const getSnapTarget = () => {-->
+<!--    const el = document.querySelector('.header&#45;&#45;right');-->
+<!--    if (!el) return 0;-->
 
+<!--    const rectTop = el.getBoundingClientRect().top + window.scrollY;-->
 
+<!--    const fixedHeader = document.querySelector(FIXED_HEADER_SELECTOR);-->
+<!--    const FIXED_HEADER_HEIGHT = fixedHeader ? fixedHeader.offsetHeight : 0;-->
 
-<!--<script>-->
-<!--  // Dynamic import: This doesn't block the initial page load-->
-<!--  const initAnimation = async () => {-->
-<!--    const canvas1 = document.getElementById('network') as HTMLCanvasElement;-->
-
-<!--    if (canvas1) {-->
-<!--      const { NetworkAnimation } = await import('@utils/NetworkAnimation');-->
-<!--      new NetworkAnimation(canvas1, {});-->
+<!--    // Mobile viewport height compensation-->
+<!--    let target = rectTop - FIXED_HEADER_HEIGHT;-->
+<!--    if (window.innerWidth < 768) {-->
+<!--      const vh = window.visualViewport?.height || window.innerHeight;-->
+<!--      const delta = window.innerHeight - vh;-->
+<!--      target -= delta;         // compensate for shrinking mobile address bar-->
+<!--      target -= MOBILE_EXTRA;  // optional extra-->
 <!--    }-->
+
+<!--    return Math.max(0, target);-->
 <!--  };-->
 
-<!--  // Run it after the page is ready-->
-<!--  initAnimation();-->
+<!--  const snapScroll = () => {-->
+<!--    const target = getSnapTarget();-->
+<!--    if (!target) return;-->
+
+<!--    // Smooth scroll using requestAnimationFrame without overflow: hidden-->
+<!--    let start = null;-->
+<!--    const duration = 700;-->
+
+<!--    const step = (timestamp) => {-->
+<!--      if (!start) start = timestamp;-->
+<!--      const progress = Math.min((timestamp - start) / duration, 1);-->
+<!--      const current = window.scrollY + (target - window.scrollY) * progress;-->
+<!--      window.scrollTo(0, current);-->
+
+<!--      if (progress < 1) requestAnimationFrame(step);-->
+<!--      else isSnapping = false;-->
+<!--    };-->
+
+<!--    requestAnimationFrame(step);-->
+<!--  };-->
+
+<!--  // Desktop: wheel scroll-->
+<!--  window.addEventListener('wheel', (e) => {-->
+<!--    if (window.scrollY !== 0) return; // only at top-->
+<!--    if (e.deltaY <= 0) return;        // only scroll down-->
+<!--    if (isSnapping) return;-->
+
+<!--    isSnapping = true;-->
+<!--    e.preventDefault();-->
+<!--    snapScroll();-->
+<!--  }, { passive: false });-->
+
+<!--  // Mobile: touch-->
+<!--  window.addEventListener('touchstart', (e) => {-->
+<!--    touchStartY = e.touches[0].clientY;-->
+<!--  }, { passive: true });-->
+
+<!--  window.addEventListener('touchmove', (e) => {-->
+<!--    const deltaY = touchStartY - e.touches[0].clientY;-->
+
+<!--    if (window.scrollY !== 0) return; // only at top-->
+<!--    if (deltaY <= 0) return;          // only swipe down-->
+<!--    if (isSnapping) return;-->
+
+<!--    isSnapping = true;-->
+<!--    e.preventDefault();-->
+<!--    snapScroll();-->
+<!--  }, { passive: false });-->
 <!--</script>-->
+
+
+
+
+<script>
+  import { NetworkAnimation } from '@utils/NetworkAnimation';
+
+  const canvas1 = document.getElementById('network') as HTMLCanvasElement;
+
+  if (canvas1) {
+    // Pass your custom settings as the second argument
+    new NetworkAnimation(canvas1, {
+
+    });
+  }
+</script>
 
 
 <style>
