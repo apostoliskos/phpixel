@@ -2,7 +2,6 @@
 import { SkipLink } from '@components/odyssey-theme';
 import BaseHead from '../components/head/BaseHead.astro';
 import type { Props as BaseHeadProps } from '../components/head/BaseHead.astro';
-// import '../utils/NetworkAnimation.ts';
 export interface Props {
 	seo?: BaseHeadProps;
 }
@@ -23,5 +22,22 @@ const { seo } = Astro.props;
 			<slot />
 		</main>
 		<slot name="footer" />
+
+		<script>
+			const initAnimation = async () => {
+				const canvas1 = document.getElementById('network') as HTMLCanvasElement;
+				if (canvas1) {
+					const { NetworkAnimation } = await import('@utils/NetworkAnimation');
+					new NetworkAnimation(canvas1, {});
+				}
+			};
+
+			// Wait until the browser is idle to start the heavy animation logic
+			if ('requestIdleCallback' in window) {
+				window.requestIdleCallback(() => initAnimation());
+			} else {
+				setTimeout(initAnimation, 200); // Fallback for older browsers
+			}
+		</script>
 	</body>
 </html>

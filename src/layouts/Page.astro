@@ -17,22 +17,7 @@ const { seo } = Astro.props as Props;
 ---
 
 <Layout seo={seo}>
-	<script>
-		const initAnimation = async () => {
-			const canvas1 = document.getElementById('network') as HTMLCanvasElement;
-			if (canvas1) {
-				const { NetworkAnimation } = await import('@utils/NetworkAnimation');
-				new NetworkAnimation(canvas1, {});
-			}
-		};
 
-		// Wait until the browser is idle to start the heavy animation logic
-		if ('requestIdleCallback' in window) {
-			window.requestIdleCallback(() => initAnimation());
-		} else {
-			setTimeout(initAnimation, 200); // Fallback for older browsers
-		}
-	</script>
 	<div id="page">
 		<slot name="announcement-bar" />
 		<Header rightMenu navData={nav} slot="header">
