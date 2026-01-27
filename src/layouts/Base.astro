@@ -23,34 +23,6 @@ const { seo } = Astro.props;
 		</main>
 		<slot name="footer" />
 
-		<script >
-			// We use is:inline so this small block of code is part of the HTML
-			// and doesn't create a "Network Chain"
 
-			const startAnimation = async () => {
-				const canvas = document.getElementById('network');
-
-				if (canvas) {
-					try {
-						// We use the full path to the bundled file
-						// Note: You may need to check your 'dist' folder for the exact path
-						// if '@utils' doesn't resolve in an inline script.
-						const module = await import('/_astro/NetworkAnimation.js');
-						new module.NetworkAnimation(canvas, {});
-					} catch (e) {
-						console.error("Animation failed to load", e);
-					}
-				}
-			};
-
-			// 'load' ensures the canvas and all images/styles are ready
-			window.addEventListener('load', () => {
-				if ('requestIdleCallback' in window) {
-					window.requestIdleCallback(startAnimation);
-				} else {
-					setTimeout(startAnimation, 200);
-				}
-			});
-		</script>
 	</body>
 </html>
