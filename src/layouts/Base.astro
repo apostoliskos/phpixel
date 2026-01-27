@@ -23,7 +23,7 @@ const { seo } = Astro.props;
 		</main>
 		<slot name="footer" />
 
-		<script>
+		<script async>
 			const initAnimation = async () => {
 				const canvas1 = document.getElementById('network') as HTMLCanvasElement;
 				if (canvas1) {
