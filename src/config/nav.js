@@ -1,41 +1,36 @@
 export const nav = [
-	{
-		title: 'News',
-		slug: '/blog',
-	},
-	{
-		title: 'Services',
-		slug: '/services',
-		children: [
-			{
-				title: 'Κατασκευή e-shop',
-				slug: '/ecommerce'
-			},
-			{
-				title: 'Κατασκευή Ιστοσελίδας,<br> Landing Page',
-				slug: '/istoselides-landingpage'
-			},
-			{
-				title: 'Social Media Marketing',
-				slug: '/social-media-marketing'
-			},
-			{
-				title: 'Search Engine<br> Optimization (SEO)',
-				slug: '/software-development'
-			},
-		],
-	},
-	{
-		title: 'Projects',
-		slug: '/software-development'
-	},
-	{
-		title: 'Πως δουλεύουμε',
-		slug: '/how-we-work'
-	},
-	{
-		title: 'About',
-		slug: '/about',
-	},
-
+  {
+    title: 'Υπηρεσίες',
+    slug: '/services',
+    children: [
+      {
+        title: 'E-shop Creation',
+        slug: '/services#eshop',
+      },
+      {
+        title: 'Website Building',
+        slug: '/services#website',
+      },
+      {
+        title: 'Custom Web Apps',
+        slug: '/services#apps',
+      },
+      {
+        title: 'Hosting & Maintenance',
+        slug: '/services#hosting',
+      },
+    ],
+  },
+  {
+    title: 'Πώς Δουλεύουμε',
+    slug: '/how-we-work',
+  },
+  {
+    title: 'Blog',
+    slug: '/blog',
+  },
+  {
+    title: 'About',
+    slug: '/about',
+  },
 ];

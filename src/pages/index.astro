@@ -1,172 +1,323 @@
 ---
-import {
-	CustomerQuoteSection,
-	Button,
-	CtaCardSection,
-	StickyTextImageSection,
-	AnnouncementBar,
-	Container,
-	FeatureCard
-} from '@components/odyssey-theme';
-
-import Layout from '../layouts/Page.astro';
-import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
-import What_we_do from '../components/sections/heros/What_we_do.astro';
-import Stats from '../components/sections/heros/Stats.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import CtaSection from '../components/CtaSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
-import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
+import { services } from '../data/services';
+import { site } from '../data/site';
 ---
-<Layout>
-	<AnnouncementBar slot="announcement-bar" />
-	<HomeHeroSection />
-	<!--<What_we_do />-->
 
-	<!--<Stats />-->
+<BaseLayout
+  title={`${site.name} — Digital Agency | E-shop, Websites, Custom Apps`}
+  description="Phpixel Digital Agency — Κατασκευή e-shop, ιστοσελίδων, custom web apps, hosting & maintenance. Ολοκληρωμένες ψηφιακές λύσεις."
+>
 
-	<TextAndImageHero reversed>
-		<div slot="text-container">
-			<h2>Κατασκευή Ιστοσελίδων</h2>
-			<p>Δώστε στην επιχείρησή σας τη διαδικτυακή παρουσία που της αξίζει!</p>
-			<p>Φέρτε την επιχείρησή σας online με έναν επαγγελματικό ιστότοπο. Ο ιστότοπός σας είναι το κέντρο της ψηφιακής
-				σας παρουσίας, συνδέοντας εσάς με τους πελάτες σας και προβάλλοντας την επωνυμία σας. Ένας καλά σχεδιασμένος
-				ιστότοπος αυξάνει την προβολή, δημιουργεί leads και ενισχύει τις πωλήσεις σας. Μην αφήνετε το διαδίκτυο να
-				περάσει ανεκμετάλλευτο – ας δημιουργήσουμε έναν ιστότοπο που αναδεικνύει τη μοναδικότητά σας και φέρνει
-				αποτελέσματα.</p>
-			<ul>
-				<li>
-					Προσαρμοσμένο Θέμα & Σχεδιασμός: Ο ιστότοπός σας αποκτά μοναδική εμφάνιση που ταιριάζει στην επωνυμία σας.
-				</li>
-				<li>
-					Τελευταίες Τεχνολογίες Σχεδίασης: Σύγχρονη αισθητική και λειτουργικότητα.
-				</li>
-				<li>
-					SEO-Φιλικός Σχεδιασμός: Οι πελάτες σας θα σας βρίσκουν εύκολα στις μηχανές αναζήτησης.
-				</li>
-			</ul>
-		</div>
-		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon>Get Started<Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
-		</div>
-		<picture slot="image-container">
-			<img src="/assets/images/landing-1/landing-hero-1.jpg" alt="Astro Odyssee" id="home-hero-image" />
-		</picture>
-	</TextAndImageHero>
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <span class="hero__badge reveal">Digital Agency</span>
+        <h1 class="hero__title reveal" style="transition-delay: 0.1s">
+          Κάνε την Ιδέα σου<br />
+          <span class="hero__title-accent">Πραγματικότητα</span>
+        </h1>
+        <p class="hero__subtitle reveal" style="transition-delay: 0.2s">
+          E-shop, websites, custom apps & hosting. Δημιουργούμε ψηφιακές λύσεις
+          που φέρνουν αποτελέσματα.
+        </p>
+        <div class="hero__actions reveal" style="transition-delay: 0.3s">
+          <a href="/contact" class="btn btn--primary btn--lg">
+            <Icon name="ic:baseline-mail" class="btn-icon" />
+            Ξεκίνα τώρα
+          </a>
+          <a href="/services" class="btn btn--outline btn--lg hero__outline-btn">
+            Οι υπηρεσίες μας
+            <Icon name="ic:baseline-arrow-forward" class="btn-icon" />
+          </a>
+        </div>
+      </div>
 
-	<TextAndImageHero>
-		<div slot="text-container">
-			<h2>Κατασκευή e-Shop</h2>
-			<p>Ανεβάστε την επιχείρησή σας στο επόμενο επίπεδο με ένα e-Shop!</p>
-			<p>Με ένα ηλεκτρονικό κατάστημα οι πελάτες σας μπορούν να αγοράζουν προϊόντα ή υπηρεσίες οποιαδήποτε στιγμή, 24/7.
-				Είναι άνετο για τους πελάτες και ανοίγει νέες αγορές για την επιχείρησή σας. Δημιουργούμε e-shops που είναι
-				εύχρηστα, ασφαλή και προσαρμοσμένα στην επωνυμία σας. Με ένα επαγγελματικό e-shop, αυξάνετε τις πωλήσεις και
-				διευρύνετε την πελατειακή σας βάση, ενώ μειώνετε τα λειτουργικά κόστη.</p>
-			<ul>
-				<li>
-					Πωλήσεις 24/7
-				</li>
-				<li>
-					Σύνδεση με ERP (αν διαθέτετε)
-				</li>
-				<li>
-					Υποστήριξη ηλεκτρονικών πληρωμών
-				</li>
-			</ul>
-		</div>
-		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon>Get Started<Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
-		</div>
-		<picture slot="image-container">
-			<img src="/assets/images/landing-1/landing-hero-1.jpg" alt="Astro Odyssee" id="home-hero-image" />
-		</picture>
-	</TextAndImageHero>
+      <div class="hero__visual reveal" style="transition-delay: 0.4s">
+        <div class="hero__card hero__card--1">
+          <Icon name="ic:baseline-shopping-cart" class="hero-card-icon" />
+          <span>E-shop</span>
+        </div>
+        <div class="hero__card hero__card--2">
+          <Icon name="ic:baseline-language" class="hero-card-icon" />
+          <span>Websites</span>
+        </div>
+        <div class="hero__card hero__card--3">
+          <Icon name="ic:baseline-code" class="hero-card-icon" />
+          <span>Web Apps</span>
+        </div>
+        <div class="hero__card hero__card--4">
+          <Icon name="ic:baseline-cloud" class="hero-card-icon" />
+          <span>Hosting</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<CustomerQuoteSection quoteText="Κατασκευή Ιστοσελίδων, E-shop & Digital Marketing" />
-	<!--<Container>-->
-	<!--	<section class="feature-card__section">-->
-	<!--		<h2>Landing Pages</h2>-->
-	<!--		<p>-->
-	<!--			Use one of our landing pages to jumpstart your website or-->
-	<!--			ad campaign.-->
-	<!--		</p>-->
-	<!--		<div class="feature-card__grid">-->
-	<!--			<FeatureCard href="/landing-pages/landing-1" title="Κατασκευή website" imgSrc="/assets/images/home/screenshots/landing-1" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
-	<!--			</FeatureCard>-->
-	<!--			<FeatureCard href="/landing-pages/landing-2" title="Κατασκευή e-shop" imgSrc="/assets/images/home/screenshots/landing-2" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
-	<!--			</FeatureCard>-->
-	<!--		</div>-->
-	<!--	</section>-->
-	<!--</Container>-->
+  <!-- ========== SERVICES GRID ========== -->
+  <ServicesGrid services={services} />
 
-	<Container>
-		<section class="feature-card__section">
-			<h2>Υπηρεσίες Marketing & Σχεδιασμού</h2>
-			<p>
-				Search Engine Optimization (SEO).
-			</p>
-			<div class="feature-card__grid">
-				<FeatureCard  title="Search Engine Optimization" imgSrc="/assets/images/home/screenshots/about"
-										 txt="Ανεβάστε την ιστοσελίδα σας ψηλότερα στις μηχανές αναζήτησης με ολοκληρωμένες υπηρεσίες SEO.">
-				</FeatureCard>
-				<FeatureCard  title="Σχεδιασμός Ψηφιακού Προϊόντος & UI/UX"
-										 imgSrc="/assets/images/home/screenshots/contact"
-										 txt="Μετατρέψτε τις ιδέες σας σε ψηφιακά προϊόντα με υπηρεσίες σχεδιασμού διεπαφής και εμπειρίας χρήστη (UI/UX).">
-				</FeatureCard>
-				<FeatureCard  title="Social Media Marketing" imgSrc="/assets/images/home/screenshots/blog"
-										 txt="Αυξήστε την απήχηση της επιχείρησής σας και προσεγγίστε νέους πελάτες μέσα από στρατηγικές social media που λειτουργούν για εσάς, 24/7.">
-				</FeatureCard>
-				<FeatureCard
-											title="Σχεδιασμός Ψηφιακού Προϊόντος & UI/UX"
-										 imgSrc="/assets/images/home/screenshots/blog-post"
-										 txt="Κάντε πραγματικότητα το λογισμικό που φαντάζεστε με τις υπηρεσίες ανάπτυξης software μας.">
-				</FeatureCard>
-				<!--<FeatureCard href="/legal" imgSrc="/assets/images/home/screenshots/legal"	title="Legal Page" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
-				<!--</FeatureCard>-->
-			</div>
-		</section>
-	</Container>
+  <!-- ========== WHY US SECTION ========== -->
+  <section class="why-us">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeader title="Γιατί Εμάς" subtitle="Our Approach">
+          Συνδυάζουμε τεχνολογία, σχεδιασμό και στρατηγική
+          για να φτιάξουμε κάτι που πραγματικά δουλεύει.
+        </SectionHeader>
+      </div>
 
-	<!--<Container>-->
-	<!--	<section class="feature-card__section">-->
-	<!--		<h2>Theme Pages</h2>-->
-	<!--		<p>Learn more about how to set up and use the Odyssey Theme.</p>-->
-	<!--		<div class="feature-card__grid">-->
-	<!--			<FeatureCard href="/theme/get-started" imgSrc="/assets/images/home/screenshots/get-started"	title="Get Started" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
-	<!--			</FeatureCard>-->
-	<!--			<FeatureCard href="/theme/style-guide" imgSrc="/assets/images/home/screenshots/style-guide"	title="Style Guide" txt="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi.">-->
-	<!--			</FeatureCard>-->
-	<!--		</div>-->
-	<!--	</section>-->
-	<!--</Container>-->
+      <div class="why-us__grid">
+        <div class="why-us__item reveal">
+          <div class="why-us__number">01</div>
+          <h3>Modern Tech Stack</h3>
+          <p>Astro, Next.js, React, Shopify — χρησιμοποιούμε τις πιο σύγχρονες τεχνολογίες για ταχύτητα και απόδοση.</p>
+        </div>
+        <div class="why-us__item reveal" style="transition-delay: 0.1s">
+          <div class="why-us__number">02</div>
+          <h3>SEO-First Design</h3>
+          <p>Κάθε σελίδα βελτιστοποιημένη για τις μηχανές αναζήτησης. Core Web Vitals, semantic HTML, structured data.</p>
+        </div>
+        <div class="why-us__item reveal" style="transition-delay: 0.2s">
+          <div class="why-us__number">03</div>
+          <h3>Dedicated Support</h3>
+          <p>Δεν σε αφήνουμε μετά το launch. Συνεχής υποστήριξη, updates και monitoring 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<CtaCardSection background="var(--theme-surface-2)" color="var(--theme-on-surface-2)">
-		<h2>Μιλήστε μας</h2>
-		<p>Μην διστάσεις να επικοινωνήσεις μαζί μας για να γίνει η ιδέα σου πραγματικότητα.</p>
-		<div class="two_buttons">
-			<!-- Icon after text (default) -->
-			<Button href="/contact" customIcon iconPosition="before">Επικοινωνία<Fragment slot="icon"><Icon name="ic:baseline-mail" /></Fragment></Button>
+  <!-- ========== CTA SECTION ========== -->
+  <CtaSection
+    title="Ας δημιουργήσουμε κάτι μαζί"
+    description="Μην διστάσεις να επικοινωνήσεις μαζί μας. Η ιδέα σου αξίζει να γίνει πραγματικότητα."
+    primaryLabel="Επικοινωνία"
+    primaryHref="/contact"
+    secondaryLabel="6977383488"
+    secondaryHref="tel:6977383488"
+  />
 
-			<!-- Icon before text -->
-			<Button href="tel:6977383488" customIcon iconPosition="before">6977383488<Fragment slot="icon"><Icon name="ic:baseline-phone" /></Fragment></Button>
-
-		</div>
-
-	</CtaCardSection>
-</Layout>
+</BaseLayout>
 
 <style>
-    .feature-card__section {
-        margin: var(--section-margin) auto;
+  /* ========================================
+     HERO
+     ======================================== */
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: var(--navbar-height);
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero);
+    z-index: 0;
+  }
+
+  .hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding: 4rem var(--container-padding);
+  }
+
+  .hero__content {
+    color: #fff;
+  }
+
+  .hero__badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero__title {
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__title-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__subtitle {
+    font-size: 1.15rem;
+    opacity: 0.8;
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero__outline-btn {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .hero__outline-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+  }
+
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Hero Visual — Floating Cards */
+  .hero__visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding: 2rem;
+  }
+
+  .hero__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--theme-shape-radius);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--theme-transition);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero__card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .hero__card--1 { animation-delay: 0s; }
+  .hero__card--2 { animation-delay: 1.5s; }
+  .hero__card--3 { animation-delay: 3s; }
+  .hero__card--4 { animation-delay: 4.5s; }
+
+  .hero-card-icon {
+    width: 36px;
+    height: 36px;
+    opacity: 0.9;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ========================================
+     WHY US SECTION
+     ======================================== */
+
+  .why-us {
+    padding: var(--section-padding);
+    background: var(--theme-surface-1);
+  }
+
+  .why-us__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .why-us__item {
+    padding: 2rem;
+  }
+
+  .why-us__number {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .why-us__item h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .why-us__item p {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 768px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 2rem var(--container-padding);
     }
 
-    .feature-card__grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--theme-grid-gap);
+    .hero__subtitle {
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    @media (max-width: 768px) {
-        .feature-card__grid {
-            grid-template-columns: 1fr;
-        }
+    .hero__actions {
+      justify-content: center;
     }
-</style>
+
+    .hero__visual {
+      padding: 0;
+      gap: 1rem;
+    }
+
+    .hero__card {
+      padding: 1.25rem 1rem;
+    }
+
+    .why-us__grid {
+      grid-template-columns: 1fr;
+    }

@@ -1,100 +1,424 @@
 ---
-import Layout from '../layouts/Page.astro';
-import { CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, FeatureCard } from '@components/odyssey-theme';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaSection from '../components/CtaSection.astro';
 import { Icon } from 'astro-icon/components';
 
-
+const services = [
+  {
+    num: '01',
+    title: 'E-shop Creation',
+    tags: ['WooCommerce', 'Shopify', 'Custom'],
+    desc: 'Ολοκληρωμένες λύσεις ηλεκτρονικού εμπορίου προσαρμοσμένες στην επιχείρησή σας. Επιλογή πλατφόρμας, custom integrations και UX βελτιστοποιημένο για conversions.',
+    features: ['Επιλογή & ρύθμιση πλατφόρμας', 'Custom integrations & αυτοματισμοί', 'UX βελτιστοποιημένο για conversions'],
+    href: '/ecommerce',
+    accent: 'var(--accent-emerald)',
+  },
+  {
+    num: '02',
+    title: 'Website Building',
+    tags: ['Mobile-First', 'SEO-Ready', 'Fast'],
+    desc: 'Καθαρές, γρήγορες ιστοσελίδες με επίκεντρο τη μετατροπή. Mobile-first, SEO-ready και φτιαγμένες να αντιπροσωπεύουν το brand σας στο καλύτερό του.',
+    features: ['Responsive σχεδιασμός για κάθε συσκευή', 'Βελτιστοποιημένη απόδοση & ταχύτητα', 'CMS integration για εύκολη διαχείριση'],
+    href: '/contact',
+    accent: 'var(--accent-blue)',
+  },
+  {
+    num: '03',
+    title: 'Digital Marketing',
+    tags: ['SEO', 'Google Ads', 'Social Media'],
+    desc: 'Στρατηγικό digital marketing που οδηγεί πραγματική επισκεψιμότητα και μετρήσιμα αποτελέσματα. SEO, Google Ads, social media και content strategy.',
+    features: ['Στοχευμένο SEO & έρευνα λέξεων-κλειδιών', 'Google Ads & πληρωμένες καμπάνιες', 'Στρατηγική social media & περιεχόμενο'],
+    href: '/contact',
+    accent: 'var(--accent-rose)',
+  },
+  {
+    num: '04',
+    title: 'Custom Web Apps',
+    tags: ['Εσωτερικά Εργαλεία', 'Πλατφόρμες', 'Scale'],
+    desc: 'Προσαρμοσμένες web εφαρμογές φτιαγμένες γύρω από τις ακριβείς ανάγκες σας — από εσωτερικά εργαλεία έως πλατφόρμες που κλιμακώνονται.',
+    features: ['Custom αυτοματισμοί workflow', 'Κλιμακούμενη αρχιτεκτονική cloud', 'API integrations & third-party συστήματα'],
+    href: '/contact',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    num: '05',
+    title: 'Hosting & Maintenance',
+    tags: ['Cloud', 'Security', '24/7'],
+    desc: 'Managed cloud hosting, ασφάλεια, αυτόματα backups και 24/7 τεχνική υποστήριξη. Εσείς εστιάζετε στην επιχείρηση, εμείς στην τεχνολογία.',
+    features: ['Managed cloud servers', 'SSL & security monitoring', '24/7 υποστήριξη & backups'],
+    href: '/contact',
+    accent: 'var(--accent-amber)',
+  },
+];
 ---
 
+<BaseLayout
+  title="Υπηρεσίες — Phpixel | Digital Agency"
+  description="E-shop creation, website building, digital marketing, custom web apps, hosting & maintenance. Ολοκληρωμένες ψηφιακές λύσεις από την Phpixel."
+>
 
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Phpixel",
+    "url": "https://phpixel.gr",
+    "description": "Digital agency offering ecommerce solutions, web design, digital marketing, and custom web applications.",
+    "areaServed": "GR",
+    "serviceType": [
+      "Ecommerce Development",
+      "Website Creation",
+      "Digital Marketing",
+      "Custom Web Applications",
+      "Hosting & Maintenance"
+    ]
+  }
+  </script>
 
-<Layout>
+  <!-- ── HERO ── -->
+  <section class="svc-hero">
+    <div class="svc-hero__bg"></div>
+    <div class="container svc-hero__inner">
+      <div class="svc-hero__content reveal">
+        <span class="svc-hero__badge">Phpixel Services</span>
+        <h1 class="svc-hero__title">
+          Ψηφιακές λύσεις<br />
+          <span class="svc-hero__accent">που αποδίδουν.</span>
+        </h1>
+        <p class="svc-hero__sub">
+          Από το πρώτο pixel μέχρι την ολοκλήρωση — σχεδιάζουμε, αναπτύσσουμε
+          και προωθούμε ψηφιακές εμπειρίες που μετρούνται σε αποτελέσματα.
+        </p>
+        <a href="/contact" class="btn btn--primary btn--lg">Ξεκινήστε σήμερα</a>
+      </div>
+    </div>
+  </section>
 
-	<CustomerQuoteSection
-		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
-		customerName="Happy Customer"
-	/>
-	<StickyTextImageSection>
-		<div slot="text-container">
-			<h2>Features</h2>
-			<h3>SEO</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Responsive</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Themeable</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-		</div>
-		<picture slot="image-container">
-			<img
-				src="/assets/images/landing-1/landing-sticky.jpg"
-				alt="Astro Odyssey"
-				loading="lazy"
-			/>
-		</picture>
-	</StickyTextImageSection>
-	<StickyTextImageSection reversed>
-		<div slot="text-container">
-			<h2>Features</h2>
-			<h3>SEO</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Responsive</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-			<h3>Themeable</h3>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
-				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
-				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
-				mollitia cumque. Velit.
-			</p>
-		</div>
-		<picture slot="image-container">
-			<img
-				src="/assets/images/landing-1/landing-sticky.jpg"
-				alt="Astro Odyssey"
-				loading="lazy"
-			/>
-		</picture>
-	</StickyTextImageSection>
+  <!-- ── SERVICES ACCORDION ── -->
+  <section class="svc-list" aria-label="Υπηρεσίες">
+    <div class="container">
+      {services.map((s) => (
+        <details class="svc-row reveal" id={s.title.toLowerCase().replace(/\s+/g, '-')}>
+          <summary class="svc-row__head">
+            <span class="svc-row__num">{s.num}</span>
+            <span class="svc-row__title">{s.title}</span>
+            <span class="svc-row__tags">
+              {s.tags.map(t => <span class="svc-tag">{t}</span>)}
+            </span>
+            <span class="svc-row__arrow" aria-hidden="true">
+              <Icon name="ic:baseline-keyboard-arrow-down" />
+            </span>
+          </summary>
 
-	<CtaCardSection
-		background="var(--theme-surface-2)"
-		color="var(--theme-on-surface-2)"
-	>
-		<h2>Start Your Website Today</h2>
-		<p>
-			It only takes a couple clicks to have a new, modern website for your
-			business or startup.
-		</p>
-		<Button href="/theme/get-started" customIcon
-		>Get Started <Fragment slot="icon">
-			<Icon name="ic:baseline-chevron-right" />
-		</Fragment></Button
-		>
-	</CtaCardSection>
+          <div class="svc-row__body">
+            <p class="svc-row__desc">{s.desc}</p>
+            <ul class="svc-row__feats">
+              {s.features.map(f => (
+                <li class="svc-row__feat">
+                  <Icon name="ic:baseline-check-circle" class="feat-icon" style={`color: ${s.accent}`} />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href={s.href} class="svc-row__link">
+              Μάθετε περισσότερα
+              <Icon name="ic:baseline-arrow-forward" class="link-arrow" />
+            </a>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
 
-</layout>
+  <!-- ── STATS ── -->
+  <section class="svc-stats reveal">
+    <div class="container svc-stats__inner">
+      <div class="svc-stat">
+        <span class="svc-stat__num">50+</span>
+        <span class="svc-stat__label">Ολοκληρωμένα projects</span>
+      </div>
+      <div class="svc-stats__divider" aria-hidden="true"></div>
+      <div class="svc-stat">
+        <span class="svc-stat__num">5+</span>
+        <span class="svc-stat__label">Χρόνια εμπειρίας</span>
+      </div>
+      <div class="svc-stats__divider" aria-hidden="true"></div>
+      <div class="svc-stat">
+        <span class="svc-stat__num">100%</span>
+        <span class="svc-stat__label">Αφοσίωση στον πελάτη</span>
+      </div>
+      <div class="svc-stats__divider" aria-hidden="true"></div>
+      <div class="svc-stat">
+        <span class="svc-stat__num">24/7</span>
+        <span class="svc-stat__label">Υποστήριξη & monitoring</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <CtaSection
+    title="Ας Δουλέψουμε Μαζί"
+    description="Έχετε ένα project στο μυαλό σας; Επικοινωνήστε μαζί μας σήμερα και ας μετατρέψουμε την ιδέα σας σε πραγματικότητα."
+    primaryLabel="Επικοινωνία"
+    primaryHref="/contact"
+    secondaryLabel="6977383488"
+    secondaryHref="tel:6977383488"
+  />
+
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .svc-hero {
+    position: relative;
+    padding: calc(var(--navbar-height) + 4rem) 0 4rem;
+    overflow: hidden;
+  }
+
+  .svc-hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-subtle);
+    z-index: 0;
+  }
+
+  .svc-hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .svc-hero__content {
+    max-width: 640px;
+  }
+
+  .svc-hero__badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--theme-surface-1);
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .svc-hero__title {
+    margin-bottom: 1.5rem;
+  }
+
+  .svc-hero__accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .svc-hero__sub {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    opacity: 0.65;
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  /* ACCORDION */
+  .svc-list {
+    padding: var(--section-padding);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .svc-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .svc-row__head {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: var(--theme-transition);
+  }
+
+  .svc-row__head::-webkit-details-marker { display: none; }
+
+  .svc-row__num {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.35;
+    flex: 0 0 2.5rem;
+    transition: var(--theme-transition);
+  }
+
+  .svc-row:hover .svc-row__num,
+  .svc-row[open] .svc-row__num {
+    opacity: 0.8;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .svc-row__title {
+    flex: 1;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    transition: var(--theme-transition);
+  }
+
+  .svc-row__tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .svc-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: var(--theme-shape-radius-sm);
+    opacity: 0.5;
+    transition: var(--theme-transition);
+  }
+
+  .svc-row:hover .svc-tag,
+  .svc-row[open] .svc-tag {
+    opacity: 1;
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+
+  .svc-row__arrow {
+    flex: 0 0 auto;
+    opacity: 0.4;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .svc-row__arrow svg,
+  .svc-row__arrow [data-icon] {
+    width: 22px;
+    height: 22px;
+  }
+
+  .svc-row[open] .svc-row__arrow {
+    transform: rotate(180deg);
+    opacity: 0.8;
+  }
+
+  .svc-row__body {
+    padding: 0 0 2rem calc(2.5rem + 1.5rem);
+    max-width: 640px;
+  }
+
+  .svc-row__desc {
+    font-size: 1rem;
+    line-height: 1.75;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .svc-row__feats {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .svc-row__feat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .feat-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .svc-row__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: var(--theme-transition);
+  }
+
+  .svc-row__link:hover {
+    gap: 0.75rem;
+  }
+
+  .link-arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* STATS */
+  .svc-stats {
+    background: var(--theme-surface-1);
+    padding: 3.5rem 0;
+  }
+
+  .svc-stats__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .svc-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    text-align: center;
+  }
+
+  .svc-stat__num {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .svc-stat__label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .svc-stats__divider {
+    width: 1px;
+    height: 3rem;
+    background: currentColor;
+    opacity: 0.1;
+  }
+
+  @media (max-width: 768px) {
+    .svc-row__tags { display: none; }
+    .svc-row__body { padding-left: 0; }
+    .svc-stats__divider { display: none; }
+    .svc-stats__inner { justify-content: flex-start; gap: 1.5rem 3rem; }
+    .svc-stat { align-items: flex-start; text-align: left; }
+  }
+</style>

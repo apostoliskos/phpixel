@@ -1,42 +1,85 @@
 :root {
-	/* Theme Colors */
-	--theme-primary: #000;
-	--theme-primary-hover: #333;
-	--theme-on-primary: #fff;
+  /* ========================================
+     PHPIXEL DESIGN SYSTEM v2.0
+     Premium Digital Agency Theme
+     ======================================== */
 
-	--theme-bg: #fff;
-	--theme-on-bg: #000;
+  /* === Brand Colors === */
+  --theme-primary: #0a0a0a;
+  --theme-primary-hover: #1a1a2e;
+  --theme-on-primary: #ffffff;
 
-	--theme-surface-1: #f2f2f2;
-	--theme-on-surface-1: #000;
+  --theme-bg: #fafafa;
+  --theme-on-bg: #0a0a0a;
 
-	--theme-surface-2: #cce6d0;
-	--theme-on-surface-2: #000;
+  --theme-surface-1: #f0f0f5;
+  --theme-on-surface-1: #0a0a0a;
 
-	/* Buttons */
-	--button_color: #024C73;
-	--button_color_hover: #1C1C1C;
+  --theme-surface-2: #e8e8f0;
+  --theme-on-surface-2: #0a0a0a;
 
+  /* === Accent Palette === */
+  --accent-emerald: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-violet: #8b5cf6;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
 
-	/* Theme Shapes */
-	/* Set this to 0 if you want all of the rounded cards, images, etc to be straight edges */
-	--theme-shape-radius: clamp(0rem, 0rem, 0rem);
-	--theme-button-border-radius: 0.2rem;
+  /* === Glassmorphism === */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(16px);
+  --glass-bg-dark: rgba(10, 10, 10, 0.7);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
 
-	/* Theme Transition */
-	--theme-transition: 0.2s ease-in-out;
+  /* === Buttons === */
+  --button-color: #0a0a0a;
+  --button-color-hover: #1a1a2e;
+  --button-text: #ffffff;
+  --button-border-radius: 0.5rem;
 
-	/* Theme Layout */
-	--section-margin: 3rem;
-	--theme-grid-gap: 1rem;
-	--container-max-width: 1440px;
-	--container-max-width-narrow: 960px;
-	--container-padding: 1rem;
+  /* === Shapes & Radius === */
+  --theme-shape-radius: 1rem;
+  --theme-shape-radius-sm: 0.5rem;
+  --theme-shape-radius-lg: 1.5rem;
 
-	--theme-blog-post-header-width: 1200px;
+  /* === Transitions === */
+  --theme-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-	/* Theme Fonts */
-	/*--theme-font-family-serif: 'Roboto', Georgia, Cambria, 'Times New Roman', Times, serif;*/
-	--theme-font-family-serif: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-	--theme-font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* === Layout === */
+  --section-margin: 6rem;
+  --section-padding: 5rem 0;
+  --theme-grid-gap: 1.5rem;
+  --container-max-width: 1280px;
+  --container-max-width-narrow: 960px;
+  --container-padding: 1.5rem;
+  --navbar-height: 80px;
+
+  --theme-blog-post-header-width: 1200px;
+
+  /* === Typography === */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --theme-font-family-serif: var(--font-body);
+  --theme-font-family-sans: var(--font-body);
+
+  /* === Gradients === */
+  --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-violet) 100%);
+}
+
+/* Dark mode support (future-ready) */
+[data-theme="dark"] {
+  --theme-bg: #0a0a0a;
+  --theme-on-bg: #f0f0f5;
+  --theme-surface-1: #141420;
+  --theme-on-surface-1: #e0e0e8;
+  --theme-surface-2: #1a1a2e;
+  --theme-on-surface-2: #e0e0e8;
+  --glass-bg: rgba(20, 20, 32, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }

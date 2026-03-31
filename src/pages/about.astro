@@ -1,80 +1,284 @@
 ---
-import { CtaCardSection,TextSection,Button } from '@components/odyssey-theme';
-import Layout from '../layouts/Page.astro';
-import HeroSection from '../components/sections/heros/HeroSection.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CtaSection from '../components/CtaSection.astro';
 import { Icon } from 'astro-icon/components';
-import TextAndImageHero from '../components/sections/heros/TextAndImageHero.astro';
 
-const seo = {
-	title: 'About | Astro Odyssey Theme',
-	description: 'About Page',
-};
+const values = [
+  {
+    icon: 'ic:baseline-speed',
+    title: 'Performance First',
+    desc: 'Κάθε project βελτιστοποιημένο για ταχύτητα. Γρήγορα sites = ευτυχισμένοι πελάτες + καλύτερο SEO.',
+  },
+  {
+    icon: 'ic:baseline-handshake',
+    title: 'Συνεργασία',
+    desc: 'Δουλεύουμε μαζί σας σε κάθε βήμα. Διαφάνεια, επικοινωνία και σεβασμός στο timeline.',
+  },
+  {
+    icon: 'ic:baseline-trending-up',
+    title: 'Αποτελέσματα',
+    desc: 'Δεν φτιάχνουμε απλά websites — φτιάχνουμε εργαλεία που φέρνουν πελάτες και πωλήσεις.',
+  },
+  {
+    icon: 'ic:baseline-support-agent',
+    title: 'Ongoing Support',
+    desc: 'Η σχέση μας δεν τελειώνει στο launch. Συνεχής υποστήριξη, updates και monitoring.',
+  },
+];
 ---
 
-<Layout {seo}>
+<BaseLayout
+  title="About — Phpixel | Ποιοι Είμαστε"
+  description="Η Phpixel είναι ένα digital agency με έδρα την Ελλάδα. Κατασκευή e-shop, ιστοσελίδων, custom web apps και digital marketing."
+>
 
+  <!-- Hero -->
+  <section class="about-hero">
+    <div class="about-hero__bg"></div>
+    <div class="container about-hero__inner">
+      <div class="about-hero__content reveal">
+        <span class="about-hero__badge">About Us</span>
+        <h1>
+          Δημιουργούμε ψηφιακές<br />
+          <span class="accent-text">εμπειρίες που μετρούν.</span>
+        </h1>
+        <p class="about-hero__sub">
+          Είμαστε μια ομάδα developers, designers και στρατηγικών που πιστεύουν
+          ότι η τεχνολογία πρέπει να δουλεύει για τον πελάτη — όχι το αντίστροφο.
+        </p>
+      </div>
+    </div>
+  </section>
 
-	<TextSection narrow>
-		<p>
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo asperiores alias illo accusamus voluptatem ea cum nemo odit! Consequatur quidem quo iusto quam ea neque nisi dolorum quod, recusandae id!
-			Repudiandae, fugit labore voluptatum beatae modi omnis adipisci corrupti aut aliquid cumque inventore iure possimus doloremque iste incidunt nulla architecto. Nobis iusto sunt voluptatem necessitatibus laborum, earum doloremque fugit rerum!
-		</p>
-		<p>Fugit asperiores harum consectetur sapiente deleniti. Optio enim tenetur impedit reprehenderit labore, illo eius in, consequatur odio dolore iste assumenda explicabo, nisi similique qui obcaecati possimus delectus reiciendis quod modi.</p>
-	</TextSection>
+  <!-- Story -->
+  <section class="about-story">
+    <div class="container about-story__inner">
+      <div class="about-story__text reveal">
+        <SectionHeader title="Η Ιστορία μας" subtitle="Our Story" align="left" />
+        <p>
+          Η Phpixel ξεκίνησε με ένα απλό όραμα: να βοηθήσει ελληνικές επιχειρήσεις
+          να αποκτήσουν ισχυρή ψηφιακή παρουσία χωρίς να χρειαστεί να γίνουν ειδικοί
+          στην τεχνολογία. Από τότε, έχουμε δουλέψει με δεκάδες businesses — από μικρά
+          καταστήματα μέχρι μεγάλες εταιρείες.
+        </p>
+        <p>
+          Χρησιμοποιούμε τις πιο σύγχρονες τεχνολογίες (Astro, Next.js, React, Shopify)
+          και εστιάζουμε πάντα στην απόδοση, τη χρηστικότητα και τα μετρήσιμα αποτελέσματα.
+        </p>
+      </div>
+      <div class="about-story__stats reveal" style="transition-delay: 0.2s">
+        <div class="stat-card">
+          <span class="stat-card__num">50+</span>
+          <span class="stat-card__label">Projects</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num">5+</span>
+          <span class="stat-card__label">Χρόνια</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num">100%</span>
+          <span class="stat-card__label">Αφοσίωση</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<TextAndImageHero reversed>
-		<div slot="text-container">
-			<h2>Κατασκευή Ιστοσελίδων</h2>
-			<p>Δώστε στην επιχείρησή σας τη διαδικτυακή παρουσία που της αξίζει!</p>
-			<p>Φέρτε την επιχείρησή σας online με έναν επαγγελματικό ιστότοπο. Ο ιστότοπός σας είναι το κέντρο της ψηφιακής
-				σας παρουσίας.</p>
-			<ul>
-				<li>
-					Τελευταίες Τεχνολογίες Σχεδίασης: Σύγχρονη αισθητική και λειτουργικότητα.
-				</li>
-				<li>
-					SEO-Φιλικός Σχεδιασμός: Οι πελάτες σας θα σας βρίσκουν εύκολα στις μηχανές αναζήτησης.
-				</li>
-			</ul>
-		</div>
-		<div slot="btns-container">
-			<Button href="/theme/get-started" customIcon>Get Started<Fragment slot="icon"><Icon name="ic:baseline-chevron-right" /></Fragment></Button>
-		</div>
-		<picture slot="image-container">
-			<img src="/assets/images/landing-1/landing-hero-1.jpg" alt="Astro Odyssee" id="home-hero-image" />
-		</picture>
-	</TextAndImageHero>
+  <!-- Values -->
+  <section class="about-values">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeader title="Τι Μας Ξεχωρίζει" subtitle="Our Values" />
+      </div>
+      <div class="values-grid">
+        {values.map((v, i) => (
+          <div class="value-card reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <div class="value-card__icon">
+              <Icon name={v.icon} />
+            </div>
+            <h3>{v.title}</h3>
+            <p>{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-	<TextAndImageHero>
-		<div slot="text-container">
-			<h2>Κατασκευή e-Shop</h2>
-			<p>Ανεβάστε την επιχείρησή σας στο επόμενο επίπεδο με ένα e-Shop!</p>
-			<p>Με ένα ηλεκτρονικό κατάστημα οι πελάτες σας μπορούν να αγοράζουν προϊόντα ή υπηρεσίες οποιαδήποτε στιγμή, 24/7.
-				Είναι άνετο για τους πελάτες.</p>
-			<ul>
-				<li>
-					Σύνδεση με ERP (αν διαθέτετε)
-				</li>
-				<li>
-					Υποστήριξη ηλεκτρονικών πληρωμών
-				</li>
-			</ul>
-		</div>
-		<picture slot="image-container">
-			<img src="/assets/images/landing-1/landing-hero-1.jpg" alt="Astro Odyssee" id="home-hero-image" />
-		</picture>
-	</TextAndImageHero>
-	<CtaCardSection background="var(--theme-surface-2)" color="var(--theme-on-surface-2)">
-		<h2>Start Your Website Today</h2>
-		<p>It only takes a couple clicks to have a new, modern website for your business or startup.</p>
-		<div class="two_buttons">
-			<!-- Icon after text (default) -->
-			<Button href="/contact" customIcon iconPosition="before">Επικοινωνία<Fragment slot="icon"><Icon name="ic:baseline-mail" /></Fragment></Button>
+  <!-- CTA -->
+  <CtaSection
+    title="Θέλετε να δουλέψουμε μαζί;"
+    description="Μιλήστε μας για το project σας. Η πρώτη συζήτηση είναι πάντα δωρεάν."
+    primaryLabel="Επικοινωνία"
+    primaryHref="/contact"
+    secondaryLabel="Οι υπηρεσίες μας"
+    secondaryHref="/services"
+  />
 
-			<!-- Icon before text -->
-			<Button href="tel:6977383488" customIcon iconPosition="before">6977383488<Fragment slot="icon"><Icon name="ic:baseline-phone" /></Fragment></Button>
+</BaseLayout>
 
-		</div>
+<style>
+  /* Hero */
+  .about-hero {
+    position: relative;
+    padding: calc(var(--navbar-height) + 5rem) 0 5rem;
+  }
 
-	</CtaCardSection>
-</Layout>
+  .about-hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-subtle);
+  }
+
+  .about-hero__inner {
+    position: relative;
+  }
+
+  .about-hero__badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--theme-surface-1);
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-hero__content h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .accent-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .about-hero__sub {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    opacity: 0.7;
+    max-width: 560px;
+  }
+
+  /* Story */
+  .about-story {
+    padding: var(--section-padding);
+  }
+
+  .about-story__inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-story__text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .about-story__stats {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius);
+    text-align: center;
+  }
+
+  .stat-card__num {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-card__label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Values */
+  .about-values {
+    padding: var(--section-padding);
+    background: var(--theme-surface-1);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius);
+    transition: var(--theme-transition);
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .value-card__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--accent-blue) 10%, transparent);
+    color: var(--accent-blue);
+    margin-bottom: 1.25rem;
+  }
+
+  .value-card__icon svg,
+  .value-card__icon [data-icon] {
+    width: 24px;
+    height: 24px;
+  }
+
+  .value-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .value-card p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .about-story__inner { grid-template-columns: 1fr; gap: 2rem; }
+    .about-story__stats { grid-template-columns: repeat(3, 1fr); }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .about-story__stats { grid-template-columns: 1fr; }
+  }
+</style>
