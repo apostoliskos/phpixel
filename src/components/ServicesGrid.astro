@@ -1,0 +1,60 @@
+---
+import GlassCard from './GlassCard.astro';
+import SectionHeader from './SectionHeader.astro';
+import type { Service } from '../data/services';
+
+export interface Props {
+  services: Service[];
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  services,
+  title = 'Οι Υπηρεσίες μας',
+  subtitle = 'What We Do',
+} = Astro.props;
+---
+
+<section class="services-section">
+  <div class="container">
+    <div class="reveal">
+      <SectionHeader title={title} subtitle={subtitle}>
+        Ολοκληρωμένες ψηφιακές λύσεις για κάθε επιχείρηση.
+      </SectionHeader>
+    </div>
+
+    <div class="services-grid">
+      {services.map((service, i) => (
+        <div class="reveal" style={`transition-delay: ${i * 0.1}s`}>
+          <GlassCard
+            icon={service.icon}
+            title={service.title}
+            description={service.description}
+            features={service.features}
+            href={service.href}
+            accent={service.accent}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: var(--section-padding);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--theme-grid-gap);
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  title: string;
+  description?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  dark?: boolean;
+}
+
+const {
+  title,
+  description,
+  primaryHref = '/contact',
+  primaryLabel = 'Επικοινωνία',
+  secondaryHref,
+  secondaryLabel,
+  dark = true,
+} = Astro.props;
+---
+
+<section class:list={['cta-section', { 'cta-section--dark': dark }]}>
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2 class="cta-title">{title}</h2>
+      {description && <p class="cta-desc">{description}</p>}
+      <div class="cta-buttons">
+        <a href={primaryHref} class="btn btn--primary btn--lg cta-btn">
+          <Icon name="ic:baseline-mail" class="btn-icon" />
+          {primaryLabel}
+        </a>
+        {secondaryHref && secondaryLabel && (
+          <a href={secondaryHref} class="btn btn--outline btn--lg cta-btn cta-btn--outline">
+            {secondaryLabel}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: var(--section-padding);
+  }
+
+  .cta-section--dark {
+    background: var(--gradient-hero);
+    color: #fff;
+  }
+
+  .cta-inner {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    margin-bottom: 1rem;
+  }
+
+  .cta-desc {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-section--dark .btn--primary {
+    background: #fff;
+    color: var(--theme-primary);
+    border-color: #fff;
+  }
+
+  .cta-section--dark .btn--primary:hover {
+    background: var(--theme-surface-1);
+    border-color: var(--theme-surface-1);
+  }
+
+  .cta-section--dark .btn--outline {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .cta-section--dark .btn--outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+  }
+
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+</style>

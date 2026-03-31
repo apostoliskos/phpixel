@@ -1,0 +1,165 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  icon?: string;
+  title: string;
+  description: string;
+  features?: string[];
+  href?: string;
+  accent?: string;
+}
+
+const {
+  icon,
+  title,
+  description,
+  features = [],
+  href,
+  accent = 'var(--accent-blue)',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class="glass-card" {...(href ? { href } : {})} style={`--card-accent: ${accent}`}>
+  {icon && (
+    <div class="glass-card__icon">
+      <Icon name={icon} />
+    </div>
+  )}
+  <h3 class="glass-card__title">{title}</h3>
+  <p class="glass-card__desc">{description}</p>
+  {features.length > 0 && (
+    <ul class="glass-card__features">
+      {features.map((f) => (
+        <li>
+          <Icon name="ic:baseline-check-circle" class="feature-check" />
+          <span>{f}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+  {href && (
+    <span class="glass-card__arrow">
+      <Icon name="ic:baseline-arrow-forward" />
+    </span>
+  )}
+</Tag>
+
+<style>
+  .glass-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius);
+    box-shadow: var(--glass-shadow);
+    transition: var(--theme-transition);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent);
+    opacity: 0;
+    transition: var(--theme-transition);
+  }
+
+  .glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+    border-color: var(--card-accent);
+  }
+
+  .glass-card:hover::before {
+    opacity: 1;
+  }
+
+  .glass-card__icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    color: var(--card-accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .glass-card__icon svg,
+  .glass-card__icon [data-icon] {
+    width: 26px;
+    height: 26px;
+  }
+
+  .glass-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .glass-card__desc {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .glass-card__features {
+    list-style: none;
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .glass-card__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .feature-check {
+    width: 18px;
+    height: 18px;
+    color: var(--card-accent);
+    flex-shrink: 0;
+  }
+
+  .glass-card__arrow {
+    margin-top: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--theme-surface-1);
+    transition: var(--theme-transition);
+  }
+
+  .glass-card__arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .glass-card:hover .glass-card__arrow {
+    background: var(--card-accent);
+    color: #fff;
+    transform: translateX(4px);
+  }
+</style>
