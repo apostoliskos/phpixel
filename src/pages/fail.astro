@@ -1,63 +1,94 @@
 ---
-import Layout from '../layouts/Page.astro';
-import { TextSection,CustomerQuoteSection, Button, CtaCardSection, StickyTextImageSection, AnnouncementBar, Container, Feature_card_small } from '@components/odyssey-theme';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
-import HeroSection from '../components/sections/heros/HeroSection.astro';
 
 const c_status = Astro.cookies.get('form_status')?.value;
-const c_name = Astro.cookies.get('form_name')?.value;
-const c_email = Astro.cookies.get('form_email')?.value;
 
 if (c_status !== 'sent') {
-	return Astro.redirect('/contact');
+  return Astro.redirect('/contact');
 }
-
-const seo = {
-	title: 'Κατασκευή eShop B2C, Β2Β',
-	description: 'Κατασκευή eShop B2C, Β2Β. Προσαρμοσμένο στις ανάγκες σας',
-};
 ---
 
-<Layout seo={seo}>
+<BaseLayout
+  title="Αποτυχία Αποστολής — Phpixel"
+  description="Κάτι πήγε στραβά. Δοκιμάστε ξανά ή επικοινωνήστε τηλεφωνικά."
+>
 
+  <section class="status-page">
+    <div class="container status-page__inner">
+      <div class="status-card reveal">
+        <div class="status-icon status-icon--error">
+          <Icon name="ic:baseline-error" />
+        </div>
+        <h1>Κάτι πήγε στραβά</h1>
+        <p>Δυστυχώς δεν μπορέσαμε να στείλουμε το μήνυμά σας. Δοκιμάστε ξανά ή καλέστε μας στο 6977383488.</p>
+        <div class="status-actions">
+          <a href="/contact" class="btn btn--primary">Δοκιμάστε ξανά</a>
+          <a href="tel:6977383488" class="btn btn--outline">Τηλεφωνική Επικοινωνία</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<TextSection narrow>
-		<p>
-			success page
-		</p>
-	</TextSection>
-
-
-</layout>
+</BaseLayout>
 
 <style>
+  .status-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--navbar-height);
+  }
 
-    @media (min-width: 768px) {
-        .feature-card__row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
+  .status-card {
+    text-align: center;
+    max-width: 520px;
+    padding: 3rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius-lg);
+    box-shadow: var(--glass-shadow);
+  }
 
-        .for_three {
-            .feature-card__card {
-                width: calc(33.333% - 7px);
-            }
-        }
+  .status-icon {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+  }
 
-        .for_two {
-            .feature-card__card {
-                width: calc(50% - 5px);
-            }
-        }
+  .status-icon svg,
+  .status-icon [data-icon] {
+    width: 40px;
+    height: 40px;
+  }
 
-    }
+  .status-icon--error {
+    background: color-mix(in srgb, var(--accent-rose) 15%, transparent);
+    color: var(--accent-rose);
+  }
 
+  .status-card h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
 
+  .status-card p {
+    font-size: 1.05rem;
+    opacity: 0.7;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
 
-
-
-
+  .status-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 </style>

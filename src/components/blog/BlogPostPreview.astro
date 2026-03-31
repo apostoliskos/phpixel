@@ -1,31 +1,129 @@
 ---
-const {post} = Astro.props;
+export interface Props {
+  post: {
+    title: string;
+    description?: string;
+    excerpt?: string;
+    featuredImage?: string;
+    publishDate?: Date | string;
+    href?: string;
+  };
+}
+
+const { post } = Astro.props;
+
+const dateStr = post.publishDate
+  ? new Date(post.publishDate).toLocaleDateString('el-GR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : null;
 ---
 
-<li class="blog-post__preview">
-  <a href={post.href}>
-    <img src={post.featuredImage} />
-    <h3>{post.title}</h3>
-    {post.excerpt && <p>{post.excerpt}</p>}
+<li class="blog-card">
+  <a href={post.href} class="blog-card__link">
+    {post.featuredImage && (
+      <div class="blog-card__img-wrap">
+        <img src={post.featuredImage} alt={post.title} loading="lazy" />
+      </div>
+    )}
+    <div class="blog-card__content">
+      {dateStr && <time class="blog-card__date">{dateStr}</time>}
+      <h3 class="blog-card__title">{post.title}</h3>
+      {post.excerpt && <p class="blog-card__excerpt">{post.excerpt}</p>}
+      <span class="blog-card__read-more">
+        Διαβάστε περισσότερα &rarr;
+      </span>
+    </div>
   </a>
 </li>
 
-
 <style>
-.blog-post__preview img {
-  margin-bottom: 1rem;
-  border-radius: calc(var(--theme-shape-radius) /2);
-  transition: border-radius var(--theme-transition);
-}
-.blog-post__preview:hover img {
-  border-radius: var(--theme-shape-radius);
-}
-.blog-post__preview a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-.blog-post__preview h3 {
-  margin: 0;
-}
-</style> 
+  .blog-card {
+    list-style: none;
+    border-radius: var(--theme-shape-radius);
+    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: var(--theme-transition);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card__img-wrap {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  .blog-card__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .blog-card:hover .blog-card__img-wrap img {
+    transform: scale(1.05);
+  }
+
+  .blog-card__content {
+    padding: 1.5rem;
+  }
+
+  .blog-card__date {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-card__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    transition: var(--theme-transition);
+  }
+
+  .blog-card:hover .blog-card__title {
+    color: var(--accent-blue);
+  }
+
+  .blog-card__excerpt {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card__read-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    transition: var(--theme-transition);
+  }
+
+  .blog-card:hover .blog-card__read-more {
+    letter-spacing: 0.02em;
+  }
+</style>

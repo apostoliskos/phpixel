@@ -1,111 +1,79 @@
 ---
-import { Button, Container, TextCardSection } from '@components/odyssey-theme';
-import Layout from '../layouts/Page.astro';
-
-const seo = {
-	title: 'Σελίδα Δεν Βρέθηκε | phpixel',
-	description: 'Φαίνεται πως αυτή η σελίδα… κάνει διακοπές. Πάμε πίσω στην αρχική για να βρούμε ό,τι χρειάζεσαι!',
-};
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout {seo}>
-	<Container>
-		<TextCardSection>
-			<div class="error-wrapper">
-				<div class="error-text">
-					<h1>404</h1>
-					<h2>Page Not Found 👀</h2>
-					<p class="error-desc">Η σελίδα δεν υπάρχει ή μετακόμισε αλλού.</p>
+<BaseLayout
+  title="404 — Σελίδα Δεν Βρέθηκε | Phpixel"
+  description="Η σελίδα που ψάχνετε δεν υπάρχει ή έχει μετακινηθεί."
+>
 
-					<div class="cta-buttons__container">
-						<Button href="/">Return Home</Button>
-					</div>
-				</div>
+  <section class="error-page">
+    <div class="container error-page__inner">
+      <div class="error-content reveal">
+        <span class="error-badge">Ωπ!</span>
+        <h1 class="error-num">404</h1>
+        <h2>Σελίδα Δεν Βρέθηκε</h2>
+        <p class="error-desc">
+          Η σελίδα που ψάχνετε δεν υπάρχει ή μετακόμισε αλλού.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="btn btn--primary">Πίσω στην Αρχική</a>
+          <a href="/contact" class="btn btn--outline">Επικοινωνία</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-				<div class="error-image">
-					<img src="/assets/images/error/travolta.gif" alt="Confused Travolta GIF">
-				</div>
-			</div>
-		</TextCardSection>
-	</Container>
-</Layout>
+</BaseLayout>
 
 <style>
-    /* Main wrapper */
-    .error-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-        padding: 2rem 1rem;
-    }
+  .error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: var(--navbar-height);
+  }
 
-    /* Text side */
-    .error-text h1 {
-        font-size: 4rem;
-        margin-bottom: 0.2rem;
-    }
+  .error-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--theme-surface-1);
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+  }
 
-    .error-text h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
+  .error-num {
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
 
-    .error-desc {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-    }
+  .error-content h2 {
+    margin-bottom: 1rem;
+  }
 
-    /* Image styling */
-    .error-image img {
-        max-width: 280px;
-        width: 100%;
-        border-radius: 8px;
-    }
+  .error-desc {
+    font-size: 1.1rem;
+    opacity: 0.6;
+    margin-bottom: 2rem;
+  }
 
-    /* Buttons */
-    .cta-buttons__container {
-        display: flex;
-        flex-wrap: wrap;
-				justify-content: center;
-    }
-
-    .cta-buttons__container :global(a) {
-        margin-right: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-        .error-wrapper {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .error-text h1 {
-            font-size: 3.2rem;
-        }
-
-        .error-text h2 {
-            font-size: 1.7rem;
-        }
-
-        .error-image img {
-            max-width: 240px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .error-text h1 {
-            font-size: 2.6rem;
-        }
-
-        .error-text h2 {
-            font-size: 1.4rem;
-        }
-
-        .error-image img {
-            max-width: 200px;
-        }
-    }
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 </style>
