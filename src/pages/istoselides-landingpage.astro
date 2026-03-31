@@ -1,4 +1,245 @@
 ---
-// Redirect old URL to new services page
-return Astro.redirect('/services#website-building', 301);
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import GlassCard from '../components/GlassCard.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { Icon } from 'astro-icon/components';
+
+const features = [
+  {
+    icon: 'ic:baseline-web',
+    title: 'Custom Design',
+    desc: 'Μοναδικός σχεδιασμός προσαρμοσμένος στο brand σας — χωρίς templates, χωρίς συμβιβασμούς.',
+    accent: 'var(--accent-blue)',
+  },
+  {
+    icon: 'ic:baseline-devices',
+    title: 'Responsive Layout',
+    desc: 'Πλήρης προσαρμογή σε κάθε συσκευή — desktop, tablet και κινητό, για μέγιστη εμπειρία χρήστη.',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    icon: 'ic:baseline-speed',
+    title: 'Ultra-Fast Loading',
+    desc: 'Βελτιστοποιημένη ταχύτητα φόρτωσης με σύγχρονες τεχνολογίες για κορυφαία απόδοση.',
+    accent: 'var(--accent-emerald)',
+  },
+  {
+    icon: 'ic:baseline-search',
+    title: 'SEO Ready',
+    desc: 'On-page SEO, meta tags, schema markup και βελτιστοποίηση ώστε να σας βρίσκουν οι πελάτες σας.',
+    accent: 'var(--accent-amber)',
+  },
+  {
+    icon: 'ic:baseline-touch-app',
+    title: 'CTA Optimization',
+    desc: 'Στρατηγική τοποθέτηση call-to-action στοιχείων για μέγιστη μετατροπή επισκεπτών σε πελάτες.',
+    accent: 'var(--accent-rose)',
+  },
+  {
+    icon: 'ic:baseline-analytics',
+    title: 'Analytics Integration',
+    desc: 'Σύνδεση με Google Analytics, Facebook Pixel και conversion tracking για μέτρηση αποτελεσμάτων.',
+    accent: 'var(--accent-blue)',
+  },
+  {
+    icon: 'ic:baseline-edit',
+    title: 'A/B Testing Ready',
+    desc: 'Δυνατότητα δοκιμών A/B σε headlines, CTAs και layout για συνεχή βελτιστοποίηση conversion rate.',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    icon: 'ic:baseline-integration-instructions',
+    title: 'Form & CRM Integration',
+    desc: 'Σύνδεση φορμών με το CRM σας, email marketing platforms και αυτοματοποίηση follow-up.',
+    accent: 'var(--accent-emerald)',
+  },
+];
+
+const pageTypes = [
+  { name: 'Lead Generation', desc: 'Σελίδες συλλογής leads για υπηρεσίες και B2B' },
+  { name: 'Product Launch', desc: 'Landing pages για παρουσίαση νέων προϊόντων' },
+  { name: 'Event & Promo', desc: 'Σελίδες για events, προσφορές και campaigns' },
+];
 ---
+
+<BaseLayout
+  title="Κατασκευή Landing Pages — Phpixel | Ιστοσελίδες Υψηλής Μετατροπής"
+  description="Κατασκευή landing pages και ιστοσελίδων υψηλής μετατροπής. Custom design, ultra-fast loading και CTA optimization για μέγιστο conversion rate."
+>
+
+  <!-- Hero -->
+  <section class="lp-hero">
+    <div class="lp-hero__bg"></div>
+    <div class="container lp-hero__inner">
+      <div class="lp-hero__content reveal">
+        <span class="lp-badge">Web Design & Landing Pages</span>
+        <h1>
+          Ιστοσελίδες &<br />
+          <span class="accent-text">Landing Pages</span>
+        </h1>
+        <p class="lp-hero__sub">
+          Σχεδιάζουμε ιστοσελίδες και landing pages που μετατρέπουν
+          επισκέπτες σε πελάτες. Conversion-focused design με μετρήσιμα αποτελέσματα.
+        </p>
+        <div class="lp-hero__actions">
+          <a href="/contact" class="btn btn--primary btn--lg">Ξεκινήστε τώρα</a>
+          <a href="/services" class="btn btn--outline btn--lg">Όλες οι υπηρεσίες</a>
+        </div>
+      </div>
+
+      <!-- Page Types -->
+      <div class="lp-hero__platforms reveal" style="transition-delay: 0.2s">
+        {pageTypes.map((p) => (
+          <div class="platform-card">
+            <h3>{p.name}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="lp-features">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeader title="Τι περιλαμβάνει" subtitle="Landing Page Features">
+          Κάθε σελίδα που δημιουργούμε είναι σχεδιασμένη για μέγιστη απόδοση και conversion.
+        </SectionHeader>
+      </div>
+
+      <div class="features-grid">
+        {features.map((f, i) => (
+          <div class="reveal" style={`transition-delay: ${i * 0.05}s`}>
+            <GlassCard
+              icon={f.icon}
+              title={f.title}
+              description={f.desc}
+              accent={f.accent}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CtaSection
+    title="Ετοιμάστε τη σελίδα που θα κάνει τη διαφορά"
+    description="Η πρώτη συνάντηση είναι δωρεάν. Θα αναλύσουμε τους στόχους σας και θα σχεδιάσουμε τη σελίδα που θα αυξήσει τα conversions σας."
+    primaryLabel="Επικοινωνία"
+    primaryHref="/contact"
+    secondaryLabel="6977383488"
+    secondaryHref="tel:6977383488"
+  />
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .lp-hero {
+    position: relative;
+    padding: calc(var(--navbar-height) + 4rem) 0 4rem;
+  }
+
+  .lp-hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-subtle);
+  }
+
+  .lp-hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .lp-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--theme-surface-1);
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .lp-hero__content h1 { margin-bottom: 1.5rem; }
+
+  .accent-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .lp-hero__sub {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    opacity: 0.7;
+    max-width: 460px;
+    margin-bottom: 2rem;
+  }
+
+  .lp-hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .lp-hero__platforms {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .platform-card {
+    padding: 1.5rem 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius);
+    transition: var(--theme-transition);
+  }
+
+  .platform-card:hover {
+    transform: translateX(8px);
+    border-color: var(--accent-blue);
+  }
+
+  .platform-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .platform-card p {
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+
+  /* Features */
+  .lp-features {
+    padding: var(--section-padding);
+    background: var(--theme-surface-1);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--theme-grid-gap);
+  }
+
+  @media (max-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .lp-hero__inner { grid-template-columns: 1fr; gap: 2rem; }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>

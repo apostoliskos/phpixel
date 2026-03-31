@@ -5,19 +5,23 @@ export const nav = [
     children: [
       {
         title: 'E-shop Creation',
-        slug: '/services#eshop',
+        slug: '/ecommerce',
       },
       {
-        title: 'Website Building',
-        slug: '/services#website',
+        title: 'Ιστοσελίδες & Landing Pages',
+        slug: '/istoselides-landingpage',
       },
       {
-        title: 'Custom Web Apps',
-        slug: '/services#apps',
+        title: 'SEO',
+        slug: '/seo',
       },
       {
-        title: 'Hosting & Maintenance',
-        slug: '/services#hosting',
+        title: 'Social Media Marketing',
+        slug: '/social-media-marketing',
+      },
+      {
+        title: 'Software Development',
+        slug: '/software-development',
       },
     ],
   },

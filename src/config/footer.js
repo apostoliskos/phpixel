@@ -20,10 +20,11 @@ export const footerLists = [
   {
     title: 'Υπηρεσίες',
     items: [
-      { title: 'E-shop Creation', slug: '/services#eshop' },
-      { title: 'Website Building', slug: '/services#website' },
-      { title: 'Custom Web Apps', slug: '/services#apps' },
-      { title: 'Hosting & Maintenance', slug: '/services#hosting' },
+      { title: 'E-shop Creation', slug: '/ecommerce' },
+      { title: 'Ιστοσελίδες & Landing Pages', slug: '/istoselides-landingpage' },
+      { title: 'SEO', slug: '/seo' },
+      { title: 'Social Media Marketing', slug: '/social-media-marketing' },
+      { title: 'Software Development', slug: '/software-development' },
     ],
   },
   {

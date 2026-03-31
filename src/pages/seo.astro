@@ -1,4 +1,245 @@
 ---
-// Redirect old URL to services page
-return Astro.redirect('/services#digital-marketing', 301);
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import GlassCard from '../components/GlassCard.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { Icon } from 'astro-icon/components';
+
+const features = [
+  {
+    icon: 'ic:baseline-search',
+    title: 'Keyword Research',
+    desc: 'Εντοπισμός των πιο αποδοτικών λέξεων-κλειδιών για την αγορά σας με εξειδικευμένα εργαλεία ανάλυσης.',
+    accent: 'var(--accent-blue)',
+  },
+  {
+    icon: 'ic:baseline-speed',
+    title: 'Technical SEO',
+    desc: 'Βελτιστοποίηση ταχύτητας, δομής URL, sitemap, schema markup και Core Web Vitals.',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    icon: 'ic:baseline-article',
+    title: 'Content Strategy',
+    desc: 'Δημιουργία στοχευμένου περιεχομένου που απαντά στις ανάγκες του κοινού σας και κατατάσσεται ψηλά.',
+    accent: 'var(--accent-emerald)',
+  },
+  {
+    icon: 'ic:baseline-link',
+    title: 'Link Building',
+    desc: 'Απόκτηση ποιοτικών backlinks από αξιόπιστες πηγές για ενίσχυση του domain authority σας.',
+    accent: 'var(--accent-amber)',
+  },
+  {
+    icon: 'ic:baseline-location-on',
+    title: 'Local SEO',
+    desc: 'Βελτιστοποίηση Google Business Profile και τοπικών αναζητήσεων για να σας βρίσκουν οι πελάτες στην περιοχή σας.',
+    accent: 'var(--accent-rose)',
+  },
+  {
+    icon: 'ic:baseline-analytics',
+    title: 'Analytics & Reporting',
+    desc: 'Μηνιαίες αναφορές με μετρήσεις απόδοσης, traffic, rankings και actionable insights.',
+    accent: 'var(--accent-blue)',
+  },
+  {
+    icon: 'ic:baseline-smartphone',
+    title: 'Mobile SEO',
+    desc: 'Βελτιστοποίηση για mobile-first indexing — responsive σχεδιασμός και γρήγορη φόρτωση σε κινητά.',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    icon: 'ic:baseline-trending-up',
+    title: 'Competitor Analysis',
+    desc: 'Ανάλυση ανταγωνισμού, εντοπισμός ευκαιριών και στρατηγική για να τους ξεπεράσετε στα αποτελέσματα.',
+    accent: 'var(--accent-emerald)',
+  },
+];
+
+const approaches = [
+  { name: 'On-Page SEO', desc: 'Βελτιστοποίηση τίτλων, meta descriptions, headings και εσωτερικών links' },
+  { name: 'Off-Page SEO', desc: 'Link building, brand mentions και ενίσχυση online authority' },
+  { name: 'Technical SEO', desc: 'Crawlability, site speed, structured data και indexing' },
+];
 ---
+
+<BaseLayout
+  title="SEO Υπηρεσίες — Phpixel | Βελτιστοποίηση Μηχανών Αναζήτησης"
+  description="Επαγγελματικές υπηρεσίες SEO. Keyword research, technical SEO, content strategy και link building για να κατακτήσετε τις πρώτες θέσεις στη Google."
+>
+
+  <!-- Hero -->
+  <section class="seo-hero">
+    <div class="seo-hero__bg"></div>
+    <div class="container seo-hero__inner">
+      <div class="seo-hero__content reveal">
+        <span class="seo-badge">Search Engine Optimization</span>
+        <h1>
+          Υπηρεσίες<br />
+          <span class="accent-text">SEO</span>
+        </h1>
+        <p class="seo-hero__sub">
+          Αυξήστε την οργανική επισκεψιμότητα και κατακτήστε τις πρώτες θέσεις
+          στη Google. Data-driven στρατηγική με μετρήσιμα αποτελέσματα.
+        </p>
+        <div class="seo-hero__actions">
+          <a href="/contact" class="btn btn--primary btn--lg">Δωρεάν SEO Audit</a>
+          <a href="/services" class="btn btn--outline btn--lg">Όλες οι υπηρεσίες</a>
+        </div>
+      </div>
+
+      <!-- Approaches -->
+      <div class="seo-hero__platforms reveal" style="transition-delay: 0.2s">
+        {approaches.map((p) => (
+          <div class="platform-card">
+            <h3>{p.name}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="seo-features">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeader title="Τι περιλαμβάνει" subtitle="SEO Services">
+          Ολοκληρωμένες υπηρεσίες SEO που καλύπτουν κάθε πτυχή της βελτιστοποίησης για μηχανές αναζήτησης.
+        </SectionHeader>
+      </div>
+
+      <div class="features-grid">
+        {features.map((f, i) => (
+          <div class="reveal" style={`transition-delay: ${i * 0.05}s`}>
+            <GlassCard
+              icon={f.icon}
+              title={f.title}
+              description={f.desc}
+              accent={f.accent}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CtaSection
+    title="Ανεβάστε το site σας στην κορυφή"
+    description="Ξεκινήστε με δωρεάν SEO audit. Θα αναλύσουμε το site σας και θα σας δείξουμε πώς να αυξήσετε την οργανική σας επισκεψιμότητα."
+    primaryLabel="Επικοινωνία"
+    primaryHref="/contact"
+    secondaryLabel="6977383488"
+    secondaryHref="tel:6977383488"
+  />
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .seo-hero {
+    position: relative;
+    padding: calc(var(--navbar-height) + 4rem) 0 4rem;
+  }
+
+  .seo-hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-subtle);
+  }
+
+  .seo-hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .seo-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--theme-surface-1);
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .seo-hero__content h1 { margin-bottom: 1.5rem; }
+
+  .accent-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .seo-hero__sub {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    opacity: 0.7;
+    max-width: 460px;
+    margin-bottom: 2rem;
+  }
+
+  .seo-hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .seo-hero__platforms {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .platform-card {
+    padding: 1.5rem 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius);
+    transition: var(--theme-transition);
+  }
+
+  .platform-card:hover {
+    transform: translateX(8px);
+    border-color: var(--accent-blue);
+  }
+
+  .platform-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .platform-card p {
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+
+  /* Features */
+  .seo-features {
+    padding: var(--section-padding);
+    background: var(--theme-surface-1);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--theme-grid-gap);
+  }
+
+  @media (max-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .seo-hero__inner { grid-template-columns: 1fr; gap: 2rem; }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>
