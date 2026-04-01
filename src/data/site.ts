@@ -1,8 +1,8 @@
 export const site = {
   name: 'Phpixel',
-  tagline: 'Digital Agency',
+  tagline: 'From idea to pixel and code',
   description:
-    'Phpixel — Digital Agency. E-shop creation, website building, custom web apps, hosting & maintenance. Κατασκευή ιστοσελίδων, e-shop, web εφαρμογές.',
+    'Phpixel — E-shop creation, website building, custom web apps, hosting & maintenance. Κατασκευή ιστοσελίδων, e-shop, web εφαρμογές.',
   url: 'https://phpixel.gr',
   lang: 'el',
   contact: {
