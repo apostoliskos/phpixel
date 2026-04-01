@@ -23,7 +23,7 @@ export const services: Service[] = [
       'Mobile-first σχεδιασμός',
       'Analytics & conversion tracking',
     ],
-    href: '/services#eshop',
+    href: '/ecommerce',
     accent: 'var(--accent-emerald)',
   },
   {
@@ -39,7 +39,7 @@ export const services: Service[] = [
       'Responsive σε κάθε συσκευή',
       'CMS integration για εύκολη διαχείριση',
     ],
-    href: '/services#website',
+    href: '/istoselides-landingpage',
     accent: 'var(--accent-blue)',
   },
   {
@@ -55,7 +55,7 @@ export const services: Service[] = [
       'API integrations',
       'Real-time dashboards & reporting',
     ],
-    href: '/services#apps',
+    href: '/software-development',
     accent: 'var(--accent-violet)',
   },
   {
