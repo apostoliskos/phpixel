@@ -20,24 +20,24 @@ export const footerLists = [
   {
     title: 'Υπηρεσίες',
     items: [
-      { title: 'E-shop Creation', slug: '/ecommerce' },
+      { title: 'Δημιουργία E-shop', slug: '/ecommerce' },
       { title: 'Ιστοσελίδες & Landing Pages', slug: '/istoselides-landingpage' },
       { title: 'SEO', slug: '/seo' },
-      { title: 'Social Media Marketing', slug: '/social-media-marketing' },
-      { title: 'Software Development', slug: '/software-development' },
+      { title: 'Marketing Κοινωνικών Δικτύων', slug: '/social-media-marketing' },
+      { title: 'Ανάπτυξη Λογισμικού', slug: '/software-development' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Εταιρεία',
     items: [
-      { title: 'About', slug: '/about' },
+      { title: 'Σχετικά', slug: '/about' },
       { title: 'Blog', slug: '/blog' },
       { title: 'Πώς Δουλεύουμε', slug: '/how-we-work' },
       { title: 'Επικοινωνία', slug: '/contact' },
     ],
   },
   {
-    title: 'Legal',
+    title: 'Νομικά',
     items: [
       { title: 'Πολιτική Απορρήτου', slug: '/legal' },
     ],

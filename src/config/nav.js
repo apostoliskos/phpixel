@@ -4,7 +4,7 @@ export const nav = [
     slug: '/services',
     children: [
       {
-        title: 'E-shop Creation',
+        title: 'Δημιουργία E-shop',
         slug: '/ecommerce',
       },
       {
@@ -16,11 +16,11 @@ export const nav = [
         slug: '/seo',
       },
       {
-        title: 'Social Media Marketing',
+        title: 'Marketing Κοινωνικών Δικτύων',
         slug: '/social-media-marketing',
       },
       {
-        title: 'Software Development',
+        title: 'Ανάπτυξη Λογισμικού',
         slug: '/software-development',
       },
     ],
@@ -34,7 +34,7 @@ export const nav = [
     slug: '/blog',
   },
   {
-    title: 'About',
+    title: 'Σχετικά',
     slug: '/about',
   },
 ];
