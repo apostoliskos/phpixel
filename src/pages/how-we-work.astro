@@ -2,7 +2,35 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import CtaSection from '../components/CtaSection.astro';
+import GlassCard from '../components/GlassCard.astro';
 import { Icon } from 'astro-icon/components';
+
+const values = [
+  {
+    icon: 'ic:baseline-psychology',
+    title: 'Στρατηγική, όχι μόνο Κώδικας',
+    desc: 'Δεν «παραδίδουμε» απλώς μια ιστοσελίδα. Μελετάμε το κοινό σας και χτίζουμε ένα ψηφιακό εργαλείο που φέρνει αποτελέσματα, όχι απλώς clicks.',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    icon: 'ic:baseline-handshake',
+    title: 'Ειλικρίνεια πάνω από όλα',
+    desc: 'Αν κάτι δεν πρόκειται να λειτουργήσει για την επιχείρησή σας, θα σας το πούμε. Προτιμάμε μια ειλικρινή συμβουλή από μια εύκολη πώληση.',
+    accent: 'var(--accent-emerald)',
+  },
+  {
+    icon: 'ic:baseline-speed',
+    title: 'Performance-First Mindset',
+    desc: 'Σε έναν κόσμο που βιάζεται, κάθε millisecond μετράει. Κατασκευάζουμε sites που «πετάνε», βελτιστοποιημένα για ταχύτητα και SEO από την πρώτη γραμμή κώδικα.',
+    accent: 'var(--accent-blue)',
+  },
+  {
+    icon: 'ic:baseline-trending-up',
+    title: 'Συνεχής Εξέλιξη',
+    desc: 'Η τεχνολογία αλλάζει κάθε μέρα. Εμείς μένουμε μπροστά από τις εξελίξεις, για να μην μένετε εσείς πίσω από τον ανταγωνισμό.',
+    accent: 'var(--accent-amber)',
+  },
+];
 
 const steps = [
   {
@@ -86,6 +114,29 @@ const steps = [
                 <p>{step.desc}</p>
               </div>
             </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Values / Why Us -->
+  <section class="hww-values">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Γιατί εμείς"
+        title="Τι μας διαφοροποιεί"
+        align="center"
+      />
+      <div class="values-grid">
+        {values.map((v, i) => (
+          <div class="reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <GlassCard
+              icon={v.icon}
+              title={v.title}
+              description={v.desc}
+              accent={v.accent}
+            />
           </div>
         ))}
       </div>
@@ -243,9 +294,25 @@ const steps = [
     opacity: 0.7;
   }
 
+  /* Values Section */
+  .hww-values {
+    padding: var(--section-padding);
+    background: var(--gradient-subtle);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--theme-grid-gap, 1.5rem);
+    max-width: 960px;
+    margin: 3rem auto 0;
+  }
+
   @media (max-width: 768px) {
     .step { gap: 1rem; }
     .step__content { gap: 1rem; }
     .step__icon { width: 44px; height: 44px; }
+    .values-grid { grid-template-columns: 1fr; }
   }
 </style>
+        
