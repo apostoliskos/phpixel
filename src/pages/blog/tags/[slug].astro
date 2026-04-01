@@ -1,35 +1,35 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { generateTagData } from '../../../utils/helpers.js';
+import { generateSlug, generateTagData } from '../../../utils/helpers.js';
 
-export async function getStaticPaths() {
-  const allPosts = await Astro.glob('../posts/*.mdx');
-  const sortedPosts = allPosts.sort(
-    (a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
-  );
-  const allCategoriesUnique = new Set();
+const { slug } = Astro.params;
 
-  sortedPosts.forEach((post) => {
-    post.frontmatter.tags &&
-      post.frontmatter.tags.map((tag) => {
-        allCategoriesUnique.add(tag);
-      });
-  });
+const allPosts = await Astro.glob('../posts/*.mdx');
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
 
-  const allCategoriesData = generateTagData(allCategoriesUnique);
-
-  return allCategoriesData.map((tag) => {
-    const posts = sortedPosts.filter((post) =>
-      post.frontmatter.tags.includes(tag.title)
-    );
-    return {
-      params: { slug: tag.slug },
-      props: { tag: tag.title, posts: posts },
-    };
-  });
+// Find the tag title that matches this slug
+let tag = slug;
+for (const post of sortedPosts) {
+  if (post.frontmatter.tags) {
+    const match = post.frontmatter.tags.find((t) => generateSlug(t) === slug);
+    if (match) {
+      tag = match;
+      break;
+    }
+  }
 }
 
-const { tag, posts } = Astro.props;
+// Filter posts that have this tag
+const posts = sortedPosts.filter(
+  (post) => post.frontmatter.tags && post.frontmatter.tags.some((t) => generateSlug(t) === slug)
+);
+
+// 404 if no posts found for this tag
+if (posts.length === 0) {
+  return Astro.redirect('/blog');
+}
 ---
 
 <BaseLayout
