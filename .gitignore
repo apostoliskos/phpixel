@@ -1,6 +1,7 @@
 # build output
 dist/
 .output/
+.astro/
 
 # dependencies
 node_modules/
@@ -24,3 +25,4 @@ icon.d.ts
 
 # IDE
 .idea/
+/CLAUDE.md
