@@ -14,23 +14,22 @@ function parseFlexibleDate(dateStr: string): Date {
   return new Date();
 }
 
-const posts = await Astro.glob('./posts/*.mdx').then(posts =>
-  posts
-    .map(({ frontmatter, url }) => ({
-      title: frontmatter.title,
-      description: frontmatter.description,
-      authors: frontmatter.authors,
-      publishDate: parseFlexibleDate(frontmatter.publishDate),
-      featuredImage: frontmatter.featuredImage,
-      excerpt: frontmatter.excerpt,
-      href: url,
-    }))
-    .sort((a, b) => {
-      if (isBefore(a.publishDate, b.publishDate)) return 1;
-      if (isBefore(b.publishDate, a.publishDate)) return -1;
-      return 0;
-    })
-);
+const postModules = import.meta.glob('./posts/*.mdx', { eager: true });
+const posts = Object.values(postModules)
+  .map((mod: any) => ({
+    title: mod.frontmatter.title,
+    description: mod.frontmatter.description,
+    authors: mod.frontmatter.authors,
+    publishDate: parseFlexibleDate(mod.frontmatter.publishDate),
+    featuredImage: mod.frontmatter.featuredImage,
+    excerpt: mod.frontmatter.excerpt,
+    href: mod.url,
+  }))
+  .sort((a, b) => {
+    if (isBefore(a.publishDate, b.publishDate)) return 1;
+    if (isBefore(b.publishDate, a.publishDate)) return -1;
+    return 0;
+  });
 ---
 
 <BaseLayout

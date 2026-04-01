@@ -4,7 +4,8 @@ import { generateSlug, generateTagData } from '../../../utils/helpers.js';
 
 const { slug } = Astro.params;
 
-const allPosts = await Astro.glob('../posts/*.mdx');
+const postModules = import.meta.glob('../posts/*.mdx', { eager: true });
+const allPosts = Object.values(postModules) as any[];
 const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
 );
