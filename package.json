@@ -28,6 +28,7 @@
 	},
 	"dependencies": {
 		"@astrojs/vercel": "^8.0.4",
+		"@rollup/rollup-linux-x64-gnu": "^4.60.1",
 		"nodemailer": "^7.0.11",
 		"querystring": "^0.2.1"
 	}
