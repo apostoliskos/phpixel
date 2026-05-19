@@ -31,6 +31,7 @@ export const footerLists = [
     title: 'Εταιρεία',
     items: [
       { title: 'Σχετικά', slug: '/about' },
+      { title: 'Portfolio', slug: '/portfolio' },
       { title: 'Blog', slug: '/blog' },
       { title: 'Πώς Δουλεύουμε', slug: '/how-we-work' },
       { title: 'Επικοινωνία', slug: '/contact' },

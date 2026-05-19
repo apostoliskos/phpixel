@@ -26,6 +26,10 @@ export const nav = [
     ],
   },
   {
+    title: 'Portfolio',
+    slug: '/portfolio',
+  },
+  {
     title: 'Πώς Δουλεύουμε',
     slug: '/how-we-work',
   },
