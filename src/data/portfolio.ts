@@ -59,6 +59,10 @@ export interface Project {
   stack: string[];
   /** Κύρια εικόνα — εμφανίζεται στη κάρτα grid */
   thumb: string;
+  /** Νέο screenshot από designer (webp) — αν λείπει, γίνεται fallback στο thumb */
+  image?: string;
+  /** Alt για τη νέα εικόνα */
+  imageAlt?: string;
   /** Hero image στη σελίδα detail */
   hero: string;
   /** Gallery screenshots */
@@ -102,6 +106,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'Custom Theme', 'Cloudflare', 'Elementor Pro'],
     thumb: '/assets/images/portfolio/angelayfantidou-thumb.jpg',
+    image: '/images/portfolio/angelayfantidou.webp',
+    imageAlt: 'Η ιστοσελίδα της Angela Yfantidou',
     hero: '/assets/images/portfolio/angelayfantidou-home.jpg',
     gallery: [
       {
@@ -159,6 +165,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'WooCommerce', 'Stripe', 'Mailchimp'],
     thumb: '/assets/images/portfolio/aporelliartworks-thumb.jpg',
+    image: '/images/portfolio/aporelli.webp',
+    imageAlt: 'Το e-shop της Aporelli Artworks',
     hero: '/assets/images/portfolio/aporelliartworks-home.jpg',
     gallery: [
       {
@@ -212,6 +220,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'Custom Booking Module', 'Cloudflare', 'PHP'],
     thumb: '/assets/images/portfolio/alazo-thumb.jpg',
+    image: '/images/portfolio/alazo.webp',
+    imageAlt: 'Η ιστοσελίδα του Αλάζω',
     hero: '/assets/images/portfolio/alazo-home.jpg',
     gallery: [
       {
@@ -269,6 +279,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'WooCommerce', 'Klaviyo', 'Algolia Search'],
     thumb: '/assets/images/portfolio/mian-thumb.jpg',
+    image: '/images/portfolio/mian.webp',
+    imageAlt: 'Το e-shop της Mian Natural Cosmetics',
     hero: '/assets/images/portfolio/mian-home.jpg',
     gallery: [
       {
@@ -326,6 +338,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'WooCommerce', 'Google Ads', 'Custom ERP Sync'],
     thumb: '/assets/images/portfolio/vithopoulos-thumb.jpg',
+    image: '/images/portfolio/vithopoulos.webp',
+    imageAlt: 'Το e-shop της Vithopoulos Outdoor',
     hero: '/assets/images/portfolio/vithopoulos-home.jpg',
     gallery: [
       {

@@ -1,16 +1,130 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
-import { services } from '../data/services';
 import { site } from '../data/site';
 import { projects } from '../data/portfolio';
 import { testimonials } from '../data/testimonials';
-import { footerSocials } from '../config/footer';
+import { SHOW_TESTIMONIALS } from '../config';
+import FaqSection from '../components/FaqSection.astro';
+import PreFooterCta from '../components/PreFooterCta.astro';
+import { publicImageExists } from '../utils/publicImages';
+
+const services = [
+  {
+    icon: 'ic:baseline-shopping-cart',
+    title: 'Κατασκευή E-shop',
+    href: '/kataskevi-eshop',
+    desc: 'Ηλεκτρονικά καταστήματα που μετατρέπουν επισκέπτες σε πελάτες. WooCommerce ή custom κατασκευή — διαλέγουμε ό,τι ταιριάζει στο προϊόν σου, όχι ό,τι μας βολεύει.',
+    chips: ['WooCommerce', 'Custom', 'ERP', 'B2C & B2B'],
+    variant: 'eshop',
+  },
+  {
+    icon: 'ic:baseline-language',
+    title: 'Ιστοσελίδες & Landing Pages',
+    href: '/kataskevi-istoselidon',
+    desc: 'Γρήγορες, καθαρές σελίδες που εξηγούν τι κάνεις και γιατί να σε διαλέξουν. Φτιαγμένες για να τις βρίσκει η Google.',
+    chips: ['Ταχύτητα', 'SEO-ready', 'Custom design'],
+    variant: 'website',
+  },
+  {
+    icon: 'ic:baseline-search',
+    title: 'SEO & AEO',
+    href: '/seo',
+    desc: 'Να σε βρίσκουν όσοι σε ψάχνουν — στην Google και στα AI εργαλεία που πλέον προτείνουν προϊόντα και επιχειρήσεις.',
+    chips: ['On-page', 'Technical', 'AEO/GEO'],
+    variant: 'seo',
+  },
+  {
+    icon: 'ic:baseline-mail',
+    title: 'Email Marketing',
+    href: '/email-marketing',
+    desc: 'Αυτόματα emails που φέρνουν πελάτες πίσω: εγκαταλελειμμένα καλάθια, newsletters, follow-ups. Δουλεύουν κι όταν κοιμάσαι.',
+    chips: ['Flows', 'Καλάθια', 'Newsletters'],
+    variant: 'email',
+  },
+  {
+    icon: 'ic:baseline-ads-click',
+    title: 'Google Ads & Social',
+    href: '/diafimisi',
+    desc: 'Διαφήμιση με μετρήσιμο αποτέλεσμα. Ξέρεις τι ξοδεύεις — και τι σου φέρνει πίσω.',
+    chips: ['Google Ads', 'Meta', 'Reporting'],
+    variant: 'ads',
+  },
+  {
+    icon: 'ic:baseline-code',
+    title: 'Custom Εφαρμογές',
+    href: '/software-development',
+    desc: 'Όταν τα έτοιμα δεν φτάνουν: εφαρμογές, dashboards και συνδέσεις με ERP, φτιαγμένα στα μέτρα σου.',
+    chips: ['Αυτοματισμοί', 'API', 'Dashboards'],
+    variant: 'apps',
+  },
+];
+
+const processSteps = [
+  {
+    num: '01',
+    title: 'Γνωριμία',
+    desc: 'Μιλάμε για τους στόχους σου, βλέπουμε τον ανταγωνισμό και καταλαβαίνουμε τι πραγματικά χρειάζεσαι — και τι όχι.',
+  },
+  {
+    num: '02',
+    title: 'Σχεδιασμός',
+    desc: 'Wireframes και σχέδια πριν γραφτεί γραμμή κώδικα. Ξέρεις τι θα πάρεις πριν ξεκινήσουμε.',
+  },
+  {
+    num: '03',
+    title: 'Κατασκευή',
+    desc: 'Καθαρός κώδικας, πρώτα το κινητό. Βλέπεις την πρόοδο σε κάθε βήμα — όχι έκπληξη στο τέλος.',
+  },
+  {
+    num: '04',
+    title: 'Launch & μετά',
+    desc: 'Βγαίνουμε live, στήνουμε analytics και δεν εξαφανιζόμαστε. Το site σου έχει άνθρωπο.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Πόσο κοστίζει ένα e-shop;',
+    a: 'Εξαρτάται από το τι χρειάζεσαι: πόσα προϊόντα έχεις, αν θες σύνδεση με ERP, courier ή Skroutz, πόσο custom θα είναι ο σχεδιασμός. Στην ελληνική αγορά οι τιμές έχουν τεράστιο εύρος — γι’ αυτό δεν πετάμε νούμερα στα τυφλά. Θα δούμε μαζί τι πραγματικά χρειάζεσαι (και τι όχι) και θα πάρεις αναλυτική προσφορά χωρίς κρυφά κόστη. Η πρώτη κουβέντα είναι δωρεάν.',
+  },
+  {
+    q: 'Σε πόσο καιρό θα είναι έτοιμο;',
+    a: 'Ιστοσελίδα: συνήθως 2–4 εβδομάδες. E-shop: 3–6 εβδομάδες. Custom εφαρμογή: 1–3 μήνες. Θα σου πούμε ρεαλιστικό χρονοδιάγραμμα από την αρχή — όχι αυτό που θες να ακούσεις.',
+  },
+  {
+    q: 'Θα μπορώ να διαχειρίζομαι μόνος μου το περιεχόμενο;',
+    a: 'Ναι. Κάθε site παραδίδεται με εύχρηστο σύστημα διαχείρισης και θα σου δείξουμε πώς να αλλάζεις προϊόντα, τιμές και κείμενα μόνος σου. Κι αν κολλήσεις, είμαστε ένα μήνυμα μακριά.',
+  },
+  {
+    q: 'Έχω ήδη e-shop που δεν αποδίδει. Το αναλαμβάνετε;',
+    a: 'Ναι — και είναι από τις πιο συχνές δουλειές μας. Ξεκινάμε με έναν έλεγχο σε ταχύτητα, SEO και εμπειρία αγοράς, και σου λέμε τι φταίει και τι αξίζει να διορθωθεί. Καμιά φορά δεν χρειάζεσαι καινούριο site· χρειάζεσαι το σωστό χέρι στο υπάρχον.',
+  },
+  {
+    q: 'Συνδέεται το e-shop με το ERP ή το λογιστικό μου;',
+    a: 'Ναι. Στήνουμε αυτόματο συγχρονισμό προϊόντων, αποθεμάτων και παραγγελιών με το ERP σου, καθώς και συνδέσεις με courier, τρόπους πληρωμής και πλατφόρμες όπως το Skroutz.',
+  },
+  {
+    q: 'Τι γίνεται μετά το launch;',
+    a: 'Δεν εξαφανιζόμαστε. Αναλαμβάνουμε τη φροντίδα του site — ενημερώσεις, backups, ασφάλεια, φιλοξενία — με πακέτα υποστήριξης, ώστε να έχεις πάντα έναν άνθρωπο να παίρνει τηλέφωνο.',
+  },
+  {
+    q: 'Κάνετε SEO;',
+    a: 'Κάθε site που φτιάχνουμε έχει γερές βάσεις SEO από την πρώτη μέρα. Προσφέρουμε και συνεχές SEO ως υπηρεσία — μαζί με βελτιστοποίηση για τις AI μηχανές αναζήτησης (AEO/GEO), εκεί όπου ψάχνουν όλο και περισσότεροι πελάτες σήμερα.',
+  },
+  {
+    q: 'Πού βρίσκεστε; Δουλεύετε πανελλαδικά;',
+    a: 'Η έδρα μας είναι στην Ελλάδα και δουλεύουμε με επιχειρήσεις σε όλη τη χώρα. Τα περισσότερα projects τρέχουν εξ ολοκλήρου online — κλήσεις, preview links, καθημερινή επικοινωνία.',
+  },
+];
+
+const heroImage = '/images/hero-devices.webp';
+const heroImageExists = publicImageExists(heroImage);
 ---
 
 <BaseLayout
-  title={`${site.name} — Κατασκευή E-shop, Ιστοσελίδων & Web Apps`}
-  description="Phpixel — Κατασκευή e-shop, ιστοσελίδων, custom web apps, hosting & maintenance. Ολοκληρωμένες ψηφιακές λύσεις που φέρνουν μετρήσιμα αποτελέσματα."
+  title="Κατασκευή E-shop & Ιστοσελίδων που Πουλάνε | phpixel"
+  description="Κατασκευή e-shop με WooCommerce ή custom, ιστοσελίδες, SEO και email marketing. Δουλεύουμε με επιχειρήσεις σε όλη την Ελλάδα — μιλάς με αυτόν που γράφει τον κώδικα."
 >
 
   <!-- ═══════════════════════════════════════════════
@@ -23,139 +137,73 @@ import { footerSocials } from '../config/footer';
         Δεχόμαστε νέα projects
       </div>
       <h1 class="hero__title reveal">
-        Φτιάχνουμε ψηφιακές<br/>
-        εμπειρίες που <em>πουλάνε</em>.
+        Φτιάχνουμε e-shop και<br/>
+        ιστοσελίδες που <em>πουλάνε</em>.
       </h1>
       <p class="hero__sub reveal">
-        E-shop, websites, custom web apps & hosting.<br class="hide-mobile"/>
-        Σχεδιάζουμε, αναπτύσσουμε και υποστηρίζουμε — εσείς αναπτύσσεστε.
+        Από την ιδέα μέχρι την πρώτη παραγγελία — και μετά. Σχεδιάζουμε, στήνουμε
+        και φροντίζουμε την online παρουσία σου, για να ασχολείσαι εσύ με αυτό που
+        ξέρεις καλύτερα: την επιχείρησή σου.
       </p>
       <div class="hero__cta reveal">
         <a href="/contact" class="btn-hero-primary">
-          Ξεκινήστε το project σας
+          Πες μας για το project σου
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="tel:6977383488" class="btn-hero-secondary">
-          <Icon name="ic:baseline-phone" class="btn-hero-icon" />
-          697 738 3488
+        <a href="/portfolio" class="btn-hero-secondary">
+          Δες τις δουλειές μας →
         </a>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════
-       BENTO GRID — Services + Stats
+       SERVICES + STATS
        ═══════════════════════════════════════════════ -->
   <section class="bento" id="services">
     <div class="container">
       <div class="bento__header reveal">
         <span class="eyebrow">Υπηρεσίες</span>
-        <h2>Τα εργαλεία που χρειάζεστε, σε μια ομάδα.</h2>
+        <h2>Ό,τι χρειάζεσαι για να πουλάς online.</h2>
       </div>
 
       <div class="bento__grid">
-        <!-- CARD: E-shop — Large, spans 2 cols -->
-        <a href="/kataskevi-eshop" class="bento__card bento__card--eshop reveal">
-          <div class="bento__card-inner">
+        {services.map((s) => (
+          <a href={s.href} class={`bento__card bento__card--${s.variant} reveal`}>
             <div class="bento__card-icon">
-              <Icon name="ic:baseline-shopping-cart" />
+              <Icon name={s.icon} />
             </div>
-            <h3>E-shop Creation</h3>
-            <p>Ηλεκτρονικά καταστήματα που μετατρέπουν επισκέπτες σε πελάτες. Shopify, WooCommerce ή custom — πάντα με focus στις πωλήσεις.</p>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
             <ul class="bento__tags">
-              <li>Shopify</li>
-              <li>WooCommerce</li>
-              <li>Mobile-first</li>
-              <li>ERP σύνδεση</li>
+              {s.chips.map((chip) => (
+                <li>{chip}</li>
+              ))}
             </ul>
-          </div>
-          <div class="bento__card-visual bento__card-visual--eshop">
-            <div class="bento__mock-store">
-              <div class="mock-product"></div>
-              <div class="mock-product"></div>
-              <div class="mock-product"></div>
-              <div class="mock-product"></div>
-              <div class="mock-product"></div>
-              <div class="mock-product"></div>
-            </div>
-          </div>
-        </a>
+          </a>
+        ))}
+      </div>
 
-        <!-- CARD: Website — Large, spans 2 cols -->
-        <a href="/kataskevi-istoselidon" class="bento__card bento__card--website reveal">
-          <div class="bento__card-inner">
-            <div class="bento__card-icon">
-              <Icon name="ic:baseline-language" />
-            </div>
-            <h3>Website Building</h3>
-            <p>Ultra-fast ιστοσελίδες με Astro & Next.js. Βέλτιστη SEO απόδοση, Core Web Vitals στο πράσινο.</p>
-            <ul class="bento__tags">
-              <li>Astro</li>
-              <li>Next.js</li>
-              <li>SEO</li>
-              <li>Core Web Vitals</li>
-            </ul>
-          </div>
-          <div class="bento__card-visual bento__card-visual--website">
-            <div class="bento__mock-speed">
-              <div class="speed-bar speed-bar--perf"><span>Performance</span><div class="speed-fill" style="width:98%">98</div></div>
-              <div class="speed-bar speed-bar--seo"><span>SEO</span><div class="speed-fill" style="width:100%">100</div></div>
-              <div class="speed-bar speed-bar--access"><span>Accessibility</span><div class="speed-fill" style="width:95%">95</div></div>
-            </div>
-          </div>
-        </a>
-
-        <!-- CARD: Web Apps — Medium -->
-        <a href="/software-development" class="bento__card bento__card--apps reveal">
-          <div class="bento__card-icon">
-            <Icon name="ic:baseline-code" />
-          </div>
-          <h3>Custom Web Apps</h3>
-          <p>Scalable SaaS & business tools. Αυτοματοποίηση, dashboards, API integrations.</p>
-          <ul class="bento__tags">
-            <li>React</li>
-            <li>Node.js</li>
-            <li>PostgreSQL</li>
-          </ul>
-        </a>
-
-        <!-- CARD: Hosting — Medium -->
-        <a href="/services" class="bento__card bento__card--hosting reveal">
-          <div class="bento__card-icon">
-            <Icon name="ic:baseline-cloud" />
-          </div>
-          <h3>Hosting & Maintenance</h3>
-          <p>Managed cloud, SSL, backups, 24/7 υποστήριξη. Εμείς φροντίζουμε την τεχνολογία.</p>
-          <ul class="bento__tags">
-            <li>Cloud</li>
-            <li>SSL</li>
-            <li>Backups</li>
-          </ul>
-        </a>
-
-        <!-- STAT CARDS — Small -->
-        <div class="bento__card bento__card--stat bento__card--stat-1 reveal">
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Projects</span>
+      <!-- Stats row -->
+      <div class="stats__row">
+        <div class="stats__item reveal">
+          <Icon name="ic:baseline-storefront" class="stats__icon" />
+          <span>10+ χρόνια στο e-commerce</span>
         </div>
-        <div class="bento__card bento__card--stat bento__card--stat-2 reveal">
-          <span class="stat-number">10+</span>
-          <span class="stat-label">Χρόνια</span>
+        <div class="stats__item reveal">
+          <Icon name="ic:baseline-code" class="stats__icon" />
+          <span>Μιλάς με αυτόν που γράφει τον κώδικα</span>
         </div>
-        <div class="bento__card bento__card--stat bento__card--stat-3 reveal">
-          <span class="stat-number">24/7</span>
-          <span class="stat-label">Support</span>
-        </div>
-        <div class="bento__card bento__card--stat bento__card--stat-4 reveal">
-          <span class="stat-number">100%</span>
-          <span class="stat-label">Αφοσίωση</span>
+        <div class="stats__item reveal">
+          <Icon name="ic:baseline-schedule" class="stats__icon" />
+          <span>Απάντηση εντός μίας εργάσιμης</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════
-       PROCESS — How We Work (Bento row)
+       PROCESS — How We Work
        ═══════════════════════════════════════════════ -->
   <section class="process">
     <div class="container">
@@ -165,26 +213,13 @@ import { footerSocials } from '../config/footer';
       </div>
 
       <div class="process__grid">
-        <div class="process__card reveal">
-          <span class="process__num">01</span>
-          <h3>Ανακάλυψη</h3>
-          <p>Κατανοούμε τους στόχους σας, αναλύουμε τον ανταγωνισμό, χαρτογραφούμε τις ανάγκες.</p>
-        </div>
-        <div class="process__card reveal">
-          <span class="process__num">02</span>
-          <h3>Σχεδιασμός</h3>
-          <p>Wireframes, UI mockups, UX flows. Κάθε pixel έχει σκοπό — conversion, brand, εμπειρία.</p>
-        </div>
-        <div class="process__card reveal">
-          <span class="process__num">03</span>
-          <h3>Ανάπτυξη</h3>
-          <p>Clean code, σύγχρονες τεχνολογίες, mobile-first. Σας ενημερώνουμε σε κάθε βήμα.</p>
-        </div>
-        <div class="process__card reveal">
-          <span class="process__num">04</span>
-          <h3>Launch & Grow</h3>
-          <p>Go live, analytics, monitoring. Συνεχής βελτιστοποίηση και υποστήριξη μετά το launch.</p>
-        </div>
+        {processSteps.map((step) => (
+          <div class="process__card reveal">
+            <span class="process__num">{step.num}</span>
+            <h3>{step.title}</h3>
+            <p>{step.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -199,25 +234,56 @@ import { footerSocials } from '../config/footer';
         <h2>Δουλειές που μιλάνε μόνες τους.</h2>
       </div>
 
+      {heroImageExists ? (
+        <img
+          src={heroImage}
+          alt="E-shop και ιστοσελίδες κατασκευασμένα από την phpixel"
+          width="1600"
+          height="1200"
+          loading="lazy"
+          decoding="async"
+          class="work__intro-img reveal"
+        />
+      ) : null}
+
       <div class="work__grid">
-        {projects.map((project) => (
-          <div class="work__card reveal">
-            <div class="work__thumb">
-              <div class="work__placeholder">
-                <Icon name="ic:baseline-image" class="work__placeholder-icon" />
+        {projects.map((project) => {
+          const src =
+            project.image && publicImageExists(project.image)
+              ? project.image
+              : publicImageExists(project.thumb)
+                ? project.thumb
+                : null;
+          return (
+            <div class="work__card reveal">
+              <div class="work__thumb">
+                {src ? (
+                  <img
+                    src={src}
+                    alt={project.imageAlt ?? `Screenshot — ${project.name}`}
+                    width="1200"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="work__placeholder">
+                    <Icon name="ic:baseline-image" class="work__placeholder-icon" />
+                  </div>
+                )}
+              </div>
+              <div class="work__info">
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+                <div class="work__tags">
+                  {project.tags.map((tag) => (
+                    <span class="work__tag">{tag}</span>
+                  ))}
+                </div>
               </div>
             </div>
-            <div class="work__info">
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
-              <div class="work__tags">
-                {project.tags.map((tag) => (
-                  <span class="work__tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div class="work__cta reveal">
@@ -230,143 +296,57 @@ import { footerSocials } from '../config/footer';
   </section>
 
   <!-- ═══════════════════════════════════════════════
-       TESTIMONIALS
+       TESTIMONIALS — hidden until real quotes exist
        ═══════════════════════════════════════════════ -->
-  <section class="reviews">
-    <div class="container">
-      <div class="bento__header reveal">
-        <span class="eyebrow">Reviews</span>
-        <h2>Τι λένε οι πελάτες μας.</h2>
-      </div>
+  {SHOW_TESTIMONIALS && (
+    <section class="reviews">
+      <div class="container">
+        <div class="bento__header reveal">
+          <span class="eyebrow">Reviews</span>
+          <h2>Τι λένε οι πελάτες μας.</h2>
+        </div>
 
-      <div class="reviews__grid">
-        {testimonials.map((t) => (
-          <div class="reviews__card reveal">
-            <div class="reviews__stars">
-              {Array.from({ length: t.rating }).map(() => (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent-amber)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              ))}
-            </div>
-            <blockquote>{t.quote}</blockquote>
-            <div class="reviews__author">
-              <div class="reviews__avatar">{t.name.charAt(0)}</div>
-              <div>
-                <strong>{t.name}</strong>
-                <span>{t.company}</span>
+        <div class="reviews__grid">
+          {testimonials.map((t) => (
+            <div class="reviews__card reveal">
+              <div class="reviews__stars">
+                {Array.from({ length: t.rating }).map(() => (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent-amber)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                ))}
+              </div>
+              <blockquote>{t.quote}</blockquote>
+              <div class="reviews__author">
+                <div class="reviews__avatar">{t.name.charAt(0)}</div>
+                <div>
+                  <strong>{t.name}</strong>
+                  <span>{t.company}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- ═══════════════════════════════════════════════
-       TECH STACK — Logo Strip
+       TECH STRIP
        ═══════════════════════════════════════════════ -->
   <section class="tech">
     <div class="container">
-      <p class="tech__label">Τεχνολογίες που χρησιμοποιούμε</p>
-      <div class="tech__row">
-        <div class="tech__item"><Icon name="mdi:react" /><span>React</span></div>
-        <div class="tech__item"><Icon name="mdi:nodejs" /><span>Node.js</span></div>
-        <div class="tech__item"><Icon name="mdi:language-typescript" /><span>TypeScript</span></div>
-        <div class="tech__item"><Icon name="mdi:shopify" /><span>Shopify</span></div>
-        <div class="tech__item"><Icon name="mdi:wordpress" /><span>WordPress</span></div>
-        <div class="tech__item"><Icon name="mdi:cloud-outline" /><span>Cloud</span></div>
-      </div>
+      <p class="tech__line">Δουλεύουμε κυρίως με: WordPress · WooCommerce · CS-Cart · Astro · React · Node.js</p>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════
-       FAQ
+       FAQ (με FAQPage schema)
        ═══════════════════════════════════════════════ -->
-  <section class="faq">
-    <div class="container">
-      <div class="faq__layout">
-        <div class="faq__left reveal">
-          <span class="eyebrow">FAQ</span>
-          <h2>Έχετε ερωτήσεις;<br/>Έχουμε απαντήσεις.</h2>
-          <p>Δεν βρίσκετε αυτό που ψάχνετε; <a href="/contact" class="faq__contact-link">Επικοινωνήστε μαζί μας →</a></p>
-        </div>
-        <div class="faq__right">
-          <details class="faq__item reveal">
-            <summary>
-              Πόσο κοστίζει η κατασκευή ενός e-shop;
-              <span class="faq__chevron">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </summary>
-            <p>Εξαρτάται από τις ανάγκες σας — αριθμός προϊόντων, integrations, custom features. Επικοινωνήστε μαζί μας για δωρεάν αξιολόγηση και προσφορά.</p>
-          </details>
-          <details class="faq__item reveal">
-            <summary>
-              Πόσο χρόνο χρειάζεται ένα project;
-              <span class="faq__chevron">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </summary>
-            <p>Website: 2-4 εβδομάδες. E-shop: 3-6 εβδομάδες. Custom app: 1-3 μήνες. Εξαρτάται από την πολυπλοκότητα.</p>
-          </details>
-          <details class="faq__item reveal">
-            <summary>
-              Παρέχετε υποστήριξη μετά την παράδοση;
-              <span class="faq__chevron">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </summary>
-            <p>Φυσικά. Πακέτα συντήρησης 24/7 — updates, backups, security monitoring, τεχνική βοήθεια.</p>
-          </details>
-          <details class="faq__item reveal">
-            <summary>
-              Μπορώ να διαχειρίζομαι μόνος μου το περιεχόμενο;
-              <span class="faq__chevron">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </summary>
-            <p>Ναι. Κάθε project παραδίδεται με εύχρηστο CMS ώστε να ενημερώνετε το περιεχόμενο εύκολα.</p>
-          </details>
-          <details class="faq__item reveal">
-            <summary>
-              Αναλαμβάνετε και SEO;
-              <span class="faq__chevron">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </summary>
-            <p>Κάθε project κατασκευάζεται με SEO best practices. Προσφέρουμε επίσης ολοκληρωμένες υπηρεσίες SEO — on-page, technical, link building.</p>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
+  <FaqSection items={faqItems} label="FAQ" title="Έχεις ερωτήσεις; Έχουμε απαντήσεις." />
 
   <!-- ═══════════════════════════════════════════════
-       CTA — Final Call
+       PRE-FOOTER CTA
        ═══════════════════════════════════════════════ -->
-  <section class="final-cta">
-    <div class="container">
-      <div class="final-cta__card reveal">
-        <span class="eyebrow eyebrow--light">Ξεκινήστε σήμερα</span>
-        <h2>Έτοιμοι να κάνετε τη<br/>διαφορά online;</h2>
-        <p>Η πρώτη συζήτηση είναι πάντα δωρεάν.</p>
-        <div class="final-cta__actions">
-          <a href="/contact" class="btn-cta-primary">
-            Ζητήστε Δωρεάν Αξιολόγηση
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="tel:6977383488" class="btn-cta-phone">
-            <Icon name="ic:baseline-phone" class="btn-cta-phone-icon" />
-            697 738 3488
-          </a>
-        </div>
-        <div class="final-cta__channels">
-          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-          <span class="final-cta__sep">·</span>
-          <a href="https://wa.me/306977383488" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -383,10 +363,6 @@ import { footerSocials } from '../config/footer';
     letter-spacing: 0.12em;
     color: var(--accent-blue);
     margin-bottom: 0.6rem;
-  }
-
-  .eyebrow--light {
-    color: rgba(255,255,255,0.6);
   }
 
   .bento__header {
@@ -459,6 +435,7 @@ import { footerSocials } from '../config/footer';
     color: var(--theme-on-bg);
     opacity: 0.5;
     margin-bottom: 2rem;
+    max-width: 640px;
   }
 
   .hero__cta {
@@ -501,13 +478,8 @@ import { footerSocials } from '../config/footer';
     opacity: 0.8;
   }
 
-  .btn-hero-icon {
-    width: 18px;
-    height: 18px;
-  }
-
   /* ═══════════════════════════════════════════
-     BENTO GRID
+     SERVICES GRID
      ═══════════════════════════════════════════ */
 
   .bento {
@@ -516,8 +488,7 @@ import { footerSocials } from '../config/footer';
 
   .bento__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
@@ -529,6 +500,8 @@ import { footerSocials } from '../config/footer';
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .bento__card:hover {
@@ -547,6 +520,7 @@ import { footerSocials } from '../config/footer';
     font-size: 0.88rem;
     line-height: 1.6;
     opacity: 0.7;
+    flex: 1;
   }
 
   .bento__card-icon {
@@ -572,6 +546,7 @@ import { footerSocials } from '../config/footer';
     gap: 0.35rem;
     list-style: none;
     margin-top: 0.85rem;
+    padding: 0;
   }
 
   .bento__tags li {
@@ -583,16 +558,7 @@ import { footerSocials } from '../config/footer';
     opacity: 0.65;
   }
 
-  /* — Large cards (span 2 cols) — */
-  .bento__card--eshop,
-  .bento__card--website {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    min-height: 260px;
-  }
-
+  /* — Card color variants — */
   .bento__card--eshop {
     background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
     color: #064e3b;
@@ -613,124 +579,71 @@ import { footerSocials } from '../config/footer';
     background: rgba(37, 99, 235, 0.12);
   }
 
-  /* — Medium cards — */
-  .bento__card--apps {
-    grid-column: span 2;
+  .bento__card--seo {
     background: linear-gradient(145deg, #f5f3ff 0%, #ede9fe 100%);
     color: #3b1f6e;
   }
 
-  .bento__card--apps .bento__card-icon {
+  .bento__card--seo .bento__card-icon {
     color: #7c3aed;
     background: rgba(124, 58, 237, 0.12);
   }
 
-  .bento__card--hosting {
-    grid-column: span 2;
+  .bento__card--email {
     background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%);
     color: #78350f;
   }
 
-  .bento__card--hosting .bento__card-icon {
+  .bento__card--email .bento__card-icon {
     color: #d97706;
     background: rgba(217, 119, 6, 0.12);
   }
 
-  /* — Stat cards — */
-  .bento__card--stat {
-    grid-column: span 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    cursor: default;
+  .bento__card--ads {
+    background: linear-gradient(145deg, #fff1f2 0%, #ffe4e6 100%);
+    color: #881337;
   }
 
-  .bento__card--stat:hover {
-    transform: none;
-    box-shadow: none;
+  .bento__card--ads .bento__card-icon {
+    color: #e11d48;
+    background: rgba(225, 29, 72, 0.12);
   }
 
-  .bento__card--stat-1 { background: #f0fdf4; }
-  .bento__card--stat-2 { background: #eff6ff; }
-  .bento__card--stat-3 { background: #f5f3ff; }
-  .bento__card--stat-4 { background: #fffbeb; }
-
-  .stat-number {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 0.25rem;
+  .bento__card--apps {
+    background: linear-gradient(145deg, #f0fdfa 0%, #ccfbf1 100%);
+    color: #134e4a;
   }
 
-  .stat-label {
-    font-size: 0.78rem;
-    opacity: 0.5;
-    font-weight: 500;
+  .bento__card--apps .bento__card-icon {
+    color: #0d9488;
+    background: rgba(13, 148, 136, 0.12);
   }
 
-  /* — Card visuals (decorative) — */
-  .bento__card-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-
-  /* Mock store grid */
-  .bento__mock-store {
+  /* — Stats row — */
+  .stats__row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    width: 100%;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
-  .mock-product {
-    aspect-ratio: 1;
-    background: rgba(255,255,255,0.65);
-    border-radius: 10px;
-    border: 1px solid rgba(5, 150, 105, 0.1);
-  }
-
-  /* Mock speed meters */
-  .bento__mock-speed {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-  }
-
-  .speed-bar {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .speed-bar span {
-    font-size: 0.7rem;
-    font-weight: 600;
-    opacity: 0.5;
-  }
-
-  .speed-fill {
-    height: 28px;
-    border-radius: 8px;
+  .stats__item {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding: 0 0.65rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #fff;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--theme-surface-1);
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 0.92rem;
   }
 
-  .speed-bar--perf .speed-fill { background: #22c55e; }
-  .speed-bar--seo .speed-fill { background: #22c55e; }
-  .speed-bar--access .speed-fill { background: #22c55e; }
+  .stats__icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--accent-blue);
+  }
 
   /* ═══════════════════════════════════════════
      PROCESS
@@ -798,6 +711,13 @@ import { footerSocials } from '../config/footer';
     padding: 5rem 0;
   }
 
+  .work__intro-img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+  }
+
   .work__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -820,6 +740,13 @@ import { footerSocials } from '../config/footer';
   .work__thumb {
     aspect-ratio: 16 / 10;
     overflow: hidden;
+  }
+
+  .work__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
 
   .work__placeholder {
@@ -973,209 +900,12 @@ import { footerSocials } from '../config/footer';
     border-top: 1px solid var(--theme-surface-2);
   }
 
-  .tech__label {
+  .tech__line {
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.3;
-    margin-bottom: 1.25rem;
-  }
-
-  .tech__row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-
-  .tech__item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    opacity: 0.25;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-
-  .tech__item svg,
-  .tech__item [data-icon] {
-    width: 22px;
-    height: 22px;
-  }
-
-  /* ═══════════════════════════════════════════
-     FAQ
-     ═══════════════════════════════════════════ */
-
-  .faq {
-    padding: 5rem 0;
-  }
-
-  .faq__layout {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .faq__left h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-  }
-
-  .faq__left p {
-    font-size: 0.92rem;
-    opacity: 0.45;
-    line-height: 1.6;
-  }
-
-  .faq__contact-link {
-    color: var(--accent-blue);
-    font-weight: 600;
-    transition: var(--theme-transition);
-  }
-
-  .faq__contact-link:hover {
-    opacity: 0.7;
-  }
-
-  .faq__item {
-    border-bottom: 1px solid var(--theme-surface-2);
-  }
-
-  .faq__item:first-child {
-    border-top: 1px solid var(--theme-surface-2);
-  }
-
-  .faq__item summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 0;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    list-style: none;
-    gap: 1rem;
-  }
-
-  .faq__item summary::-webkit-details-marker { display: none; }
-  .faq__item summary::marker { content: ''; }
-
-  .faq__chevron {
-    flex-shrink: 0;
-    opacity: 0.3;
-    transition: transform 0.25s ease;
-  }
-
-  .faq__item[open] .faq__chevron {
-    transform: rotate(180deg);
-  }
-
-  .faq__item p {
-    padding: 0 0 1.1rem;
-    font-size: 0.88rem;
-    line-height: 1.65;
-    opacity: 0.5;
-  }
-
-  /* ═══════════════════════════════════════════
-     FINAL CTA
-     ═══════════════════════════════════════════ */
-
-  .final-cta {
-    padding: 0 0 5rem;
-  }
-
-  .final-cta__card {
-    background: var(--theme-on-bg);
-    border-radius: 20px;
-    padding: 4rem 2rem;
-    text-align: center;
-    color: #fff;
-  }
-
-  .final-cta__card h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 0.5rem;
-  }
-
-  .final-cta__card > p {
-    font-size: 1rem;
-    opacity: 0.45;
-    margin-bottom: 2rem;
-  }
-
-  .final-cta__actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-  }
-
-  .btn-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.75rem;
-    background: #fff;
-    color: var(--theme-on-bg);
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: var(--theme-transition);
-  }
-
-  .btn-cta-primary:hover {
-    background: var(--theme-surface-1);
-    transform: translateY(-1px);
-  }
-
-  .btn-cta-phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.55);
-    transition: var(--theme-transition);
-  }
-
-  .btn-cta-phone:hover { color: #fff; }
-
-  .btn-cta-phone-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .final-cta__channels {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .final-cta__channels a {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.3);
-    transition: var(--theme-transition);
-  }
-
-  .final-cta__channels a:hover { color: rgba(255,255,255,0.6); }
-
-  .final-cta__sep {
-    color: rgba(255,255,255,0.15);
-    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    opacity: 0.35;
   }
 
   /* ═══════════════════════════════════════════
@@ -1187,27 +917,12 @@ import { footerSocials } from '../config/footer';
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .bento__card--eshop,
-    .bento__card--website {
-      grid-column: span 2;
-    }
-
-    .bento__card--apps,
-    .bento__card--hosting {
-      grid-column: span 1;
-    }
-
-    .bento__card--stat {
-      grid-column: span 1;
-    }
-
     .process__grid {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .faq__layout {
+    .stats__row {
       grid-template-columns: 1fr;
-      gap: 2rem;
     }
   }
 
@@ -1231,28 +946,12 @@ import { footerSocials } from '../config/footer';
       gap: 1rem;
     }
 
-    .bento, .process, .work, .reviews, .faq {
+    .bento, .process, .work, .reviews {
       padding: 3.5rem 0;
     }
 
     .bento__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .bento__card--eshop,
-    .bento__card--website,
-    .bento__card--apps,
-    .bento__card--hosting {
-      grid-column: span 2;
-    }
-
-    .bento__card--eshop,
-    .bento__card--website {
       grid-template-columns: 1fr;
-    }
-
-    .bento__card-visual {
-      display: none;
     }
 
     .process__grid {
@@ -1266,21 +965,6 @@ import { footerSocials } from '../config/footer';
     .reviews__grid {
       grid-template-columns: 1fr;
     }
-
-    .tech__row {
-      gap: 1.25rem;
-    }
-
-    .tech__item span { display: none; }
-
-    .final-cta__card {
-      padding: 3rem 1.5rem;
-    }
-
-    .final-cta__actions {
-      flex-direction: column;
-      gap: 0.75rem;
-    }
   }
 
   @media (max-width: 420px) {
@@ -1290,10 +974,6 @@ import { footerSocials } from '../config/footer';
 
     .bento__card {
       padding: 1.25rem;
-    }
-
-    .stat-number {
-      font-size: 1.6rem;
     }
   }
 </style>
