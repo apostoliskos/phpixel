@@ -4,23 +4,27 @@ export const nav = [
     slug: '/services',
     children: [
       {
-        title: 'Δημιουργία E-shop',
-        slug: '/ecommerce',
+        title: 'Κατασκευή E-shop',
+        slug: '/kataskevi-eshop',
       },
       {
         title: 'Ιστοσελίδες & Landing Pages',
-        slug: '/istoselides-landingpage',
+        slug: '/kataskevi-istoselidon',
       },
       {
-        title: 'SEO',
+        title: 'SEO & AEO',
         slug: '/seo',
       },
       {
-        title: 'Marketing Κοινωνικών Δικτύων',
-        slug: '/social-media-marketing',
+        title: 'Email Marketing',
+        slug: '/email-marketing',
       },
       {
-        title: 'Ανάπτυξη Λογισμικού',
+        title: 'Google Ads & Social',
+        slug: '/diafimisi',
+      },
+      {
+        title: 'Custom Εφαρμογές',
         slug: '/software-development',
       },
     ],

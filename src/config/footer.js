@@ -20,11 +20,12 @@ export const footerLists = [
   {
     title: 'Υπηρεσίες',
     items: [
-      { title: 'Δημιουργία E-shop', slug: '/ecommerce' },
-      { title: 'Ιστοσελίδες & Landing Pages', slug: '/istoselides-landingpage' },
-      { title: 'SEO', slug: '/seo' },
-      { title: 'Marketing Κοινωνικών Δικτύων', slug: '/social-media-marketing' },
-      { title: 'Ανάπτυξη Λογισμικού', slug: '/software-development' },
+      { title: 'Κατασκευή E-shop', slug: '/kataskevi-eshop' },
+      { title: 'Ιστοσελίδες & Landing Pages', slug: '/kataskevi-istoselidon' },
+      { title: 'SEO & AEO', slug: '/seo' },
+      { title: 'Email Marketing', slug: '/email-marketing' },
+      { title: 'Google Ads & Social', slug: '/diafimisi' },
+      { title: 'Custom Εφαρμογές', slug: '/software-development' },
     ],
   },
   {

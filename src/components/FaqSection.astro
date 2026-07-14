@@ -1,0 +1,163 @@
+---
+// Ενότητα FAQ με ενσωματωμένο FAQPage JSON-LD.
+// Το schema παράγεται από τα ίδια items που εμφανίζονται — μένουν πάντα συγχρονισμένα.
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+export interface Props {
+  items: FaqItem[];
+  label?: string;
+  title?: string;
+  withSchema?: boolean;
+}
+
+const {
+  items,
+  label = 'FAQ',
+  title = 'Έχεις ερωτήσεις; Έχουμε απαντήσεις.',
+  withSchema = true,
+} = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+---
+
+{withSchema && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+)}
+
+<section class="faq">
+  <div class="container">
+    <div class="faq__layout">
+      <div class="faq__left reveal">
+        <span class="faq__eyebrow">{label}</span>
+        <h2>{title}</h2>
+        <p>Δεν βρίσκεις αυτό που ψάχνεις; <a href="/contact" class="faq__contact-link">Πες μας τι σε απασχολεί →</a></p>
+      </div>
+      <div class="faq__right">
+        {items.map((item) => (
+          <details class="faq__item reveal">
+            <summary>
+              {item.q}
+              <span class="faq__chevron">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: 5rem 0;
+  }
+
+  .faq__eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-blue);
+    margin-bottom: 0.6rem;
+  }
+
+  .faq__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .faq__left h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  .faq__left p {
+    font-size: 0.92rem;
+    opacity: 0.45;
+    line-height: 1.6;
+  }
+
+  .faq__contact-link {
+    color: var(--accent-blue);
+    font-weight: 600;
+    transition: var(--theme-transition);
+  }
+
+  .faq__contact-link:hover {
+    opacity: 0.7;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--theme-surface-2);
+  }
+
+  .faq__item:first-child {
+    border-top: 1px solid var(--theme-surface-2);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    list-style: none;
+    gap: 1rem;
+  }
+
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::marker { content: ''; }
+
+  .faq__chevron {
+    flex-shrink: 0;
+    opacity: 0.3;
+    transition: transform 0.25s ease;
+  }
+
+  .faq__item[open] .faq__chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq__item p {
+    padding: 0 0 1.1rem;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    .faq__layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq {
+      padding: 3.5rem 0;
+    }
+  }
+</style>

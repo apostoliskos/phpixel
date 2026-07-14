@@ -1,0 +1,23 @@
+---
+// Organization JSON-LD — μπαίνει σε κάθε σελίδα μέσω του BaseLayout.
+import { site } from '../../data/site';
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: 'phpixel',
+  url: `${site.url}`,
+  logo: `${site.url}/favicon.png`,
+  email: site.contact.email,
+  telephone: '+30 697 738 3488',
+  areaServed: 'GR',
+  sameAs: [
+    site.socials.facebook,
+    site.socials.instagram,
+    site.socials.linkedin,
+  ],
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(organization)} />
