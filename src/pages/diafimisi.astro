@@ -2,95 +2,109 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import CtaSection from '../components/CtaSection.astro';
-import { Icon } from 'astro-icon/components';
+import PreFooterCta from '../components/PreFooterCta.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ServiceSchema from '../components/schema/ServiceSchema.astro';
 
 const features = [
   {
-    icon: 'ic:baseline-campaign',
-    title: 'Social Media Strategy',
-    desc: 'Ολοκληρωμένη στρατηγική social media προσαρμοσμένη στους στόχους και το κοινό της επιχείρησής σας.',
+    icon: 'ic:baseline-search',
+    title: 'Google Search Ads',
+    desc: 'Εμφανίζεσαι όταν κάποιος ψάχνει ακριβώς αυτό που πουλάς. Πληρώνεις για πρόθεση, όχι για τυχαία μάτια.',
     accent: 'var(--accent-blue)',
   },
   {
-    icon: 'ic:baseline-photo-library',
-    title: 'Content Creation',
-    desc: 'Δημιουργία ελκυστικού περιεχομένου — posts, stories, reels και carousels που ξεχωρίζουν.',
-    accent: 'var(--accent-violet)',
+    icon: 'ic:baseline-shopping-bag',
+    title: 'Google Shopping',
+    desc: 'Τα προϊόντα σου με φωτογραφία και τιμή, πάνω πάνω στα αποτελέσματα. Απαραίτητο για κάθε e-shop.',
+    accent: 'var(--accent-emerald)',
   },
   {
     icon: 'ic:baseline-ads-click',
-    title: 'Paid Advertising',
-    desc: 'Διαχείριση διαφημιστικών καμπανιών σε Facebook, Instagram, TikTok και LinkedIn με μέγιστο ROI.',
-    accent: 'var(--accent-emerald)',
-  },
-  {
-    icon: 'ic:baseline-groups',
-    title: 'Community Management',
-    desc: 'Διαχείριση κοινότητας, απάντηση σε σχόλια και μηνύματα, και ενίσχυση του engagement.',
-    accent: 'var(--accent-amber)',
-  },
-  {
-    icon: 'ic:baseline-analytics',
-    title: 'Performance Analytics',
-    desc: 'Μηνιαίες αναφορές με KPIs, reach, engagement rate, conversions και ROI ανάλυση.',
-    accent: 'var(--accent-rose)',
-  },
-  {
-    icon: 'ic:baseline-people',
-    title: 'Influencer Marketing',
-    desc: 'Εντοπισμός και συνεργασία με influencers που ταιριάζουν στο brand σας για αυθεντική προβολή.',
-    accent: 'var(--accent-blue)',
-  },
-  {
-    icon: 'ic:baseline-schedule',
-    title: 'Content Calendar',
-    desc: 'Οργανωμένο πρόγραμμα δημοσιεύσεων με στρατηγικό timing για μέγιστη απήχηση.',
+    title: 'Meta Ads',
+    desc: 'Facebook και Instagram για να σε ανακαλύψουν νέοι πελάτες — και remarketing για να ξαναδούν όσοι δεν αγόρασαν την πρώτη φορά.',
     accent: 'var(--accent-violet)',
   },
   {
-    icon: 'ic:baseline-auto-graph',
-    title: 'Growth Hacking',
-    desc: 'Τεχνικές ταχείας ανάπτυξης — viral campaigns, giveaways, UGC και strategic partnerships.',
-    accent: 'var(--accent-emerald)',
+    icon: 'ic:baseline-photo-library',
+    title: 'Οργανικό περιεχόμενο',
+    desc: 'Παρουσία στα social που δείχνει ότι η επιχείρηση ζει: σωστό περιεχόμενο, σταθερός ρυθμός, χωρίς άσκοπα posts.',
+    accent: 'var(--accent-amber)',
+  },
+  {
+    icon: 'ic:baseline-track-changes',
+    title: 'Στήσιμο μετρήσεων',
+    desc: 'Conversion tracking πριν ξεκινήσει η πρώτη καμπάνια. Αν δεν μετριέται, δεν το τρέχουμε.',
+    accent: 'var(--accent-rose)',
+  },
+  {
+    icon: 'ic:baseline-analytics',
+    title: 'Μηνιαίο reporting',
+    desc: 'Τι ξοδεύτηκε, τι έφερε, τι αλλάζουμε τον επόμενο μήνα. Σε γλώσσα επιχείρησης, όχι σε ορολογία.',
+    accent: 'var(--accent-blue)',
   },
 ];
 
-const platforms = [
-  { name: 'Facebook & Instagram', desc: 'Ads, posts, stories, reels και shop integration' },
-  { name: 'TikTok & YouTube', desc: 'Video content, short-form και long-form strategy' },
-  { name: 'LinkedIn & Google', desc: 'B2B marketing, Google Ads και remarketing' },
+const channels = [
+  {
+    name: 'Google Ads',
+    desc: 'Search και Shopping καμπάνιες για ανθρώπους που ήδη ψάχνουν αυτό που προσφέρεις.',
+  },
+  {
+    name: 'Meta (Facebook & Instagram)',
+    desc: 'Στοχευμένες διαφημίσεις και remarketing εκεί όπου περνούν χρόνο οι πελάτες σου.',
+  },
+  {
+    name: 'Οργανικό περιεχόμενο',
+    desc: 'Σταθερή, καθαρή παρουσία στα κανάλια σου — υποστηρίζει τη διαφήμιση, δεν την αντικαθιστά.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Πόσο budget χρειάζομαι για διαφήμιση;',
+    a: 'Εξαρτάται από τον κλάδο και τον ανταγωνισμό — αλλά δεν χρειάζεσαι τεράστια ποσά για να ξεκινήσεις. Ξεκινάμε με λογικό δοκιμαστικό budget, βλέπουμε τι αποδίδει και κλιμακώνουμε αυτό που δουλεύει. Θα σου πούμε ειλικρινά αν το budget που σκέφτεσαι δεν φτάνει για τον στόχο σου.',
+  },
+  {
+    q: 'Σε πόσο καιρό θα δω αποτελέσματα;',
+    a: 'Οι καμπάνιες φέρνουν κίνηση από την πρώτη μέρα, αλλά θέλουν 4–8 εβδομάδες βελτιστοποίησης για να αποδώσουν σωστά. Ο πρώτος μήνας είναι κυρίως μάθηση: ποιο κοινό, ποιο μήνυμα, ποιο προϊόν τραβάει.',
+  },
+  {
+    q: 'Τι κάνετε κάθε μήνα στη διαχείριση;',
+    a: 'Παρακολουθούμε και προσαρμόζουμε τις καμπάνιες, δοκιμάζουμε νέα κείμενα και κοινά, κόβουμε ό,τι δεν αποδίδει και μεταφέρουμε budget σε ό,τι αποδίδει. Στο τέλος του μήνα παίρνεις αναφορά με το τι έγινε και γιατί.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="Social Media Marketing — Phpixel | Διαχείριση & Διαφήμιση"
-  description="Υπηρεσίες social media marketing. Στρατηγική, content creation, paid advertising και community management για ανάπτυξη της επιχείρησής σας."
+  title="Google Ads & Social Media Διαφήμιση | phpixel"
+  description="Διαχείριση Google Ads (Search & Shopping), Meta ads και οργανικού περιεχομένου. Μετρήσιμο αποτέλεσμα: ξέρεις πάντα τι ξοδεύεις και τι σου φέρνει πίσω."
 >
+  <ServiceSchema
+    serviceType="Google Ads & Social Media Διαφήμιση"
+    description="Διαχείριση Google Ads (Search & Shopping), Meta ads και οργανικού περιεχομένου με μετρήσιμο αποτέλεσμα."
+  />
 
   <!-- Hero -->
   <section class="smm-hero">
     <div class="smm-hero__bg"></div>
     <div class="container smm-hero__inner">
       <div class="smm-hero__content reveal">
-        <span class="smm-badge">Digital Marketing</span>
+        <span class="smm-badge">Διαφήμιση</span>
         <h1>
-          Social Media<br />
-          <span class="accent-text">Marketing</span>
+          Google Ads<br />
+          <span class="accent-text">& Social</span>
         </h1>
         <p class="smm-hero__sub">
-          Αυξήστε την αναγνωρισιμότητα του brand σας και μετατρέψτε followers
-          σε πελάτες. Στρατηγική, content και advertising σε ένα πακέτο.
+          Δεν υποσχόμαστε «viral». Υποσχόμαστε να ξέρεις πάντα τι ξοδεύεις και τι σου
+          φέρνει πίσω. Στήνουμε και τρέχουμε καμπάνιες σε Google και Meta — και τις
+          φροντίζουμε κάθε μήνα, όχι μόνο στο στήσιμο.
         </p>
-        <div class="smm-hero__actions">
-          <a href="/contact" class="btn btn--primary btn--lg">Δωρεάν Συμβουλευτική</a>
-          <a href="/services" class="btn btn--outline btn--lg">Όλες οι υπηρεσίες</a>
-        </div>
       </div>
 
-      <!-- Platforms -->
+      <!-- Channels -->
       <div class="smm-hero__platforms reveal" style="transition-delay: 0.2s">
-        {platforms.map((p) => (
+        {channels.map((p) => (
           <div class="platform-card">
             <h3>{p.name}</h3>
             <p>{p.desc}</p>
@@ -104,8 +118,8 @@ const platforms = [
   <section class="smm-features">
     <div class="container">
       <div class="reveal">
-        <SectionHeader title="Τι περιλαμβάνει" subtitle="Social Media Services">
-          Ολοκληρωμένες υπηρεσίες social media marketing — από τη στρατηγική μέχρι την εκτέλεση.
+        <SectionHeader title="Τι περιλαμβάνει" subtitle="Google Ads & Social">
+          Διαφήμιση με σχέδιο και μέτρηση — από το στήσιμο μέχρι τη συνεχή φροντίδα των καμπανιών.
         </SectionHeader>
       </div>
 
@@ -124,15 +138,11 @@ const platforms = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <FaqSection items={faqItems} title="Συχνές ερωτήσεις για τη διαφήμιση" />
+
   <!-- CTA -->
-  <CtaSection
-    title="Ενισχύστε την παρουσία σας στα social media"
-    description="Ξεκινήστε με δωρεάν social media audit. Θα αναλύσουμε τα κανάλια σας και θα σας προτείνουμε στρατηγική ανάπτυξης."
-    primaryLabel="Επικοινωνία"
-    primaryHref="/contact"
-    secondaryLabel="6977383488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -183,13 +193,6 @@ const platforms = [
     line-height: 1.75;
     opacity: 0.7;
     max-width: 460px;
-    margin-bottom: 2rem;
-  }
-
-  .smm-hero__actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
   }
 
   .smm-hero__platforms {
@@ -230,7 +233,7 @@ const platforms = [
 
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--theme-grid-gap);
   }
 

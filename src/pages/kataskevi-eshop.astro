@@ -2,90 +2,120 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import CtaSection from '../components/CtaSection.astro';
-import { Icon } from 'astro-icon/components';
+import PreFooterCta from '../components/PreFooterCta.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ServiceSchema from '../components/schema/ServiceSchema.astro';
 
 const features = [
   {
     icon: 'ic:baseline-sync',
     title: 'Σύνδεση με ERP',
-    desc: 'Αυτόματος συγχρονισμός προϊόντων, πελατών και παραγγελιών με το ERP σας.',
+    desc: 'Αυτόματος συγχρονισμός προϊόντων, αποθεμάτων και παραγγελιών με το ERP σου — και συνδέσεις με courier, Skroutz και marketplaces.',
     accent: 'var(--accent-blue)',
   },
   {
     icon: 'ic:baseline-devices',
-    title: 'Σύγχρονος Σχεδιασμός',
-    desc: 'Mobile-first design με χρήση των πιο σύγχρονων τεχνολογιών. Responsive σε κάθε συσκευή.',
+    title: 'Σχεδιασμός για το κινητό',
+    desc: 'Οι περισσότερες αγορές γίνονται πλέον από κινητό. Εκεί σχεδιάζουμε πρώτα.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-loyalty',
-    title: 'Loyalty Program',
-    desc: 'Συλλογή πόντων με κάθε αγορά για επιβράβευση των πιστών πελατών σας.',
+    title: 'Loyalty & επιβράβευση',
+    desc: 'Πόντοι, εκπτώσεις και κίνητρα για να ξανάρθουν οι πελάτες σου.',
     accent: 'var(--accent-emerald)',
   },
   {
     icon: 'ic:baseline-search',
-    title: 'SEO-Friendly',
-    desc: 'Σχεδιασμός βελτιστοποιημένος για SEO, ώστε το e-shop σας να εμφανίζεται ψηλά στις αναζητήσεις.',
+    title: 'SEO από κατασκευής',
+    desc: 'Δομή, ταχύτητα και δεδομένα στημένα ώστε να σε βρίσκει η Google — και τα AI εργαλεία.',
     accent: 'var(--accent-blue)',
   },
   {
     icon: 'ic:baseline-shopping-cart-checkout',
-    title: 'One-Page Checkout',
-    desc: 'Ολοκλήρωση παραγγελίας και πληρωμή σε μία μόνο σελίδα για ευκολία και ταχύτητα.',
+    title: 'One-page checkout',
+    desc: 'Ολοκλήρωση παραγγελίας σε μία σελίδα. Λιγότερα βήματα, λιγότερα παρατημένα καλάθια.',
     accent: 'var(--accent-amber)',
   },
   {
     icon: 'ic:baseline-shield',
     title: 'Ασφάλεια',
-    desc: 'SSL 256-bit κρυπτογράφηση και θωράκιση απέναντι σε κακόβουλες επιθέσεις.',
+    desc: 'Ασφαλείς πληρωμές και προστασία δεδομένων — φροντισμένα από εμάς, χωρίς να χρειάζεται να ξέρεις πώς.',
     accent: 'var(--accent-rose)',
   },
   {
     icon: 'ic:baseline-support-agent',
-    title: 'Υποστήριξη',
-    desc: 'Τεχνική υποστήριξη, hosting, αναβαθμίσεις και επιδιόρθωση σφαλμάτων.',
+    title: 'Φροντίδα μετά το launch',
+    desc: 'Ενημερώσεις, backups, φιλοξενία και ένας άνθρωπος που απαντάει όταν κάτι προκύψει.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-local-shipping',
-    title: 'Αυτόματα Μεταφορικά',
-    desc: 'Αυτόματος υπολογισμός μεταφορικών κόστους με βάση τον προορισμό και το βάρος.',
+    title: 'Αυτόματα μεταφορικά',
+    desc: 'Υπολογισμός μεταφορικών με βάση προορισμό και βάρος, χωρίς χειροκίνητη δουλειά.',
     accent: 'var(--accent-emerald)',
   },
 ];
 
 const platforms = [
-  { name: 'Shopify', desc: 'Για γρήγορο setup και proven reliability' },
-  { name: 'WooCommerce', desc: 'Για flexibility και WordPress integration' },
-  { name: 'Custom Build', desc: 'Για πλήρη έλεγχο και tailor-made λύσεις' },
+  {
+    name: 'WooCommerce',
+    desc: 'Η πιο διαδεδομένη πλατφόρμα e-shop παγκοσμίως. Ευέλικτη, επεκτάσιμη και δική σου — χωρίς μηνιαία εξάρτηση από τρίτους.',
+  },
+  {
+    name: 'Custom κατασκευή',
+    desc: 'Όταν το προϊόν ή η ροή σου δεν χωράει σε καλούπια, το χτίζουμε από το μηδέν — ακριβώς στα μέτρα σου.',
+  },
+  {
+    name: 'CS-Cart',
+    desc: 'Για marketplaces, B2B και μεγάλους καταλόγους με ιδιαίτερες απαιτήσεις.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Πόσο κοστίζει ένα e-shop;',
+    a: 'Εξαρτάται από το τι χρειάζεσαι: πόσα προϊόντα έχεις, αν θες σύνδεση με ERP, courier ή Skroutz, πόσο custom θα είναι ο σχεδιασμός. Στην ελληνική αγορά οι τιμές έχουν τεράστιο εύρος — γι’ αυτό δεν πετάμε νούμερα στα τυφλά. Θα δούμε μαζί τι πραγματικά χρειάζεσαι (και τι όχι) και θα πάρεις αναλυτική προσφορά χωρίς κρυφά κόστη. Η πρώτη κουβέντα είναι δωρεάν.',
+  },
+  {
+    q: 'Έχω ήδη e-shop που δεν αποδίδει. Το αναλαμβάνετε;',
+    a: 'Ναι — και είναι από τις πιο συχνές δουλειές μας. Ξεκινάμε με έναν έλεγχο σε ταχύτητα, SEO και εμπειρία αγοράς, και σου λέμε τι φταίει και τι αξίζει να διορθωθεί. Καμιά φορά δεν χρειάζεσαι καινούριο site· χρειάζεσαι το σωστό χέρι στο υπάρχον.',
+  },
+  {
+    q: 'Συνδέεται το e-shop με το ERP ή το λογιστικό μου;',
+    a: 'Ναι. Στήνουμε αυτόματο συγχρονισμό προϊόντων, αποθεμάτων και παραγγελιών με το ERP σου, καθώς και συνδέσεις με courier, τρόπους πληρωμής και πλατφόρμες όπως το Skroutz.',
+  },
+  {
+    q: 'Τι γίνεται μετά το launch;',
+    a: 'Δεν εξαφανιζόμαστε. Αναλαμβάνουμε τη φροντίδα του e-shop — ενημερώσεις, backups, ασφάλεια, φιλοξενία — με πακέτα υποστήριξης, ώστε να έχεις πάντα έναν άνθρωπο να παίρνει τηλέφωνο.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="Κατασκευή E-shop — Phpixel | B2C & B2B"
-  description="Κατασκευή e-shop B2C & B2B. Shopify, WooCommerce ή custom — προσαρμοσμένο στις ανάγκες της επιχείρησής σας."
+  title="Κατασκευή E-shop με WooCommerce ή Custom Λύση | phpixel"
+  description="Κατασκευή e-shop για B2C & B2B: WooCommerce, custom ή CS-Cart. Σύνδεση με ERP, courier και Skroutz — στημένο για πωλήσεις, όχι απλώς για να υπάρχει."
 >
+  <ServiceSchema
+    serviceType="Κατασκευή E-shop"
+    description="Κατασκευή e-shop για B2C & B2B: WooCommerce, custom ή CS-Cart, με σύνδεση σε ERP, courier και Skroutz."
+  />
 
   <!-- Hero -->
   <section class="eshop-hero">
     <div class="eshop-hero__bg"></div>
     <div class="container eshop-hero__inner">
       <div class="eshop-hero__content reveal">
-        <span class="eshop-badge">E-Commerce Solutions</span>
+        <span class="eshop-badge">E-commerce</span>
         <h1>
           Κατασκευή<br />
           <span class="accent-text">E-shop</span>
         </h1>
         <p class="eshop-hero__sub">
-          Κλείστε ραντεβού για να αναζητήσουμε μαζί τη βέλτιστη λύση
-          για εσάς και την επιχείρησή σας. B2C & B2B.
+          Ένα e-shop δεν είναι απλώς ένας κατάλογος με καλάθι. Είναι το κατάστημά σου
+          που δουλεύει όλο το 24ωρο. Το στήνουμε σωστά από την αρχή: γρήγορο, εύχρηστο
+          στο κινητό και έτοιμο να φέρνει παραγγελίες — B2C ή B2B.
         </p>
-        <div class="eshop-hero__actions">
-          <a href="/contact" class="btn btn--primary btn--lg">Ξεκινήστε τώρα</a>
-          <a href="/services" class="btn btn--outline btn--lg">Όλες οι υπηρεσίες</a>
-        </div>
       </div>
 
       <!-- Platforms -->
@@ -104,8 +134,8 @@ const platforms = [
   <section class="eshop-features">
     <div class="container">
       <div class="reveal">
-        <SectionHeader title="Τι περιλαμβάνει" subtitle="E-shop Features">
-          Κάθε e-shop που φτιάχνουμε έρχεται με ένα πλήρες πακέτο δυνατοτήτων.
+        <SectionHeader title="Τι περιλαμβάνει" subtitle="E-shop">
+          Κάθε e-shop που φτιάχνουμε έρχεται με όσα χρειάζεσαι για να πουλάς — όχι με έξτρα που δεν θα χρησιμοποιήσεις ποτέ.
         </SectionHeader>
       </div>
 
@@ -124,15 +154,11 @@ const platforms = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <FaqSection items={faqItems} title="Συχνές ερωτήσεις για e-shop" />
+
   <!-- CTA -->
-  <CtaSection
-    title="Ξεκινήστε το E-shop σας σήμερα"
-    description="Η πρώτη συνάντηση είναι δωρεάν. Θα αναλύσουμε μαζί τις ανάγκες σας και θα σας προτείνουμε τη βέλτιστη λύση."
-    primaryLabel="Επικοινωνία"
-    primaryHref="/contact"
-    secondaryLabel="6977383488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -183,13 +209,6 @@ const platforms = [
     line-height: 1.75;
     opacity: 0.7;
     max-width: 460px;
-    margin-bottom: 2rem;
-  }
-
-  .eshop-hero__actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
   }
 
   .eshop-hero__platforms {

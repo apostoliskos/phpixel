@@ -1,96 +1,86 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CtaSection from '../components/CtaSection.astro';
+import PreFooterCta from '../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 
 const services = [
   {
     num: '01',
-    title: 'E-shop Creation',
-    tags: ['WooCommerce', 'Shopify', 'Custom'],
-    desc: 'Ολοκληρωμένες λύσεις ηλεκτρονικού εμπορίου προσαρμοσμένες στην επιχείρησή σας. Επιλογή πλατφόρμας, custom integrations και UX βελτιστοποιημένο για conversions.',
-    features: ['Επιλογή & ρύθμιση πλατφόρμας', 'Custom integrations & αυτοματισμοί', 'UX βελτιστοποιημένο για conversions'],
+    title: 'Κατασκευή E-shop',
+    tags: ['WooCommerce', 'Custom', 'CS-Cart'],
+    desc: 'Ηλεκτρονικά καταστήματα που μετατρέπουν επισκέπτες σε πελάτες. WooCommerce, custom ή CS-Cart — διαλέγουμε ό,τι ταιριάζει στο προϊόν σου, όχι ό,τι μας βολεύει.',
+    features: ['Σύνδεση με ERP, courier & Skroutz', 'Σχεδιασμός πρώτα για το κινητό', 'One-page checkout & ασφαλείς πληρωμές'],
     href: '/kataskevi-eshop',
     accent: 'var(--accent-emerald)',
   },
   {
     num: '02',
-    title: 'Website Building',
-    tags: ['Mobile-First', 'SEO-Ready', 'Fast'],
-    desc: 'Καθαρές, γρήγορες ιστοσελίδες με επίκεντρο τη μετατροπή. Mobile-first, SEO-ready και φτιαγμένες να αντιπροσωπεύουν το brand σας στο καλύτερό του.',
-    features: ['Responsive σχεδιασμός για κάθε συσκευή', 'Βελτιστοποιημένη απόδοση & ταχύτητα', 'CMS integration για εύκολη διαχείριση'],
+    title: 'Ιστοσελίδες & Landing Pages',
+    tags: ['Ταχύτητα', 'SEO-ready', 'Custom design'],
+    desc: 'Γρήγορες, καθαρές σελίδες που εξηγούν τι κάνεις και γιατί να σε διαλέξουν. Φτιαγμένες για να τις βρίσκει η Google.',
+    features: ['Custom σχεδιασμός πάνω στο brand σου', 'Φόρτωση χωρίς αναμονή', 'Εύκολη διαχείριση περιεχομένου'],
     href: '/kataskevi-istoselidon',
     accent: 'var(--accent-blue)',
   },
   {
     num: '03',
-    title: 'Digital Marketing',
-    tags: ['SEO', 'Google Ads', 'Social Media'],
-    desc: 'Στρατηγικό digital marketing που οδηγεί πραγματική επισκεψιμότητα και μετρήσιμα αποτελέσματα. SEO, Google Ads, social media και content strategy.',
-    features: ['Στοχευμένο SEO & έρευνα λέξεων-κλειδιών', 'Google Ads & πληρωμένες καμπάνιες', 'Στρατηγική social media & περιεχόμενο'],
+    title: 'SEO & AEO',
+    tags: ['On-page', 'Technical', 'AEO/GEO'],
+    desc: 'Να σε βρίσκουν όσοι σε ψάχνουν — στην Google και στα AI εργαλεία που πλέον προτείνουν προϊόντα και επιχειρήσεις.',
+    features: ['Τεχνική βάση & περιεχόμενο', 'Βελτιστοποίηση για AI αναζήτηση', 'Μηνιαίες αναφορές που καταλαβαίνεις'],
+    href: '/seo',
+    accent: 'var(--accent-violet)',
+  },
+  {
+    num: '04',
+    title: 'Email Marketing',
+    tags: ['Flows', 'Καλάθια', 'Newsletters'],
+    desc: 'Αυτόματα emails που φέρνουν πελάτες πίσω: εγκαταλελειμμένα καλάθια, newsletters, follow-ups. Δουλεύουν κι όταν κοιμάσαι.',
+    features: ['Εγκαταλελειμμένα καλάθια & welcome series', 'Newsletters με λόγο ύπαρξης', 'Σωστή τεχνική βάση & GDPR'],
+    href: '/email-marketing',
+    accent: 'var(--accent-amber)',
+  },
+  {
+    num: '05',
+    title: 'Google Ads & Social',
+    tags: ['Google Ads', 'Meta', 'Reporting'],
+    desc: 'Διαφήμιση με μετρήσιμο αποτέλεσμα. Ξέρεις τι ξοδεύεις — και τι σου φέρνει πίσω.',
+    features: ['Google Search & Shopping', 'Meta ads & remarketing', 'Μηνιαίο reporting χωρίς ορολογία'],
     href: '/diafimisi',
     accent: 'var(--accent-rose)',
   },
   {
-    num: '04',
-    title: 'Custom Web Apps',
-    tags: ['Εσωτερικά Εργαλεία', 'Πλατφόρμες', 'Scale'],
-    desc: 'Προσαρμοσμένες web εφαρμογές φτιαγμένες γύρω από τις ακριβείς ανάγκες σας — από εσωτερικά εργαλεία έως πλατφόρμες που κλιμακώνονται.',
-    features: ['Custom αυτοματισμοί workflow', 'Κλιμακούμενη αρχιτεκτονική cloud', 'API integrations & third-party συστήματα'],
+    num: '06',
+    title: 'Custom Εφαρμογές',
+    tags: ['Αυτοματισμοί', 'API', 'Dashboards'],
+    desc: 'Όταν τα έτοιμα δεν φτάνουν: εφαρμογές, dashboards και συνδέσεις με ERP, φτιαγμένα στα μέτρα σου.',
+    features: ['Αυτοματισμοί που κόβουν χειροκίνητη δουλειά', 'Συνδέσεις συστημάτων (ERP, λογιστικό, courier)', 'Dashboards με τα νούμερα που μετράνε'],
     href: '/software-development',
     accent: 'var(--accent-violet)',
-  },
-  {
-    num: '05',
-    title: 'Hosting & Maintenance',
-    tags: ['Cloud', 'Security', '24/7'],
-    desc: 'Managed cloud hosting, ασφάλεια, αυτόματα backups και 24/7 τεχνική υποστήριξη. Εσείς εστιάζετε στην επιχείρηση, εμείς στην τεχνολογία.',
-    features: ['Managed cloud servers', 'SSL & security monitoring', '24/7 υποστήριξη & backups'],
-    href: '/services',
-    accent: 'var(--accent-amber)',
   },
 ];
 ---
 
 <BaseLayout
-  title="Υπηρεσίες — Phpixel"
-  description="E-shop creation, website building, digital marketing, custom web apps, hosting & maintenance. Ολοκληρωμένες ψηφιακές λύσεις από την Phpixel."
+  title="Υπηρεσίες — Κατασκευή E-shop, Ιστοσελίδες, SEO, Email Marketing | phpixel"
+  description="Οι υπηρεσίες της phpixel: κατασκευή e-shop και ιστοσελίδων, SEO & AEO, email marketing, Google Ads & Social και custom εφαρμογές. Ό,τι χρειάζεσαι για να πουλάς online."
 >
-
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json" is:inline>
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Phpixel",
-    "url": "https://phpixel.gr",
-    "description": "Digital agency offering ecommerce solutions, web design, digital marketing, and custom web applications.",
-    "areaServed": "GR",
-    "serviceType": [
-      "Ecommerce Development",
-      "Website Creation",
-      "Digital Marketing",
-      "Custom Web Applications",
-      "Hosting & Maintenance"
-    ]
-  }
-  </script>
 
   <!-- ── HERO ── -->
   <section class="svc-hero">
     <div class="svc-hero__bg"></div>
     <div class="container svc-hero__inner">
       <div class="svc-hero__content reveal">
-        <span class="svc-hero__badge">Phpixel Services</span>
+        <span class="svc-hero__badge">Υπηρεσίες</span>
         <h1 class="svc-hero__title">
-          Ψηφιακές λύσεις<br />
-          <span class="svc-hero__accent">που αποδίδουν.</span>
+          Ό,τι χρειάζεσαι<br />
+          <span class="svc-hero__accent">για να πουλάς online.</span>
         </h1>
         <p class="svc-hero__sub">
-          Από το πρώτο pixel μέχρι την ολοκλήρωση — σχεδιάζουμε, αναπτύσσουμε
-          και προωθούμε ψηφιακές εμπειρίες που μετρούνται σε αποτελέσματα.
+          Από το πρώτο e-shop μέχρι τη διαφήμιση και τα αυτόματα emails —
+          στήνουμε, τρέχουμε και φροντίζουμε την online παρουσία σου.
+          Και μένουμε δίπλα σου μετά.
         </p>
-        <a href="/contact" class="btn btn--primary btn--lg">Ξεκινήστε σήμερα</a>
       </div>
     </div>
   </section>
@@ -122,7 +112,7 @@ const services = [
               ))}
             </ul>
             <a href={s.href} class="svc-row__link">
-              Μάθετε περισσότερα
+              Μάθε περισσότερα
               <Icon name="ic:baseline-arrow-forward" class="link-arrow" />
             </a>
           </div>
@@ -131,40 +121,37 @@ const services = [
     </div>
   </section>
 
+  <!-- ── HOSTING & CARE (πρώην /hosting) ── -->
+  <section class="svc-care" id="hosting">
+    <div class="container svc-care__inner reveal">
+      <h2>Φιλοξενία & φροντίδα</h2>
+      <p>
+        Δεν πουλάμε hosting σκέτο. Αναλαμβάνουμε όμως τη φροντίδα των sites που
+        φτιάχνουμε: φιλοξενία, ενημερώσεις, backups και ασφάλεια, με πακέτα
+        υποστήριξης — ώστε να έχεις πάντα έναν άνθρωπο να παίρνει τηλέφωνο.
+      </p>
+    </div>
+  </section>
+
   <!-- ── STATS ── -->
   <section class="svc-stats reveal">
     <div class="container svc-stats__inner">
       <div class="svc-stat">
-        <span class="svc-stat__num">50+</span>
-        <span class="svc-stat__label">Ολοκληρωμένα projects</span>
+        <span class="svc-stat__label-big">10+ χρόνια στο e-commerce</span>
       </div>
       <div class="svc-stats__divider" aria-hidden="true"></div>
       <div class="svc-stat">
-        <span class="svc-stat__num">5+</span>
-        <span class="svc-stat__label">Χρόνια εμπειρίας</span>
+        <span class="svc-stat__label-big">Μιλάς με αυτόν που γράφει τον κώδικα</span>
       </div>
       <div class="svc-stats__divider" aria-hidden="true"></div>
       <div class="svc-stat">
-        <span class="svc-stat__num">100%</span>
-        <span class="svc-stat__label">Αφοσίωση στον πελάτη</span>
-      </div>
-      <div class="svc-stats__divider" aria-hidden="true"></div>
-      <div class="svc-stat">
-        <span class="svc-stat__num">24/7</span>
-        <span class="svc-stat__label">Υποστήριξη & monitoring</span>
+        <span class="svc-stat__label-big">Απάντηση εντός μίας εργάσιμης</span>
       </div>
     </div>
   </section>
 
   <!-- ── CTA ── -->
-  <CtaSection
-    title="Ας Δουλέψουμε Μαζί"
-    description="Έχετε ένα project στο μυαλό σας; Επικοινωνήστε μαζί μας σήμερα και ας μετατρέψουμε την ιδέα σας σε πραγματικότητα."
-    primaryLabel="Επικοινωνία"
-    primaryHref="/contact"
-    secondaryLabel="6977383488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -366,6 +353,27 @@ const services = [
     height: 16px;
   }
 
+  /* HOSTING & CARE */
+  .svc-care {
+    padding: var(--section-padding);
+  }
+
+  .svc-care__inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .svc-care__inner h2 {
+    margin-bottom: 1rem;
+  }
+
+  .svc-care__inner p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.7;
+  }
+
   /* STATS */
   .svc-stats {
     background: var(--theme-surface-1);
@@ -388,23 +396,10 @@ const services = [
     text-align: center;
   }
 
-  .svc-stat__num {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .svc-stat__label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    opacity: 0.5;
+  .svc-stat__label-big {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   .svc-stats__divider {

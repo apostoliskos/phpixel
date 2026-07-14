@@ -2,90 +2,117 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import CtaSection from '../components/CtaSection.astro';
-import { Icon } from 'astro-icon/components';
+import PreFooterCta from '../components/PreFooterCta.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ServiceSchema from '../components/schema/ServiceSchema.astro';
 
 const features = [
   {
     icon: 'ic:baseline-web',
-    title: 'Custom Design',
-    desc: 'Μοναδικός σχεδιασμός προσαρμοσμένος στο brand σας — χωρίς templates, χωρίς συμβιβασμούς.',
+    title: 'Custom σχεδιασμός',
+    desc: 'Σχεδιασμός πάνω στο brand σου — όχι έτοιμο template που έχουν άλλοι πενήντα.',
     accent: 'var(--accent-blue)',
   },
   {
     icon: 'ic:baseline-devices',
-    title: 'Responsive Layout',
-    desc: 'Πλήρης προσαρμογή σε κάθε συσκευή — desktop, tablet και κινητό, για μέγιστη εμπειρία χρήστη.',
+    title: 'Σε κάθε συσκευή',
+    desc: 'Δουλεύει σωστά παντού: κινητό, tablet, desktop. Εκεί που σε βλέπουν οι πελάτες σου.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-speed',
-    title: 'Ultra-Fast Loading',
-    desc: 'Βελτιστοποιημένη ταχύτητα φόρτωσης με σύγχρονες τεχνολογίες για κορυφαία απόδοση.',
+    title: 'Ταχύτητα',
+    desc: 'Σελίδες που φορτώνουν αστραπιαία. Ο επισκέπτης δεν περιμένει — και η Google το μετράει.',
     accent: 'var(--accent-emerald)',
   },
   {
     icon: 'ic:baseline-search',
-    title: 'SEO Ready',
-    desc: 'On-page SEO, meta tags, schema markup και βελτιστοποίηση ώστε να σας βρίσκουν οι πελάτες σας.',
+    title: 'SEO-ready',
+    desc: 'Δομή, meta δεδομένα και schema στημένα από την πρώτη μέρα, για να σε βρίσκουν όσοι σε ψάχνουν.',
     accent: 'var(--accent-amber)',
   },
   {
     icon: 'ic:baseline-touch-app',
-    title: 'CTA Optimization',
-    desc: 'Στρατηγική τοποθέτηση call-to-action στοιχείων για μέγιστη μετατροπή επισκεπτών σε πελάτες.',
+    title: 'Καθαρά calls-to-action',
+    desc: 'Κάθε σελίδα οδηγεί κάπου: σε κλήση, ραντεβού ή αγορά. Όχι απλώς μια «ωραία σελίδα».',
     accent: 'var(--accent-rose)',
   },
   {
     icon: 'ic:baseline-analytics',
-    title: 'Analytics Integration',
-    desc: 'Σύνδεση με Google Analytics, Facebook Pixel και conversion tracking για μέτρηση αποτελεσμάτων.',
+    title: 'Μετρήσεις από την αρχή',
+    desc: 'Google Analytics και μέτρηση conversions στημένα από το launch. Ξέρεις τι δουλεύει και τι όχι.',
     accent: 'var(--accent-blue)',
   },
   {
     icon: 'ic:baseline-edit',
-    title: 'A/B Testing Ready',
-    desc: 'Δυνατότητα δοκιμών A/B σε headlines, CTAs και layout για συνεχή βελτιστοποίηση conversion rate.',
+    title: 'Έτοιμο για A/B δοκιμές',
+    desc: 'Δοκιμές σε τίτλους και κουμπιά, ώστε η σελίδα να βελτιώνεται με δεδομένα — όχι με εικασίες.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-integration-instructions',
-    title: 'Form & CRM Integration',
-    desc: 'Σύνδεση φορμών με το CRM σας, email marketing platforms και αυτοματοποίηση follow-up.',
+    title: 'Φόρμες & CRM',
+    desc: 'Οι φόρμες σου συνδέονται με το CRM ή το email εργαλείο σου. Κανένα μήνυμα δεν χάνεται.',
     accent: 'var(--accent-emerald)',
   },
 ];
 
 const pageTypes = [
-  { name: 'Lead Generation', desc: 'Σελίδες συλλογής leads για υπηρεσίες και B2B' },
-  { name: 'Product Launch', desc: 'Landing pages για παρουσίαση νέων προϊόντων' },
-  { name: 'Event & Promo', desc: 'Σελίδες για events, προσφορές και campaigns' },
+  {
+    name: 'Lead Generation',
+    desc: 'Σελίδες που μαζεύουν αιτήματα και ραντεβού — για υπηρεσίες και B2B.',
+  },
+  {
+    name: 'Product Launch',
+    desc: 'Landing pages που παρουσιάζουν ένα νέο προϊόν καθαρά και το κάνουν εύκολο να αγοραστεί.',
+  },
+  {
+    name: 'Event & Promo',
+    desc: 'Σελίδες για events, προσφορές και καμπάνιες — με έναν στόχο τη φορά.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Πόσο κοστίζει μια ιστοσελίδα;',
+    a: 'Εξαρτάται από το μέγεθος και το τι πρέπει να κάνει: πόσες σελίδες, πόσο custom ο σχεδιασμός, φόρμες, κρατήσεις, πολλές γλώσσες. Θα σου πούμε καθαρά τι χρειάζεσαι — και τι μπορείς να αφήσεις για αργότερα. Παίρνεις αναλυτική προσφορά χωρίς κρυφά κόστη.',
+  },
+  {
+    q: 'Σε πόσο καιρό θα είναι έτοιμη;',
+    a: 'Συνήθως 2–4 εβδομάδες, ανάλογα με το περιεχόμενο και τον αριθμό των σελίδων. Θα έχεις preview link από νωρίς, για να βλέπεις την πρόοδο — όχι έκπληξη στο τέλος.',
+  },
+  {
+    q: 'Θα μπορώ να αλλάζω μόνος μου κείμενα και εικόνες;',
+    a: 'Ναι. Παραδίδουμε το site με εύχρηστο σύστημα διαχείρισης και σου δείχνουμε πώς να κάνεις τις αλλαγές μόνος σου. Κι αν κολλήσεις, είμαστε ένα μήνυμα μακριά.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="Κατασκευή Landing Pages — Phpixel | Ιστοσελίδες Υψηλής Μετατροπής"
-  description="Κατασκευή landing pages και ιστοσελίδων υψηλής μετατροπής. Custom design, ultra-fast loading και CTA optimization για μέγιστο conversion rate."
+  title="Κατασκευή Ιστοσελίδων & Landing Pages | phpixel"
+  description="Γρήγορες, καθαρές ιστοσελίδες και landing pages που εξηγούν τι κάνεις και φέρνουν πελάτες. Custom σχεδιασμός και SEO από την πρώτη γραμμή κώδικα."
 >
+  <ServiceSchema
+    serviceType="Κατασκευή Ιστοσελίδων & Landing Pages"
+    description="Γρήγορες, καθαρές ιστοσελίδες και landing pages με custom σχεδιασμό και SEO από την πρώτη γραμμή κώδικα."
+  />
 
   <!-- Hero -->
   <section class="lp-hero">
     <div class="lp-hero__bg"></div>
     <div class="container lp-hero__inner">
       <div class="lp-hero__content reveal">
-        <span class="lp-badge">Web Design & Landing Pages</span>
+        <span class="lp-badge">Ιστοσελίδες</span>
         <h1>
           Ιστοσελίδες &<br />
           <span class="accent-text">Landing Pages</span>
         </h1>
         <p class="lp-hero__sub">
-          Σχεδιάζουμε ιστοσελίδες και landing pages που μετατρέπουν
-          επισκέπτες σε πελάτες. Conversion-focused design με μετρήσιμα αποτελέσματα.
+          Η ιστοσελίδα σου είναι συχνά η πρώτη εντύπωση — και δεν υπάρχει δεύτερη
+          ευκαιρία γι’ αυτήν. Φτιάχνουμε σελίδες που φορτώνουν αστραπιαία, δείχνουν
+          καθαρά τι προσφέρεις και οδηγούν τον επισκέπτη εκεί που θες: σε επικοινωνία,
+          ραντεβού ή αγορά.
         </p>
-        <div class="lp-hero__actions">
-          <a href="/contact" class="btn btn--primary btn--lg">Ξεκινήστε τώρα</a>
-          <a href="/services" class="btn btn--outline btn--lg">Όλες οι υπηρεσίες</a>
-        </div>
       </div>
 
       <!-- Page Types -->
@@ -104,8 +131,8 @@ const pageTypes = [
   <section class="lp-features">
     <div class="container">
       <div class="reveal">
-        <SectionHeader title="Τι περιλαμβάνει" subtitle="Landing Page Features">
-          Κάθε σελίδα που δημιουργούμε είναι σχεδιασμένη για μέγιστη απόδοση και conversion.
+        <SectionHeader title="Τι περιλαμβάνει" subtitle="Ιστοσελίδες & Landing Pages">
+          Κάθε σελίδα που φτιάχνουμε έχει έναν σκοπό: να φέρνει πελάτες — όχι απλώς επισκέψεις.
         </SectionHeader>
       </div>
 
@@ -124,15 +151,11 @@ const pageTypes = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <FaqSection items={faqItems} title="Συχνές ερωτήσεις για ιστοσελίδες" />
+
   <!-- CTA -->
-  <CtaSection
-    title="Ετοιμάστε τη σελίδα που θα κάνει τη διαφορά"
-    description="Η πρώτη συνάντηση είναι δωρεάν. Θα αναλύσουμε τους στόχους σας και θα σχεδιάσουμε τη σελίδα που θα αυξήσει τα conversions σας."
-    primaryLabel="Επικοινωνία"
-    primaryHref="/contact"
-    secondaryLabel="6977383488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -183,13 +206,6 @@ const pageTypes = [
     line-height: 1.75;
     opacity: 0.7;
     max-width: 460px;
-    margin-bottom: 2rem;
-  }
-
-  .lp-hero__actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
   }
 
   .lp-hero__platforms {
