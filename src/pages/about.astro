@@ -1,36 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import CtaSection from '../components/CtaSection.astro';
+import PreFooterCta from '../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
+import { SHOW_TEAM } from '../config';
+import { publicImageExists } from '../utils/publicImages';
 
 const values = [
   {
     icon: 'ic:baseline-speed',
-    title: 'Performance First',
-    desc: 'Κάθε project βελτιστοποιημένο για ταχύτητα. Γρήγορα sites = ευτυχισμένοι πελάτες + καλύτερο SEO.',
+    title: 'Ταχύτητα πρώτα',
+    desc: 'Γρήγορο site σημαίνει καλύτερη εμπειρία, καλύτερο SEO και περισσότερες πωλήσεις. Το μετράμε σε κάθε παράδοση.',
   },
   {
     icon: 'ic:baseline-handshake',
-    title: 'Συνεργασία',
-    desc: 'Δουλεύουμε μαζί σας σε κάθε βήμα. Διαφάνεια, επικοινωνία και σεβασμός στο timeline.',
+    title: 'Ειλικρίνεια',
+    desc: 'Αν κάτι δεν πρόκειται να λειτουργήσει για την επιχείρησή σου, θα σου το πούμε. Προτιμάμε μια ειλικρινή συμβουλή από μια εύκολη πώληση.',
   },
   {
     icon: 'ic:baseline-trending-up',
-    title: 'Αποτελέσματα',
-    desc: 'Δεν φτιάχνουμε απλά websites — φτιάχνουμε εργαλεία που φέρνουν πελάτες και πωλήσεις.',
+    title: 'Αποτελέσματα, όχι εντυπώσεις',
+    desc: 'Δεν φτιάχνουμε «όμορφα» sites που δεν πουλάνε. Κάθε απόφαση κρίνεται από το αν φέρνει πελάτες.',
   },
   {
     icon: 'ic:baseline-support-agent',
-    title: 'Ongoing Support',
-    desc: 'Η σχέση μας δεν τελειώνει στο launch. Συνεχής υποστήριξη, updates και monitoring.',
+    title: 'Δεν εξαφανιζόμαστε',
+    desc: 'Η σχέση δεν τελειώνει στο launch. Ενημερώσεις, βελτιώσεις, ένας άνθρωπος που σηκώνει το τηλέφωνο.',
   },
 ];
+
+const founderImage = '/images/about-founder.webp';
+const founderImageExists = publicImageExists(founderImage);
 ---
 
 <BaseLayout
-  title="About — Phpixel | Ποιοι Είμαστε"
-  description="Η Phpixel είναι ένα digital agency με έδρα την Ελλάδα. Κατασκευή e-shop, ιστοσελίδων, custom web apps και digital marketing."
+  title="Ποιοι Είμαστε | phpixel"
+  description="Η phpixel είναι μικρή — επίτηδες. Ένας σταθερός υπεύθυνος ανά project, πάνω από δέκα χρόνια στο e-commerce, χωρίς ενδιάμεσους. Μιλάς με αυτόν που φτιάχνει τη δουλειά."
 >
 
   <!-- Hero -->
@@ -38,14 +43,14 @@ const values = [
     <div class="about-hero__bg"></div>
     <div class="container about-hero__inner">
       <div class="about-hero__content reveal">
-        <span class="about-hero__badge">About Us</span>
+        <span class="about-hero__badge">Σχετικά</span>
         <h1>
-          Δημιουργούμε ψηφιακές<br />
-          <span class="accent-text">εμπειρίες που μετρούν.</span>
+          Άνθρωποι,<br />
+          <span class="accent-text">όχι τμήματα.</span>
         </h1>
         <p class="about-hero__sub">
-          Είμαστε μια ομάδα developers, designers και στρατηγικών που πιστεύουν
-          ότι η τεχνολογία πρέπει να δουλεύει για τον πελάτη — όχι το αντίστροφο.
+          Η phpixel είναι μικρή — επίτηδες. Χωρίς ενδιάμεσους project managers,
+          χωρίς tickets. Μιλάς με αυτόν που φτιάχνει τη δουλειά.
         </p>
       </div>
     </div>
@@ -55,40 +60,86 @@ const values = [
   <section class="about-story">
     <div class="container about-story__inner">
       <div class="about-story__text reveal">
-        <SectionHeader title="Η Ιστορία μας" subtitle="Our Story" align="left" />
+        <SectionHeader title="Η Ιστορία μας" subtitle="Πώς ξεκίνησε" align="left" />
         <p>
-          Η Phpixel ξεκίνησε με ένα απλό όραμα: να βοηθήσει ελληνικές επιχειρήσεις
-          να αποκτήσουν ισχυρή ψηφιακή παρουσία χωρίς να χρειαστεί να γίνουν ειδικοί
-          στην τεχνολογία. Από τότε, έχουμε δουλέψει με δεκάδες businesses — από μικρά
-          καταστήματα μέχρι μεγάλες εταιρείες.
+          Η phpixel ξεκίνησε από έναν άνθρωπο με πάνω από δέκα χρόνια μέσα στο
+          e-commerce — πρώτα χτίζοντας και συντηρώντας μεγάλα ηλεκτρονικά καταστήματα
+          ως developer, μετά δίπλα σε ελληνικές επιχειρήσεις που ήθελαν να πουλήσουν
+          online χωρίς να γίνουν τεχνικοί.
         </p>
         <p>
-          Χρησιμοποιούμε τις πιο σύγχρονες τεχνολογίες (Astro, Next.js, React, Shopify)
-          και εστιάζουμε πάντα στην απόδοση, τη χρηστικότητα και τα μετρήσιμα αποτελέσματα.
+          Σήμερα δουλεύουμε έτσι: σε κάθε project υπάρχει ένας σταθερός υπεύθυνος —
+          ο ίδιος από την πρώτη κουβέντα μέχρι το launch και μετά. Ανάλογα με το τι
+          χρειάζεται η δουλειά, μπαίνουν στην ομάδα επιλεγμένοι συνεργάτες: designer,
+          marketer, κειμενογράφος. Πληρώνεις για δουλειά, όχι για οργανόγραμμα.
         </p>
       </div>
       <div class="about-story__stats reveal" style="transition-delay: 0.2s">
         <div class="stat-card">
-          <span class="stat-card__num">50+</span>
-          <span class="stat-card__label">Projects</span>
+          <span class="stat-card__text">10+ χρόνια στο e-commerce</span>
         </div>
         <div class="stat-card">
-          <span class="stat-card__num">5+</span>
-          <span class="stat-card__label">Χρόνια</span>
+          <span class="stat-card__text">Σε όλη την Ελλάδα</span>
         </div>
         <div class="stat-card">
-          <span class="stat-card__num">100%</span>
-          <span class="stat-card__label">Αφοσίωση</span>
+          <span class="stat-card__text">Ένας υπεύθυνος ανά project</span>
         </div>
       </div>
     </div>
   </section>
 
+  {SHOW_TEAM && (
+    <!-- Team — ενεργοποιείται με SHOW_TEAM στο src/config.ts -->
+    <section class="about-team">
+      <div class="container">
+        <div class="reveal">
+          <SectionHeader title="Η Ομάδα" subtitle="Ποιοι δουλεύουν στο project σου" />
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            {founderImageExists ? (
+              <img
+                src={founderImage}
+                alt="Ο ιδρυτής της phpixel"
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                class="team-card__photo"
+              />
+            ) : (
+              <div class="team-card__photo team-card__photo--placeholder" aria-hidden="true">
+                <Icon name="ic:baseline-person" />
+              </div>
+            )}
+            <h3>Αποστόλης Κωστόπουλος — Ιδρυτής</h3>
+            <p>10+ χρόνια στο e-commerce</p>
+          </div>
+          <!-- TODO: συμπλήρωσε τους συνεργάτες πριν ενεργοποιήσεις το SHOW_TEAM -->
+          <div class="team-card team-card--todo reveal">
+            <div class="team-card__photo team-card__photo--placeholder" aria-hidden="true">
+              <Icon name="ic:baseline-person" />
+            </div>
+            <h3>[Όνομα συνεργάτη]</h3>
+            <p>[Ρόλος — π.χ. Designer]</p>
+          </div>
+          <div class="team-card team-card--todo reveal">
+            <div class="team-card__photo team-card__photo--placeholder" aria-hidden="true">
+              <Icon name="ic:baseline-person" />
+            </div>
+            <h3>[Όνομα συνεργάτη]</h3>
+            <p>[Ρόλος — π.χ. Marketer]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Values -->
   <section class="about-values">
     <div class="container">
       <div class="reveal">
-        <SectionHeader title="Τι Μας Ξεχωρίζει" subtitle="Our Values" />
+        <SectionHeader title="Τι Μας Ξεχωρίζει" subtitle="Οι αξίες μας" />
       </div>
       <div class="values-grid">
         {values.map((v, i) => (
@@ -105,14 +156,7 @@ const values = [
   </section>
 
   <!-- CTA -->
-  <CtaSection
-    title="Θέλετε να δουλέψουμε μαζί;"
-    description="Μιλήστε μας για το project σας. Η πρώτη συζήτηση είναι πάντα δωρεάν."
-    primaryLabel="Επικοινωνία"
-    primaryHref="/contact"
-    secondaryLabel="Οι υπηρεσίες μας"
-    secondaryHref="/services"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -188,7 +232,7 @@ const values = [
   }
 
   .stat-card {
-    padding: 2rem;
+    padding: 1.75rem 2rem;
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
@@ -196,24 +240,63 @@ const values = [
     text-align: center;
   }
 
-  .stat-card__num {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 900;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
+  .stat-card__text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Team */
+  .about-team {
+    padding: var(--section-padding);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    text-align: center;
+  }
+
+  .team-card__photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--theme-shape-radius);
+    margin-bottom: 1rem;
+  }
+
+  .team-card__photo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--theme-surface-2) 0%, var(--theme-surface-1) 100%);
+  }
+
+  .team-card__photo--placeholder svg,
+  .team-card__photo--placeholder [data-icon] {
+    width: 48px;
+    height: 48px;
+    opacity: 0.2;
+  }
+
+  .team-card h3 {
+    font-size: 1.05rem;
     margin-bottom: 0.25rem;
   }
 
-  .stat-card__label {
-    font-size: 0.85rem;
-    font-weight: 500;
+  .team-card p {
+    font-size: 0.9rem;
     opacity: 0.6;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  }
+
+  .team-card--todo {
+    opacity: 0.55;
   }
 
   /* Values */
@@ -273,12 +356,12 @@ const values = [
 
   @media (max-width: 768px) {
     .about-story__inner { grid-template-columns: 1fr; gap: 2rem; }
-    .about-story__stats { grid-template-columns: repeat(3, 1fr); }
+    .about-story__stats { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
     .values-grid { grid-template-columns: 1fr; }
-    .about-story__stats { grid-template-columns: 1fr; }
   }
 </style>

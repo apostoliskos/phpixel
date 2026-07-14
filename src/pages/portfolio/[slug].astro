@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CtaSection from '../../components/CtaSection.astro';
+import PreFooterCta from '../../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 import { projects, type Project } from '../../data/portfolio';
 
@@ -27,7 +27,7 @@ const next = projects[(idx + 1) % projects.length];
 ---
 
 <BaseLayout
-  title={`${project.name} — Case Study | Phpixel`}
+  title={`${project.name} — Case Study | phpixel`}
   description={project.tagline}
   image={project.hero}
   darkHero={true}
@@ -42,7 +42,7 @@ const next = projects[(idx + 1) % projects.length];
     image: project.hero,
     creator: {
       '@type': 'Organization',
-      name: 'Phpixel',
+      name: 'phpixel',
       url: 'https://phpixel.gr',
     },
     dateCreated: `${project.year}`,
@@ -77,12 +77,9 @@ const next = projects[(idx + 1) % projects.length];
               class="btn btn--primary btn--lg cs-hero__cta"
             >
               <Icon name="ic:baseline-launch" class="btn-icon" />
-              Επισκεφθείτε το site
+              Δες το site live
             </a>
           )}
-          <a href="/contact" class="btn btn--outline btn--lg cs-hero__cta cs-hero__cta--ghost">
-            Παρόμοιο project;
-          </a>
         </div>
       </div>
     </div>
@@ -162,8 +159,8 @@ const next = projects[(idx + 1) % projects.length];
           <span class="cs-eyebrow">Τι κάναμε</span>
           <h2 class="cs-h2">Υπηρεσίες & τεχνολογίες.</h2>
           <p class="cs-sub">
-            Από τη στρατηγική και τον σχεδιασμό μέχρι το launch — ολοκληρωμένη
-            ψηφιακή λύση χωρίς διασκορπισμένα tools.
+            Από τη στρατηγική και τον σχεδιασμό μέχρι το launch — όλα από μία
+            ομάδα, χωρίς διασκορπισμένα tools.
           </p>
         </div>
         <div class="cs-twocol__right reveal">
@@ -191,7 +188,7 @@ const next = projects[(idx + 1) % projects.length];
       <div class="container">
         <div class="cs-gallery__head reveal">
           <span class="cs-eyebrow">Gallery</span>
-          <h2 class="cs-h2">Δείτε το από κοντά.</h2>
+          <h2 class="cs-h2">Δες το από κοντά.</h2>
         </div>
         <div class="cs-gallery__grid">
           {project.gallery.map((g, i) => (
@@ -246,14 +243,7 @@ const next = projects[(idx + 1) % projects.length];
   </section>
 
   <!-- ============== CTA ============== -->
-  <CtaSection
-    title="Έτοιμοι να ξεκινήσουμε το δικό σας;"
-    description="Πείτε μας λίγα λόγια για την επιχείρησή σας — θα σας απαντήσουμε με συγκεκριμένα επόμενα βήματα και τιμολόγηση."
-    primaryLabel="Ζητήστε προσφορά"
-    primaryHref="/contact"
-    secondaryLabel="697 738 3488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 </BaseLayout>
 
 <style>

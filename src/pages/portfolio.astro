@@ -1,24 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CtaSection from '../components/CtaSection.astro';
+import PreFooterCta from '../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 import { projects } from '../data/portfolio';
+import { publicImageExists } from '../utils/publicImages';
 
 // Συγκεντρώνουμε τα distinct filters από τα ίδια τα data
 const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.category)))];
 ---
 
 <BaseLayout
-  title="Portfolio — Phpixel | Έργα ιστοσελίδων & e-shop"
-  description="Δείτε ένα δείγμα από τα projects μας: e-shops, ιστοσελίδες και custom web apps για ελληνικές επιχειρήσεις. Πραγματικά αποτελέσματα, μετρήσιμη απόδοση."
+  title="Portfolio — Έργα Ιστοσελίδων & E-shop | phpixel"
+  description="Δες ένα δείγμα από τα projects μας: e-shops, ιστοσελίδες και custom εφαρμογές για ελληνικές επιχειρήσεις. Όλα live — μπες και δες τα μόνος σου."
 >
   <!-- Schema.org JSON-LD: CollectionPage -->
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Phpixel Portfolio',
+    name: 'phpixel Portfolio',
     url: 'https://phpixel.gr/portfolio',
-    description: 'Έργα ιστοσελίδων, e-shop και web apps της Phpixel.',
+    description: 'Έργα ιστοσελίδων, e-shop και web εφαρμογών της phpixel.',
     hasPart: projects.map((p) => ({
       '@type': 'CreativeWork',
       name: p.name,
@@ -35,28 +36,13 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
       <div class="pf-hero__content reveal">
         <span class="pf-hero__badge">Portfolio</span>
         <h1 class="pf-hero__title">
-          Έργα που μιλούν<br />
-          <span class="pf-hero__accent">από μόνα τους.</span>
+          Δουλειές που μιλάνε<br />
+          <span class="pf-hero__accent">μόνες τους.</span>
         </h1>
         <p class="pf-hero__sub">
-          Από premium portfolio sites μέχρι μεγάλα e-shops με χιλιάδες προϊόντα —
-          κάθε project σχεδιάζεται γύρω από έναν στόχο: μετρήσιμα αποτελέσματα.
+          Από premium sites μέχρι e-shops με μεγάλους καταλόγους — κάθε project
+          είναι live. Μπες, δες το, κρίνε μόνος σου.
         </p>
-
-        <div class="pf-hero__stats">
-          <div class="pf-stat">
-            <span class="pf-stat__num">{projects.length}+</span>
-            <span class="pf-stat__label">Live projects</span>
-          </div>
-          <div class="pf-stat">
-            <span class="pf-stat__num">5+</span>
-            <span class="pf-stat__label">Χρόνια εμπειρίας</span>
-          </div>
-          <div class="pf-stat">
-            <span class="pf-stat__num">98</span>
-            <span class="pf-stat__label">Μ.Ο. PageSpeed Score</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -82,57 +68,75 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
   <section class="pf-grid-section" aria-label="Λίστα έργων">
     <div class="container">
       <div class="pf-grid" id="pf-grid">
-        {projects.map((p, idx) => (
-          <a
-            href={`/portfolio/${p.slug}`}
-            class="pf-card reveal"
-            data-category={p.category}
-            style={`--pf-accent: ${p.accent}; --pf-delay: ${idx * 80}ms`}
-            aria-label={`Δείτε το case study: ${p.name}`}
-          >
-            <div class="pf-card__media">
-              <img
-                src={p.thumb}
-                alt={`Screenshot — ${p.name}`}
-                loading={idx < 2 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
-              <div class="pf-card__overlay">
-                <span class="pf-card__cta">
-                  Δείτε το case study
-                  <Icon name="ic:baseline-arrow-forward" class="pf-card__arrow" />
-                </span>
-              </div>
-              <span class="pf-card__category">{p.category}</span>
-            </div>
+        {projects.map((p, idx) => {
+          const src =
+            p.image && publicImageExists(p.image)
+              ? p.image
+              : publicImageExists(p.thumb)
+                ? p.thumb
+                : null;
+          return (
+            <div
+              id={p.anchor}
+              class="pf-card reveal"
+              data-category={p.category}
+              style={`--pf-accent: ${p.accent}; --pf-delay: ${idx * 80}ms`}
+            >
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener"
+                class="pf-card__media"
+                aria-label={`Δες το site της ${p.name} (ανοίγει σε νέα καρτέλα)`}
+              >
+                {src ? (
+                  <img
+                    src={src}
+                    alt={p.imageAlt ?? `Screenshot — ${p.name}`}
+                    width="1200"
+                    height="900"
+                    loading={idx < 2 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="pf-card__placeholder" aria-hidden="true">
+                    <Icon name="ic:baseline-image" />
+                  </div>
+                )}
+                <div class="pf-card__overlay">
+                  <span class="pf-card__cta">
+                    Δες το site live
+                    <Icon name="ic:baseline-launch" class="pf-card__arrow" />
+                  </span>
+                </div>
+                <span class="pf-card__category">{p.category}</span>
+              </a>
 
-            <div class="pf-card__body">
-              <div class="pf-card__head">
-                <h3 class="pf-card__title">{p.name}</h3>
-                <span class="pf-card__year">{p.year}</span>
-              </div>
-              <p class="pf-card__tagline">{p.tagline}</p>
-              <div class="pf-card__tags">
-                {p.tags.slice(0, 4).map((t) => (
-                  <span class="pf-chip">{t}</span>
-                ))}
+              <div class="pf-card__body">
+                <div class="pf-card__head">
+                  <h3 class="pf-card__title">{p.name}</h3>
+                  <span class="pf-card__year">{p.year}</span>
+                </div>
+                <p class="pf-card__tagline">{p.tagline}</p>
+                <div class="pf-card__tags">
+                  {p.tags.slice(0, 4).map((t) => (
+                    <span class="pf-chip">{t}</span>
+                  ))}
+                </div>
+                <a href={`/portfolio/${p.slug}`} class="pf-card__case-link">
+                  Δες το case study
+                  <Icon name="ic:baseline-arrow-forward" class="pf-card__arrow" />
+                </a>
               </div>
             </div>
-          </a>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
 
   <!-- ============== CTA ============== -->
-  <CtaSection
-    title="Έχετε project στο μυαλό σας;"
-    description="Πείτε μας λίγα λόγια για την ιδέα σας και θα σας στείλουμε εξατομικευμένη πρόταση μέσα σε 48 ώρες."
-    primaryLabel="Ζητήστε προσφορά"
-    primaryHref="/contact"
-    secondaryLabel="697 738 3488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 </BaseLayout>
 
 <!-- =========================================================== -->
@@ -353,9 +357,26 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
   /* MEDIA */
   .pf-card__media {
     position: relative;
+    display: block;
     aspect-ratio: 4 / 3;
     overflow: hidden;
     background: var(--theme-surface-1);
+  }
+
+  .pf-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--theme-surface-2) 0%, var(--theme-surface-1) 100%);
+  }
+
+  .pf-card__placeholder svg,
+  .pf-card__placeholder [data-icon] {
+    width: 36px;
+    height: 36px;
+    opacity: 0.15;
   }
 
   .pf-card__media img {
@@ -482,6 +503,21 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
     background: var(--theme-surface-1);
     color: var(--theme-on-bg);
     opacity: 0.75;
+  }
+
+  .pf-card__case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    transition: var(--theme-transition);
+  }
+
+  .pf-card__case-link:hover {
+    gap: 0.65rem;
   }
 
   /* ===== RESPONSIVE ===== */
