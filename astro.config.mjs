@@ -9,6 +9,12 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://phpixel.gr',
   sitemap: true,
+  redirects: {
+    '/ecommerce': { status: 301, destination: '/kataskevi-eshop' },
+    '/istoselides-landingpage': { status: 301, destination: '/kataskevi-istoselidon' },
+    '/social-media-marketing': { status: 301, destination: '/diafimisi' },
+    '/hosting': { status: 301, destination: '/services' },
+  },
   integrations: [sitemap(), mdx(), lit(), icon()],
   output: 'server',
   adapter: vercel(),

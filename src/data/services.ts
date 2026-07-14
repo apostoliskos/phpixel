@@ -23,7 +23,7 @@ export const services: Service[] = [
       'Mobile-first σχεδιασμός',
       'Analytics & conversion tracking',
     ],
-    href: '/ecommerce',
+    href: '/kataskevi-eshop',
     accent: 'var(--accent-emerald)',
   },
   {
@@ -39,7 +39,7 @@ export const services: Service[] = [
       'Responsive σε κάθε συσκευή',
       'CMS integration για εύκολη διαχείριση',
     ],
-    href: '/istoselides-landingpage',
+    href: '/kataskevi-istoselidon',
     accent: 'var(--accent-blue)',
   },
   {
