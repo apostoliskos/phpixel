@@ -122,7 +122,7 @@ const faqItems = [
       <div class="lp-hero__platforms reveal" style="transition-delay: 0.2s">
         {pageTypes.map((p) => (
           <div class="platform-card">
-            <h3>{p.name}</h3>
+            <p class="platform-card__title">{p.name}</p>
             <p>{p.desc}</p>
           </div>
         ))}
@@ -231,9 +231,13 @@ const faqItems = [
     border-color: var(--accent-blue);
   }
 
-  .platform-card h3 {
+  .platform-card__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    line-height: 1.15;
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
+    opacity: 1;
   }
 
   .platform-card p {

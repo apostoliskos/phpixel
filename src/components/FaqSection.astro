@@ -74,7 +74,8 @@ const faqSchema = {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--accent-blue);
+    /* Σκουρύνουμε ελαφρά το accent για επαρκές contrast (WCAG AA) στο μικρό μέγεθος */
+    color: color-mix(in srgb, var(--accent-blue) 72%, #000);
     margin-bottom: 0.6rem;
   }
 

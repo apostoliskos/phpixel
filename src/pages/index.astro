@@ -364,7 +364,8 @@ const heroImageExists = publicImageExists(heroImage);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--accent-blue);
+    /* Σκουρύνουμε ελαφρά το accent για επαρκές contrast (WCAG AA) στο μικρό μέγεθος */
+    color: color-mix(in srgb, var(--accent-blue) 72%, #000);
     margin-bottom: 0.6rem;
   }
 
@@ -436,7 +437,7 @@ const heroImageExists = publicImageExists(heroImage);
     font-size: 1.15rem;
     line-height: 1.65;
     color: var(--theme-on-bg);
-    opacity: 0.5;
+    opacity: 0.7;
     margin-bottom: 2rem;
     max-width: 640px;
   }
@@ -473,12 +474,12 @@ const heroImageExists = publicImageExists(heroImage);
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--theme-on-bg);
-    opacity: 0.5;
+    opacity: 0.7;
     transition: var(--theme-transition);
   }
 
   .btn-hero-secondary:hover {
-    opacity: 0.8;
+    opacity: 1;
   }
 
   /* ═══════════════════════════════════════════
