@@ -5,24 +5,29 @@ export interface Testimonial {
   rating: number;
 }
 
-/* <!-- TODO: Replace with real client testimonials --> */
+// ΠΡΟΣΟΧΗ: Placeholder περιεχόμενο — ΔΕΝ είναι αληθινά testimonials.
+// Η ενότητα εμφανίζεται μόνο όταν SHOW_TESTIMONIALS = true (src/config.ts).
+// Αντικατέστησε με πραγματικές κριτικές πελατών πριν την ενεργοποιήσεις.
 export const testimonials: Testimonial[] = [
   {
-    quote: 'Η Phpixel μας έφτιαξε ένα e-shop που αύξησε τις πωλήσεις μας κατά 200% τον πρώτο χρόνο. Εξαιρετική ομάδα!',
-    name: 'Γιώργος Κ.',
-    company: 'Fashion Store',
+    quote:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Όνομα Πελάτη',
+    company: 'Επιχείρηση',
     rating: 5,
   },
   {
-    quote: 'Επαγγελματική δουλειά, γρήγορη παράδοση και συνεχής υποστήριξη. Τους συστήνω ανεπιφύλακτα.',
-    name: 'Μαρία Π.',
-    company: 'Κλινική Υγείας',
+    quote:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    name: 'Όνομα Πελάτη',
+    company: 'Επιχείρηση',
     rating: 5,
   },
   {
-    quote: 'Το νέο μας website φορτώνει αστραπιαία και τα rankings μας στο Google εκτοξεύτηκαν. Άψογη συνεργασία.',
-    name: 'Νίκος Δ.',
-    company: 'Restaurant Chain',
+    quote:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit.',
+    name: 'Όνομα Πελάτη',
+    company: 'Επιχείρηση',
     rating: 5,
   },
 ];

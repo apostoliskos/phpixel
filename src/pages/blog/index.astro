@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import { parse, isBefore, isValid } from 'date-fns';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostsList from '../../components/blog/BlogPostsList.astro';
@@ -33,8 +35,8 @@ const posts = Object.values(postModules)
 ---
 
 <BaseLayout
-  title="Blog — Phpixel | Άρθρα & Νέα"
-  description="Άρθρα για web development, e-commerce, SEO, UX/UI design και digital marketing από την Phpixel."
+  title="Blog — Άρθρα για E-commerce, SEO & Ιστοσελίδες | phpixel"
+  description="Άρθρα για e-commerce, SEO, UX/UI και digital marketing — γραμμένα για ιδιοκτήτες επιχειρήσεων, όχι για developers."
 >
 
   <!-- Hero -->

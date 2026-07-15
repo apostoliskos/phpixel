@@ -1,11 +1,5 @@
 ---
 import { Button, FormInput, FormSelect, FormTextarea, Form_Input_checkbox } from '@components/odyssey-theme';
-
-const selectOptions = [
-  "Google Search",
-  "Social Media",
-  "Email",
-];
 ---
 
 <form method="POST" action="/api/contact" enctype="application/x-www-form-urlencoded">
@@ -13,15 +7,13 @@ const selectOptions = [
 
   <FormInput type="email" label="Email" name="Email" placeholder="" required />
 
-  <FormInput type="tel" label="Τηλέφωνο" name="Phone" placeholder="" required />
+  <FormInput type="tel" label="Τηλέφωνο (προαιρετικό)" name="Phone" placeholder="" />
 
-  <!--<FormSelect label="How Did You Hear About Us?" name="Source" options={selectOptions} required />-->
+  <FormTextarea label="Πες μας λίγα λόγια για το project σου" name="Message" placeholder="" required />
 
-  <FormTextarea label="Το μήνυμα σας" name="Message" placeholder="" required />
+  <Form_Input_checkbox label="Συμφωνώ να αποθηκευτούν τα στοιχεία μου ώστε να επικοινωνήσει μαζί μου η phpixel." name="policy" placeholder="" required />
 
-  <Form_Input_checkbox label="Συμφωνώ να αποθηκευτούν τα στοιχεία μου ώστε να επικοινωνήσει μαζί μου η phpixel.gr" name="policy" placeholder="" required />
-
-  <Button type="submit" big_button > ΜΙΛΗΣΕ ΜΑΣ </Button>
+  <Button type="submit" big_button>Στείλε το μήνυμα</Button>
 </form>
 
 <style>
@@ -30,5 +22,4 @@ const selectOptions = [
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-
 </style>

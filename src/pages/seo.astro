@@ -1,98 +1,128 @@
 ---
+// Στατική σελίδα — μπαίνει στο sitemap και σερβίρεται prerendered
+export const prerender = true;
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import CtaSection from '../components/CtaSection.astro';
-import { Icon } from 'astro-icon/components';
+import PreFooterCta from '../components/PreFooterCta.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ServiceSchema from '../components/schema/ServiceSchema.astro';
 
 const features = [
   {
     icon: 'ic:baseline-search',
-    title: 'Έρευνα Λέξεων-Κλειδιών',
-    desc: 'Αναλύουμε τον κλάδο σας, τη συμπεριφορά αναζήτησης του κοινού σας και τις τάσεις της αγοράς για να εντοπίσουμε τις λέξεις-κλειδιά με τον υψηλότερο δυναμικό ROI — από short-tail φράσεις υψηλού όγκου μέχρι long-tail keywords με σαφή αγοραστική πρόθεση.',
+    title: 'Έρευνα λέξεων-κλειδιών',
+    desc: 'Βρίσκουμε τι πραγματικά ψάχνουν οι πελάτες σου — και ποιες αναζητήσεις δείχνουν πρόθεση αγοράς, όχι απλή περιέργεια.',
     accent: 'var(--accent-blue)',
   },
   {
     icon: 'ic:baseline-speed',
     title: 'Technical SEO',
-    desc: 'Βελτιστοποιούμε τη δομή του site σας σε βάθος: ταχύτητα φόρτωσης, Core Web Vitals (LCP, FID, CLS), crawl budget, XML sitemaps, canonical URLs, hreflang tags, schema markup και σωστή αρχιτεκτονική URL ώστε η Google να ανιχνεύει και να ευρετηριάζει κάθε σελίδα χωρίς εμπόδια.',
+    desc: 'Ταχύτητα, Core Web Vitals, sitemaps, δομημένα δεδομένα. Το site σου στημένο ώστε η Google να το διαβάζει χωρίς εμπόδια.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-article',
-    title: 'Content Strategy',
-    desc: 'Σχεδιάζουμε ολοκληρωμένη στρατηγική περιεχομένου βασισμένη σε search intent mapping: πληροφοριακό, πλοηγητικό και συναλλακτικό intent. Δημιουργούμε content clusters, pillar pages και θεματικά silos που χτίζουν topical authority και απαντούν στις πραγματικές ερωτήσεις του κοινού σας.',
+    title: 'Περιεχόμενο με σχέδιο',
+    desc: 'Σελίδες που απαντούν στις πραγματικές ερωτήσεις του κοινού σου. Γράφουμε για ανθρώπους — η Google ακολουθεί.',
     accent: 'var(--accent-emerald)',
   },
   {
     icon: 'ic:baseline-link',
-    title: 'Link Building',
-    desc: 'Εφαρμόζουμε white-hat στρατηγικές link building: digital PR, guest posting σε σχετικά publications, broken link building και δημιουργία linkable assets. Κάθε backlink προέρχεται από σχετικές, υψηλής εγκυρότητας πηγές που ενισχύουν αληθινά το domain authority σας.',
+    title: 'Χτίσιμο αξιοπιστίας',
+    desc: 'Αναφορές και links από σχετικές, αξιόπιστες πηγές. Χωρίς τεχνάσματα που αύριο θα σου κοστίσουν.',
     accent: 'var(--accent-amber)',
   },
   {
     icon: 'ic:baseline-location-on',
     title: 'Τοπικό SEO',
-    desc: 'Βελτιστοποιούμε πλήρως το Google Business Profile σας, δημιουργούμε τοπικές αναφορές (citations) σε κατάλληλους καταλόγους, διαχειριζόμαστε αξιολογήσεις και ενσωματώνουμε local schema markup — ώστε η επιχείρησή σας να εμφανίζεται στο Local Pack και στο Google Maps για αναζητήσεις στην περιοχή σας.',
+    desc: 'Google Business Profile, τοπικές αναφορές και αξιολογήσεις — για να σε βρίσκουν όσοι ψάχνουν στην περιοχή σου.',
     accent: 'var(--accent-rose)',
   },
   {
     icon: 'ic:baseline-analytics',
-    title: 'Analytics & Reporting',
-    desc: 'Λαμβάνετε μηνιαίες αναφορές με πλήρη ορατότητα: οργανική επισκεψιμότητα, keyword rankings, click-through rates, conversion paths και bounce rates. Κάθε report συνοδεύεται από στρατηγικές προτάσεις βελτίωσης — όχι απλά νούμερα, αλλά action plan.',
+    title: 'Αναφορές που καταλαβαίνεις',
+    desc: 'Κάθε μήνα βλέπεις τι έγινε, τι άλλαξε και τι ακολουθεί — σε γλώσσα επιχείρησης, όχι σε ορολογία.',
     accent: 'var(--accent-blue)',
   },
   {
     icon: 'ic:baseline-smartphone',
-    title: 'Mobile SEO',
-    desc: 'Με πάνω από 70% της κίνησης να προέρχεται από κινητά, διασφαλίζουμε ότι το site σας ανταποκρίνεται πλήρως στο mobile-first indexing της Google: γρήγορη φόρτωση, touch-friendly navigation, responsive εικόνες και βέλτιστη εμπειρία χρήστη σε κάθε συσκευή.',
+    title: 'Mobile πρώτα',
+    desc: 'Η Google κρίνει το site σου από την έκδοση του κινητού. Εκεί εστιάζουμε πρώτα.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-trending-up',
-    title: 'Ανάλυση Ανταγωνισμού',
-    desc: 'Χαρτογραφούμε πλήρως τον ψηφιακό ανταγωνισμό σας: ποιες λέξεις-κλειδιά κατατάσσονται, τι backlink profile έχουν, ποια content gaps υπάρχουν και πού βρίσκονται οι ανεκμετάλλευτες ευκαιρίες. Η στρατηγική σας βασίζεται σε δεδομένα, όχι σε υποθέσεις.',
+    title: 'Ανάλυση ανταγωνισμού',
+    desc: 'Βλέπουμε πού κατατάσσονται οι ανταγωνιστές σου και πού υπάρχει χώρος για σένα. Στρατηγική με δεδομένα, όχι υποθέσεις.',
     accent: 'var(--accent-emerald)',
   },
 ];
 
 const approaches = [
-  { name: 'On-Page SEO', desc: 'Βελτιστοποίηση title tags, meta descriptions, heading hierarchy, εσωτερικών links, image alt text και content structure ώστε κάθε σελίδα να στοχεύει με ακρίβεια τα σωστά keywords.' },
-  { name: 'Off-Page SEO', desc: 'Στρατηγικό link building, digital PR, brand mentions, social signals και ενίσχυση domain authority μέσω αξιόπιστων, σχετικών πηγών.' },
-  { name: 'Technical SEO', desc: 'Crawl optimization, Core Web Vitals, structured data (JSON-LD), site architecture, mobile-first indexing και log file analysis για πλήρη τεχνική αρτιότητα.' },
+  {
+    name: 'On-Page SEO',
+    desc: 'Τίτλοι, περιγραφές, δομή περιεχομένου και εσωτερικά links — κάθε σελίδα στοχεύει με ακρίβεια τις σωστές αναζητήσεις.',
+  },
+  {
+    name: 'Technical SEO',
+    desc: 'Ταχύτητα, Core Web Vitals, δομημένα δεδομένα και σωστή αρχιτεκτονική — τα θεμέλια πριν από οτιδήποτε άλλο.',
+  },
+  {
+    name: 'AEO / GEO',
+    desc: 'Βελτιστοποίηση για τις AI μηχανές αναζήτησης: δομημένες απαντήσεις και δεδομένα που τα AI εργαλεία καταλαβαίνουν και προτείνουν.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Πότε θα δω αποτελέσματα από το SEO;',
+    a: 'Το SEO θέλει χρόνο — συνήθως 3–6 μήνες για ορατή κίνηση, ανάλογα με τον ανταγωνισμό του κλάδου σου. Όποιος σου υπόσχεται αποτελέσματα σε δύο εβδομάδες, δεν σου λέει την αλήθεια. Θα βλέπεις όμως την πρόοδο κάθε μήνα, με καθαρές αναφορές.',
+  },
+  {
+    q: 'Εγγυάστε πρώτη θέση στην Google;',
+    a: 'Όχι — και κανείς δεν μπορεί να το εγγυηθεί ειλικρινά, γιατί την κατάταξη την αποφασίζει η Google. Αυτό που εγγυόμαστε είναι σωστή δουλειά: τεχνική βάση, περιεχόμενο που απαντάει σε πραγματικές ερωτήσεις και πλήρης διαφάνεια στο τι κάνουμε και γιατί.',
+  },
+  {
+    q: 'Τι είναι το AEO και γιατί να με νοιάζει;',
+    a: 'AEO (Answer Engine Optimization) σημαίνει να είναι το περιεχόμενό σου δομημένο έτσι ώστε να το καταλαβαίνουν και να το προτείνουν τα AI εργαλεία — ChatGPT, Gemini και οι AI απαντήσεις της Google. Όλο και περισσότεροι πελάτες ρωτούν πρώτα ένα AI πριν αγοράσουν. Αν το site σου δεν διαβάζεται σωστά από αυτά, χάνεις πελάτες που δεν θα μάθεις ποτέ ότι σε έψαχναν.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="Υπηρεσίες SEO Ελλάδα — Phpixel | Αυξήστε την Οργανική Επισκεψιμότητα & τα Rankings σας"
-  description="Επαγγελματικές υπηρεσίες SEO από την Phpixel. Keyword research, technical SEO, content strategy, link building και τοπικό SEO. Μέσος ρυθμός αύξησης οργανικού traffic 180% στους πρώτους 6 μήνες. Δωρεάν SEO Audit."
+  title="SEO & AEO — Βελτιστοποίηση για Google και AI Αναζήτηση | phpixel"
+  description="SEO για e-shop και εταιρικά sites: on-page, technical και περιεχόμενο. Μαζί με AEO/GEO — βελτιστοποίηση για τα AI εργαλεία που πλέον προτείνουν επιχειρήσεις."
 >
+  <ServiceSchema
+    serviceType="SEO & AEO"
+    description="SEO για e-shop και εταιρικά sites: on-page, technical και περιεχόμενο, μαζί με βελτιστοποίηση για AI αναζήτηση (AEO/GEO)."
+  />
 
   <!-- Hero -->
   <section class="seo-hero">
     <div class="seo-hero__bg"></div>
     <div class="container seo-hero__inner">
       <div class="seo-hero__content reveal">
-        <span class="seo-badge">Βελτιστοποίηση Μηχανών Αναζήτησης</span>
+        <span class="seo-badge">SEO & AEO</span>
         <h1>
-          Υπηρεσίες<br />
-          <span class="accent-text">SEO</span>
+          SEO &<br />
+          <span class="accent-text">AEO</span>
         </h1>
         <p class="seo-hero__sub">
-          Φέρνουμε την επιχείρησή σας στις πρώτες θέσεις της Google με data-driven στρατηγικές SEO.
-          Μέσος ρυθμός αύξησης οργανικού traffic 180% στους πρώτους 6 μήνες — με πλήρη διαφάνεια, μετρήσιμα αποτελέσματα και χωρίς δεσμεύσεις.
+          Να σε βρίσκουν όσοι σε ψάχνουν — στην Google και στα AI εργαλεία που πλέον
+          προτείνουν προϊόντα και επιχειρήσεις. Δουλεύουμε σε e-shop και εταιρικά sites,
+          με μετρήσιμη πρόοδο κάθε μήνα. Χωρίς υποσχέσεις για «πρώτες θέσεις» — με δουλειά
+          που χτίζει σταθερά.
         </p>
-        <div class="seo-hero__actions">
-          <a href="/contact" class="btn btn--primary btn--lg">Δωρεάν SEO Audit</a>
-          <a href="/services" class="btn btn--outline btn--lg">Δείτε όλες τις υπηρεσίες</a>
-        </div>
       </div>
 
       <!-- Approaches -->
       <div class="seo-hero__platforms reveal" style="transition-delay: 0.2s">
         {approaches.map((p) => (
           <div class="platform-card">
-            <h3>{p.name}</h3>
+            <p class="platform-card__title">{p.name}</p>
             <p>{p.desc}</p>
           </div>
         ))}
@@ -100,12 +130,28 @@ const approaches = [
     </div>
   </section>
 
+  <!-- AEO Section -->
+  <section class="aeo">
+    <div class="container aeo__inner reveal">
+      <h2>SEO & AEO: να σε βρίσκουν παντού</h2>
+      <p>
+        Το SEO δεν είναι πια μόνο η Google. Όλο και περισσότεροι ρωτούν το ChatGPT,
+        το Gemini ή άλλα AI εργαλεία «πού να φτιάξω e-shop» ή «ποιο προϊόν να πάρω» —
+        και τα εργαλεία αυτά απαντούν διαβάζοντας sites σαν το δικό σου. Το AEO/GEO
+        φροντίζει το περιεχόμενό σου να είναι δομημένο έτσι ώστε να το καταλαβαίνουν
+        και να το προτείνουν: καθαρές απαντήσεις, σωστά δεδομένα (schema), σελίδες που
+        απαντούν σε πραγματικές ερωτήσεις. Δεν αντικαθιστά το κλασικό SEO — το ενισχύει,
+        και τα στήνουμε μαζί.
+      </p>
+    </div>
+  </section>
+
   <!-- Features Grid -->
   <section class="seo-features">
     <div class="container">
       <div class="reveal">
-        <SectionHeader title="Η SEO Προσέγγισή Μας" subtitle="Ολοκληρωμένες Υπηρεσίες">
-          Δεν εφαρμόζουμε τυποποιημένα πακέτα. Κάθε στρατηγική SEO σχεδιάζεται εξατομικευμένα γύρω από τους στόχους, τον κλάδο και τον ανταγωνισμό σας — από τεχνική βελτιστοποίηση μέχρι δημιουργία περιεχομένου και link building.
+        <SectionHeader title="Τι περιλαμβάνει" subtitle="SEO & AEO">
+          Δεν εφαρμόζουμε τυποποιημένα πακέτα. Η δουλειά προσαρμόζεται στον κλάδο σου, στον ανταγωνισμό σου και στο τι πραγματικά θα σου φέρει πελάτες.
         </SectionHeader>
       </div>
 
@@ -124,15 +170,11 @@ const approaches = [
     </div>
   </section>
 
+  <!-- FAQ -->
+  <FaqSection items={faqItems} title="Συχνές ερωτήσεις για το SEO" />
+
   <!-- CTA -->
-  <CtaSection
-    title="Μάθετε πού χάνετε οργανικό traffic — Δωρεάν"
-    description="Ζητήστε δωρεάν SEO Audit και λάβετε αναλυτική αναφορά με τα τεχνικά προβλήματα, τις ευκαιρίες κατάταξης και τα βήματα που χρειάζεται το site σας για να ανεβεί στα αποτελέσματα αναζήτησης. Χωρίς δεσμεύσεις."
-    primaryLabel="Ζητήστε Δωρεάν Audit"
-    primaryHref="/contact"
-    secondaryLabel="6977383488"
-    secondaryHref="tel:6977383488"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 
@@ -183,13 +225,6 @@ const approaches = [
     line-height: 1.75;
     opacity: 0.7;
     max-width: 460px;
-    margin-bottom: 2rem;
-  }
-
-  .seo-hero__actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
   }
 
   .seo-hero__platforms {
@@ -212,14 +247,40 @@ const approaches = [
     border-color: var(--accent-blue);
   }
 
-  .platform-card h3 {
+  .platform-card__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    line-height: 1.15;
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
+    opacity: 1;
   }
 
   .platform-card p {
     font-size: 0.9rem;
     opacity: 0.6;
+  }
+
+  /* AEO section */
+  .aeo {
+    padding: var(--section-padding);
+  }
+
+  .aeo__inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .aeo__inner h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .aeo__inner p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.7;
+    text-align: left;
   }
 
   /* Features */

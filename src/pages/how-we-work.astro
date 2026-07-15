@@ -1,7 +1,10 @@
 ---
+// Στατική σελίδα — μπαίνει στο sitemap και σερβίρεται prerendered
+export const prerender = true;
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import CtaSection from '../components/CtaSection.astro';
+import PreFooterCta from '../components/PreFooterCta.astro';
 import GlassCard from '../components/GlassCard.astro';
 import { Icon } from 'astro-icon/components';
 
@@ -9,13 +12,13 @@ const values = [
   {
     icon: 'ic:baseline-psychology',
     title: 'Στρατηγική, όχι μόνο Κώδικας',
-    desc: 'Δεν «παραδίδουμε» απλώς μια ιστοσελίδα. Μελετάμε το κοινό σας και χτίζουμε ένα ψηφιακό εργαλείο που φέρνει αποτελέσματα, όχι απλώς clicks.',
+    desc: 'Δεν «παραδίδουμε» απλώς μια ιστοσελίδα. Μελετάμε το κοινό σου και χτίζουμε ένα εργαλείο που φέρνει αποτελέσματα, όχι απλώς clicks.',
     accent: 'var(--accent-violet)',
   },
   {
     icon: 'ic:baseline-handshake',
     title: 'Ειλικρίνεια πάνω από όλα',
-    desc: 'Αν κάτι δεν πρόκειται να λειτουργήσει για την επιχείρησή σας, θα σας το πούμε. Προτιμάμε μια ειλικρινή συμβουλή από μια εύκολη πώληση.',
+    desc: 'Αν κάτι δεν πρόκειται να λειτουργήσει για την επιχείρησή σου, θα σου το πούμε. Προτιμάμε μια ειλικρινή συμβουλή από μια εύκολη πώληση.',
     accent: 'var(--accent-emerald)',
   },
   {
@@ -27,7 +30,7 @@ const values = [
   {
     icon: 'ic:baseline-trending-up',
     title: 'Συνεχής Εξέλιξη',
-    desc: 'Η τεχνολογία αλλάζει κάθε μέρα. Εμείς μένουμε μπροστά από τις εξελίξεις, για να μην μένετε εσείς πίσω από τον ανταγωνισμό.',
+    desc: 'Η τεχνολογία αλλάζει κάθε μέρα. Εμείς μένουμε μπροστά από τις εξελίξεις, για να μη μένεις εσύ πίσω από τον ανταγωνισμό.',
     accent: 'var(--accent-amber)',
   },
 ];
@@ -37,19 +40,19 @@ const steps = [
     num: '01',
     icon: 'ic:baseline-chat',
     title: 'Ανάλυση & Κατανόηση',
-    desc: 'Ξεκινάμε με μια δωρεάν συνάντηση για να καταλάβουμε τις ανάγκες σας, τον κλάδο σας και τους στόχους σας. Η σωστή αρχή σημαίνει σωστό αποτέλεσμα.',
+    desc: 'Ξεκινάμε με μια δωρεάν συνάντηση για να καταλάβουμε τις ανάγκες σου, τον κλάδο σου και τους στόχους σου. Η σωστή αρχή σημαίνει σωστό αποτέλεσμα.',
   },
   {
     num: '02',
     icon: 'ic:baseline-draw',
     title: 'Σχεδιασμός & Πρόταση',
-    desc: 'Ετοιμάζουμε αναλυτική πρόταση με wireframes, χρονοδιάγραμμα και κόστος. Τίποτα δεν αρχίζει χωρίς τη δική σας έγκριση.',
+    desc: 'Ετοιμάζουμε αναλυτική πρόταση με wireframes, χρονοδιάγραμμα και κόστος. Τίποτα δεν αρχίζει χωρίς τη δική σου έγκριση.',
   },
   {
     num: '03',
     icon: 'ic:baseline-code',
     title: 'Development',
-    desc: 'Χτίζουμε το project σας με σύγχρονες τεχνολογίες. Regular updates, preview links και ανοιχτή επικοινωνία σε κάθε βήμα.',
+    desc: 'Χτίζουμε το project σου με εργαλεία που έχουν αποδείξει ότι δουλεύουν. Συχνά updates, preview links και ανοιχτή επικοινωνία σε κάθε βήμα.',
   },
   {
     num: '04',
@@ -61,20 +64,20 @@ const steps = [
     num: '05',
     icon: 'ic:baseline-rocket-launch',
     title: 'Launch',
-    desc: 'Δημοσίευση με μηδέν downtime. Setup analytics, monitoring και ό,τι χρειαστεί για να ξεκινήσετε δυνατά.',
+    desc: 'Δημοσίευση με μηδέν downtime. Στήνουμε analytics, monitoring και ό,τι χρειαστεί για να ξεκινήσεις δυνατά.',
   },
   {
     num: '06',
     icon: 'ic:baseline-support-agent',
     title: 'Ongoing Support',
-    desc: 'Δεν σας αφήνουμε μετά το launch. Συνεχής υποστήριξη, updates, backups και βελτιστοποίηση.',
+    desc: 'Δεν σε αφήνουμε μετά το launch. Συνεχής υποστήριξη, updates, backups και βελτιστοποίηση.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Πώς Δουλεύουμε — Phpixel | Η Διαδικασία μας"
-  description="Πώς λειτουργεί η συνεργασία μας: από την πρώτη συζήτηση μέχρι το launch και μετά. Η διαδικασία μας βήμα-βήμα."
+  title="Πώς Δουλεύουμε — Η Διαδικασία μας Βήμα-Βήμα | phpixel"
+  description="Πώς λειτουργεί η συνεργασία μας: από την πρώτη κουβέντα μέχρι το launch και μετά. Καθαρά βήματα, ανοιχτή επικοινωνία, χωρίς εκπλήξεις στο τέλος."
 >
 
   <!-- Hero -->
@@ -82,14 +85,14 @@ const steps = [
     <div class="hww-hero__bg"></div>
     <div class="container hww-hero__inner">
       <div class="hww-hero__content reveal">
-        <span class="hww-badge">Our Process</span>
+        <span class="hww-badge">Διαδικασία</span>
         <h1>
           Πώς δουλεύουμε<br />
           <span class="accent-text">βήμα-βήμα.</span>
         </h1>
         <p class="hww-hero__sub">
           Η επικοινωνία είναι το Α και το Ω σε μία επιτυχημένη συνεργασία.
-          Ορίστε πώς μετατρέπουμε την ιδέα σας σε πραγματικότητα.
+          Ορίστε πώς μετατρέπουμε την ιδέα σου σε πραγματικότητα.
         </p>
       </div>
     </div>
@@ -144,14 +147,7 @@ const steps = [
   </section>
 
   <!-- CTA -->
-  <CtaSection
-    title="Έτοιμοι να ξεκινήσουμε;"
-    description="Η πρώτη συζήτηση είναι δωρεάν. Πείτε μας για το project σας."
-    primaryLabel="Επικοινωνία"
-    primaryHref="/contact"
-    secondaryLabel="Υπηρεσίες"
-    secondaryHref="/services"
-  />
+  <PreFooterCta />
 
 </BaseLayout>
 

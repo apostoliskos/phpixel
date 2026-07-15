@@ -10,9 +10,9 @@
 //   2. Πέταξε τα screenshots στο /public/assets/images/portfolio/
 //   3. Done — τόσο η λίστα όσο και η σελίδα detail δημιουργούνται αυτόματα.
 //
-// ⚠️ TODO (Apostoli): τα services / metrics / quotes παρακάτω είναι
-//    αρχικές placeholder τιμές. Πες μου τι έκανες σε κάθε project
-//    και θα τις γράψουμε ακριβέστερα.
+// Σημείωση: metrics και quotes αφαιρέθηκαν — ήταν placeholder τιμές, όχι
+// πραγματικά μετρημένα αποτελέσματα. Όταν υπάρξουν αληθινά νούμερα
+// (με πηγή: analytics / Search Console), προστίθενται ξανά στα entries.
 // =====================================================================
 
 export type ProjectCategory =
@@ -37,6 +37,8 @@ export interface ProjectScreenshot {
 export interface Project {
   /** URL slug — π.χ. "angela-yfantidou" */
   slug: string;
+  /** Σύντομο anchor id στη σελίδα /portfolio — π.χ. "mian" (για deep links) */
+  anchor: string;
   /** Brand / project name */
   name: string;
   /** Σύντομη μονόγραμμη περιγραφή (κάρτα + meta) */
@@ -59,6 +61,10 @@ export interface Project {
   stack: string[];
   /** Κύρια εικόνα — εμφανίζεται στη κάρτα grid */
   thumb: string;
+  /** Νέο screenshot από designer (webp) — αν λείπει, γίνεται fallback στο thumb */
+  image?: string;
+  /** Alt για τη νέα εικόνα */
+  imageAlt?: string;
   /** Hero image στη σελίδα detail */
   hero: string;
   /** Gallery screenshots */
@@ -83,6 +89,7 @@ export const projects: Project[] = [
   // -----------------------------------------------------------------
   {
     slug: 'angela-yfantidou',
+    anchor: 'angelayfantidou',
     name: 'Angela Yfantidou',
     tagline: 'Premium portfolio site για επαγγελματία τελετουργό γάμου.',
     description:
@@ -102,6 +109,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'Custom Theme', 'Cloudflare', 'Elementor Pro'],
     thumb: '/assets/images/portfolio/angelayfantidou-thumb.jpg',
+    image: '/images/portfolio/angelayfantidou.webp',
+    imageAlt: 'Η ιστοσελίδα της Angela Yfantidou',
     hero: '/assets/images/portfolio/angelayfantidou-home.jpg',
     gallery: [
       {
@@ -115,22 +124,13 @@ export const projects: Project[] = [
         caption: 'Custom "Let\'s Chat" φόρμα με validation και anti-spam.',
       },
     ],
-    metrics: [
-      { value: '98', label: 'PageSpeed Score (mobile)' },
-      { value: '< 1s', label: 'Time to First Byte' },
-      { value: 'Top 3', label: 'Google rankings σε key terms' },
-    ],
+    metrics: [],
     highlights: [
       'Premium, art-direction look που αντικατοπτρίζει το brand',
-      'Extreme caching → load times κάτω από 1 δευτερόλεπτο',
+      'Extreme caching για ταχύτατη φόρτωση',
       'On-page SEO optimization για όλες τις key services',
       'Custom contact form με spam protection',
     ],
-    quote: {
-      text: 'Το site αντιπροσωπεύει ακριβώς αυτό που είμαι. Ταχύτατο, κομψό και φέρνει νέους πελάτες κάθε μήνα.',
-      author: 'Angela Yfantidou',
-      role: 'Wedding Officiant',
-    },
     accent: '#b78c87',
   },
 
@@ -139,6 +139,7 @@ export const projects: Project[] = [
   // -----------------------------------------------------------------
   {
     slug: 'aporelli-artworks',
+    anchor: 'aporelli',
     name: 'Aporelli Artworks',
     tagline:
       'E-shop χειροποίητων ορθόδοξων εικόνων με premium αισθητική και πλήρη ενσωμάτωση πληρωμών.',
@@ -159,6 +160,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'WooCommerce', 'Stripe', 'Mailchimp'],
     thumb: '/assets/images/portfolio/aporelliartworks-thumb.jpg',
+    image: '/images/portfolio/aporelli.webp',
+    imageAlt: 'Το e-shop της Aporelli Artworks',
     hero: '/assets/images/portfolio/aporelliartworks-home.jpg',
     gallery: [
       {
@@ -173,11 +176,7 @@ export const projects: Project[] = [
           'Λεπτομερής product page με variants (διαστάσεις, στιλβωτό φύλλο χρυσού).',
       },
     ],
-    metrics: [
-      { value: '+140%', label: 'Αύξηση online παραγγελιών' },
-      { value: '95', label: 'PageSpeed Score (mobile)' },
-      { value: '< 2.4s', label: 'Largest Contentful Paint' },
-    ],
+    metrics: [],
     highlights: [
       'Cinematic product photography pipeline',
       'Πολλαπλά payment gateways χωρίς ταλαιπωρία checkout',
@@ -192,6 +191,7 @@ export const projects: Project[] = [
   // -----------------------------------------------------------------
   {
     slug: 'alazo',
+    anchor: 'alazo',
     name: 'Αλάζω',
     tagline:
       'Επαγγελματικό site για διαιτολόγο & βελονιστή με σύστημα online ραντεβού.',
@@ -212,6 +212,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'Custom Booking Module', 'Cloudflare', 'PHP'],
     thumb: '/assets/images/portfolio/alazo-thumb.jpg',
+    image: '/images/portfolio/alazo.webp',
+    imageAlt: 'Η ιστοσελίδα του Αλάζω',
     hero: '/assets/images/portfolio/alazo-home.jpg',
     gallery: [
       {
@@ -230,13 +232,9 @@ export const projects: Project[] = [
         caption: 'Multi-step booking flow με date/time picker.',
       },
     ],
-    metrics: [
-      { value: '+220%', label: 'Online κρατήσεις / μήνα' },
-      { value: '3×', label: 'Επαναλαμβανόμενες επισκέψεις site' },
-      { value: '< 1.5s', label: 'Largest Contentful Paint' },
-    ],
+    metrics: [],
     highlights: [
-      'Online ραντεβού 24/7 — μηδενίζει τα χαμένα τηλεφωνήματα',
+      'Online ραντεβού όποια ώρα βολεύει τον ασθενή — λιγότερα χαμένα τηλεφωνήματα',
       'Local SEO που φέρνει ασθενείς από Καρδίτσα & γύρω περιοχή',
       'GDPR-compliant: cookies, φόρμες, ιατρικά δεδομένα',
       'Responsive design για ασθενείς που μπαίνουν από κινητό',
@@ -249,6 +247,7 @@ export const projects: Project[] = [
   // -----------------------------------------------------------------
   {
     slug: 'mian-natural-cosmetics',
+    anchor: 'mian',
     name: 'Mian Natural Cosmetics',
     tagline:
       'Ολοκληρωμένο e-shop φυσικών καλλυντικών με πλήρες σύστημα filtering & email marketing.',
@@ -269,6 +268,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'WooCommerce', 'Klaviyo', 'Algolia Search'],
     thumb: '/assets/images/portfolio/mian-thumb.jpg',
+    image: '/images/portfolio/mian.webp',
+    imageAlt: 'Το e-shop της Mian Natural Cosmetics',
     hero: '/assets/images/portfolio/mian-home.jpg',
     gallery: [
       {
@@ -287,11 +288,7 @@ export const projects: Project[] = [
         caption: 'Λεπτομερής σελίδα προϊόντος με ingredients & cross-sells.',
       },
     ],
-    metrics: [
-      { value: '+180%', label: 'Conversion rate vs old site' },
-      { value: '4.8★', label: 'Average customer rating' },
-      { value: '-35%', label: 'Cart abandonment rate' },
-    ],
+    metrics: [],
     highlights: [
       'Πλήρες multi-attribute filtering για γρήγορη αναζήτηση',
       'Email flows: welcome, abandoned cart, win-back',
@@ -306,6 +303,7 @@ export const projects: Project[] = [
   // -----------------------------------------------------------------
   {
     slug: 'vithopoulos-outdoor',
+    anchor: 'vithopoulos',
     name: 'Vithopoulos Outdoor',
     tagline:
       'E-shop εξοπλισμού πεζοπορίας & ορειβασίας με δυνατό category UX και Google Ads.',
@@ -317,7 +315,7 @@ export const projects: Project[] = [
     url: 'https://vithopoulosoutdoor.gr',
     tags: ['E-shop', 'Google Ads', 'WooCommerce', 'SEO'],
     services: [
-      'Δημιουργία e-shop με μεγάλο κατάλογο (500+ SKUs)',
+      'Δημιουργία e-shop με μεγάλο κατάλογο προϊόντων',
       'Photo-led category navigation',
       'Google Ads & Shopping campaigns',
       'Page speed optimization',
@@ -326,6 +324,8 @@ export const projects: Project[] = [
     ],
     stack: ['WordPress', 'WooCommerce', 'Google Ads', 'Custom ERP Sync'],
     thumb: '/assets/images/portfolio/vithopoulos-thumb.jpg',
+    image: '/images/portfolio/vithopoulos.webp',
+    imageAlt: 'Το e-shop της Vithopoulos Outdoor',
     hero: '/assets/images/portfolio/vithopoulos-home.jpg',
     gallery: [
       {
@@ -349,11 +349,7 @@ export const projects: Project[] = [
         caption: 'Product page με variations, αξιολογήσεις και cross-sells.',
       },
     ],
-    metrics: [
-      { value: '4.2×', label: 'ROAS από Google Ads' },
-      { value: '+95%', label: 'Οργανική επισκεψιμότητα (12 μήνες)' },
-      { value: '500+', label: 'SKUs σε live sync με αποθήκη' },
-    ],
+    metrics: [],
     highlights: [
       'Photo-led κατηγορίες που μειώνουν το decision fatigue',
       'Google Shopping feed με auto-sync τιμών & stock',

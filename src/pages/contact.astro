@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
 import { Icon } from 'astro-icon/components';
@@ -6,8 +8,8 @@ import { site } from '../data/site';
 ---
 
 <BaseLayout
-  title="Επικοινωνία — Phpixel | Μίλησέ μας"
-  description="Επικοινωνήστε με την Phpixel. Πες μας για το project σου και θα σου απαντήσουμε εντός 24 ωρών."
+  title="Επικοινωνία — Μίλησέ μας | phpixel"
+  description="Πες μας τι έχεις στο μυαλό σου — μια ιδέα, ένα πρόβλημα ή ένα site που δεν αποδίδει. Θα σου απαντήσουμε μέσα σε μία εργάσιμη."
 >
 
   <section class="contact-page">
@@ -19,17 +21,18 @@ import { site } from '../data/site';
         <span class="contact-badge">Επικοινωνία</span>
         <h1>Μίλησέ μας</h1>
         <p class="contact-info__sub">
-          Μην διστάσεις να στείλεις μήνυμα. Θα απαντήσουμε εντός 24 ωρών.
+          Πες μας τι έχεις στο μυαλό σου — μια ιδέα, ένα πρόβλημα ή ένα site που
+          δεν αποδίδει. Θα σου απαντήσουμε μέσα σε μία εργάσιμη.
         </p>
 
         <div class="contact-details">
-          <a href={`tel:${site.contact.phone}`} class="contact-detail">
+          <a href={`tel:+30${site.contact.phone}`} class="contact-detail">
             <div class="contact-detail__icon">
               <Icon name="ic:baseline-phone" />
             </div>
             <div>
               <span class="contact-detail__label">Τηλέφωνο</span>
-              <span class="contact-detail__value">{site.contact.phone}</span>
+              <span class="contact-detail__value">{site.contact.phoneDisplay}</span>
             </div>
           </a>
 

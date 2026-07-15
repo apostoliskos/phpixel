@@ -1,14 +1,15 @@
 export const site = {
-  name: 'Phpixel',
+  name: 'phpixel',
   tagline: 'From idea to pixel and code',
   description:
-    'Phpixel — E-shop creation, website building, custom web apps, hosting & maintenance. Κατασκευή ιστοσελίδων, e-shop, web εφαρμογές.',
+    'Κατασκευή e-shop με WooCommerce ή custom, ιστοσελίδες, SEO και email marketing. Δουλεύουμε με επιχειρήσεις σε όλη την Ελλάδα — μιλάς με αυτόν που γράφει τον κώδικα.',
   url: 'https://phpixel.gr',
   lang: 'el',
   contact: {
     phone: '6977383488',
+    phoneDisplay: '697 738 3488',
     email: 'info@phpixel.gr',
-    address: 'Greece',
+    address: 'Ελλάδα — δουλεύουμε πανελλαδικά',
   },
   socials: {
     facebook: 'https://facebook.com/phpixel',
