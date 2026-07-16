@@ -1,0 +1,84 @@
+---
+// Μπλοκ συγγραφέα κάτω από τον τίτλο κάθε blog post:
+// όνομα + μία γραμμή + ημερομηνίες δημοσίευσης/ενημέρωσης.
+import { site } from '../../data/site';
+
+export interface Props {
+  publishDate?: string;
+  updatedDate?: string;
+}
+
+const { publishDate, updatedDate } = Astro.props;
+
+const fmt = (d?: string) => {
+  if (!d) return null;
+  const parsed = new Date(d);
+  if (isNaN(parsed.getTime())) return d;
+  return parsed.toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+const published = fmt(publishDate);
+const updated = updatedDate && updatedDate !== publishDate ? fmt(updatedDate) : null;
+---
+
+<div class="author-block">
+  <div class="author-block__avatar" aria-hidden="true">
+    {site.blogAuthor.name.charAt(0).toUpperCase()}
+  </div>
+  <div class="author-block__meta">
+    <span class="author-block__name">{site.blogAuthor.name}</span>
+    <span class="author-block__line">{site.blogAuthor.oneLiner}</span>
+    {(published || updated) && (
+      <span class="author-block__dates">
+        {published && <>Δημοσιεύτηκε: <time>{published}</time></>}
+        {updated && <> · Ενημερώθηκε: <time>{updated}</time></>}
+      </span>
+    )}
+  </div>
+</div>
+
+<style>
+  .author-block {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: 1.25rem;
+  }
+
+  .author-block__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--theme-on-bg);
+    color: var(--theme-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .author-block__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .author-block__name {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .author-block__line {
+    font-size: 0.85rem;
+    opacity: 0.55;
+  }
+
+  .author-block__dates {
+    font-size: 0.8rem;
+    opacity: 0.45;
+    margin-top: 0.15rem;
+  }
+</style>

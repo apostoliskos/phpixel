@@ -3,31 +3,21 @@ import BaseLayout from './BaseLayout.astro';
 import { generateTagData } from '../utils/helpers';
 import ArticleSchema from '../components/schema/ArticleSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
+import AuthorBlock from '../components/blog/AuthorBlock.astro';
 
-const { content: { title, description, publishDate, updatedDate, canonicalURL, featuredImage, tags } } = Astro.props;
+// metaTitle (προαιρετικό frontmatter): σύντομος title tag όταν ο τίτλος του
+// άρθρου είναι πολύ μακρύς για τα αποτελέσματα αναζήτησης.
+const { content: { title, metaTitle, description, publishDate, updatedDate, canonicalURL, featuredImage, tags } } = Astro.props;
 
 let allTagsData = [];
 if (tags && tags.length > 0) {
   allTagsData = generateTagData(tags);
 }
 
-const dateStr = publishDate
-  ? (() => {
-      try {
-        return new Date(publishDate).toLocaleDateString('el-GR', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
-      } catch {
-        return publishDate;
-      }
-    })()
-  : null;
 ---
 
 <BaseLayout
-  title={`${title} — Blog | phpixel`}
+  title={metaTitle || `${title} — Blog | phpixel`}
   description={description}
   image={featuredImage}
   canonicalURL={canonicalURL}
@@ -57,9 +47,7 @@ const dateStr = publishDate
             </div>
           )}
           <h1 class="post-header__title">{title}</h1>
-          {dateStr && (
-            <time class="post-header__date">{dateStr}</time>
-          )}
+          <AuthorBlock publishDate={publishDate} updatedDate={updatedDate} />
         </div>
       </div>
     </header>
