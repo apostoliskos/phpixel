@@ -214,7 +214,7 @@ const heroImageExists = publicImageExists(heroImage);
     <div class="container">
       <div class="bento__header reveal">
         <span class="eyebrow">Διαδικασία</span>
-        <h2>4 βήματα. Ένα αποτέλεσμα.</h2>
+        <h2>Η διαδικασία, με μια ματιά.</h2>
       </div>
 
       <div class="process__grid">
@@ -225,6 +225,13 @@ const heroImageExists = publicImageExists(heroImage);
             <p>{step.desc}</p>
           </div>
         ))}
+      </div>
+
+      <div class="process__cta reveal">
+        <a href="/how-we-work" class="btn-outline">
+          Δες αναλυτικά πώς δουλεύουμε
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -707,6 +714,11 @@ const heroImageExists = publicImageExists(heroImage);
     font-size: 0.88rem;
     opacity: 0.5;
     line-height: 1.6;
+  }
+
+  .process__cta {
+    text-align: center;
+    margin-top: 2rem;
   }
 
   /* ═══════════════════════════════════════════
