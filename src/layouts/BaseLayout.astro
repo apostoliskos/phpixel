@@ -5,6 +5,7 @@ import { nav } from '../config/nav.js';
 import { footerLists, footerSocials } from '../config/footer';
 import { Icon } from 'astro-icon/components';
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 import '../styles/index.css';
 
@@ -76,14 +77,29 @@ const currentPath = Astro.url.pathname;
     <!-- Structured Data: Organization (κάθε σελίδα) -->
     <OrganizationSchema />
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H58TJPTQM4"></script>
+    <!-- Google Analytics — Consent Mode v2: όλα denied μέχρι να συναινέσει
+         ο επισκέπτης (βλ. CookieConsent.astro). Χωρίς αποδοχή δεν μπαίνει
+         κανένα cookie. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500,
+      });
+      try {
+        var phpixelConsent = JSON.parse(localStorage.getItem('phpixel-consent') || 'null');
+        if (phpixelConsent && phpixelConsent.v === 'granted' && Date.now() - phpixelConsent.t < 31536000000) {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      } catch (e) {}
       gtag('js', new Date());
       gtag('config', 'G-H58TJPTQM4');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H58TJPTQM4"></script>
   </head>
 
   <body>
@@ -187,9 +203,16 @@ const currentPath = Astro.url.pathname;
       </div>
 
       <div class="footer__bottom">
-        <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+          <span class="footer__bottom-sep">·</span>
+          <button type="button" class="footer__cookie-settings" data-cookie-settings>Ρυθμίσεις cookies</button>
+        </p>
       </div>
     </footer>
+
+    <!-- ========== COOKIE CONSENT ========== -->
+    <CookieConsent />
 
     <!-- ========== SCRIPTS ========== -->
     <script is:inline>
@@ -715,6 +738,26 @@ const currentPath = Astro.url.pathname;
         text-align: center;
         font-size: 0.85rem;
         opacity: 0.5;
+      }
+
+      .footer__bottom-sep {
+        margin: 0 0.35rem;
+      }
+
+      .footer__cookie-settings {
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        color: inherit;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .footer__cookie-settings:hover {
+        opacity: 0.8;
       }
 
       /* ========================================
