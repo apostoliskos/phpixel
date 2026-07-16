@@ -11,6 +11,14 @@ export const site = {
     email: 'info@phpixel.gr',
     address: 'Ελλάδα — δουλεύουμε πανελλαδικά',
   },
+  // Συγγραφέας των blog posts — εμφανίζεται στο author block και στο Article schema.
+  // TODO: εκκρεμεί το πραγματικό όνομα από τον ιδιοκτήτη· μόλις οριστεί,
+  // άλλαξε το name εδώ και το type σε 'Person'.
+  blogAuthor: {
+    type: 'Organization',
+    name: 'phpixel',
+    oneLiner: 'Σχεδιάζουμε και φτιάχνουμε e-shop και ιστοσελίδες που πουλάνε.',
+  },
   socials: {
     facebook: 'https://facebook.com/phpixel',
     instagram: 'https://instagram.com/phpixel',

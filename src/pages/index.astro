@@ -10,6 +10,7 @@ import { testimonials } from '../data/testimonials';
 import { SHOW_TESTIMONIALS } from '../config';
 import FaqSection from '../components/FaqSection.astro';
 import PreFooterCta from '../components/PreFooterCta.astro';
+import WebSiteSchema from '../components/schema/WebSiteSchema.astro';
 import { publicImageExists } from '../utils/publicImages';
 
 const services = [
@@ -129,6 +130,7 @@ const heroImageExists = publicImageExists(heroImage);
   title="Κατασκευή E-shop & Ιστοσελίδων που Πουλάνε | phpixel"
   description="Κατασκευή e-shop με WooCommerce ή custom, ιστοσελίδες, SEO και email marketing. Δουλεύουμε με επιχειρήσεις σε όλη την Ελλάδα — μιλάς με αυτόν που γράφει τον κώδικα."
 >
+  <WebSiteSchema />
 
   <!-- ═══════════════════════════════════════════════
        HERO

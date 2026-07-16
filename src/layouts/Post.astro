@@ -1,8 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { generateTagData } from '../utils/helpers';
+import ArticleSchema from '../components/schema/ArticleSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 
-const { content: { title, description, publishDate, canonicalURL, featuredImage, tags } } = Astro.props;
+const { content: { title, description, publishDate, updatedDate, canonicalURL, featuredImage, tags } } = Astro.props;
 
 let allTagsData = [];
 if (tags && tags.length > 0) {
@@ -30,6 +32,15 @@ const dateStr = publishDate
   image={featuredImage}
   canonicalURL={canonicalURL}
 >
+  <ArticleSchema
+    headline={title}
+    description={description}
+    datePublished={publishDate}
+    dateModified={updatedDate}
+    image={featuredImage}
+    path={Astro.url.pathname}
+  />
+  <BreadcrumbSchema items={[{ name: 'Blog', path: '/blog' }, { name: title }]} />
 
   <article class="post">
     <!-- Post Header -->

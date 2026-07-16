@@ -8,6 +8,7 @@ import GlassCard from '../components/GlassCard.astro';
 import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 
 const features = [
   {
@@ -99,6 +100,7 @@ const faqItems = [
     serviceType="Κατασκευή Ιστοσελίδων & Landing Pages"
     description="Γρήγορες, καθαρές ιστοσελίδες και landing pages με custom σχεδιασμό και SEO από την πρώτη γραμμή κώδικα."
   />
+  <BreadcrumbSchema items={[{ name: 'Υπηρεσίες', path: '/services' }, { name: 'Ιστοσελίδες & Landing Pages' }]} />
 
   <!-- Hero -->
   <section class="lp-hero">

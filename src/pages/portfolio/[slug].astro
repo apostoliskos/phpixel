@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PreFooterCta from '../../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 import { projects, type Project } from '../../data/portfolio';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 
 // Prerender as static — portfolio entries δεν αλλάζουν συχνά
 export const prerender = true;
@@ -49,6 +50,7 @@ const next = projects[(idx + 1) % projects.length];
     about: project.industry,
     keywords: project.tags.join(', '),
   })} />
+  <BreadcrumbSchema items={[{ name: 'Portfolio', path: '/portfolio' }, { name: project.name }]} />
 
   <!-- ============== HERO ============== -->
   <section class="cs-hero" style={`--cs-accent: ${project.accent}`}>

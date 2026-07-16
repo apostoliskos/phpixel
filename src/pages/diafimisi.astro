@@ -8,6 +8,7 @@ import GlassCard from '../components/GlassCard.astro';
 import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 
 const features = [
   {
@@ -87,6 +88,7 @@ const faqItems = [
     serviceType="Google Ads & Social Media Διαφήμιση"
     description="Διαχείριση Google Ads (Search & Shopping), Meta ads και οργανικού περιεχομένου με μετρήσιμο αποτέλεσμα."
   />
+  <BreadcrumbSchema items={[{ name: 'Υπηρεσίες', path: '/services' }, { name: 'Google Ads & Social' }]} />
 
   <!-- Hero -->
   <section class="smm-hero">

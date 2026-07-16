@@ -8,6 +8,7 @@ import GlassCard from '../components/GlassCard.astro';
 import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 
 const features = [
   {
@@ -72,6 +73,7 @@ const faqItems = [
     serviceType="Email Marketing"
     description="Αυτοματισμοί email για e-shop: εγκαταλελειμμένα καλάθια, welcome series, newsletters και win-back flows."
   />
+  <BreadcrumbSchema items={[{ name: 'Υπηρεσίες', path: '/services' }, { name: 'Email Marketing' }]} />
 
   <!-- Hero -->
   <section class="em-hero">

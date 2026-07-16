@@ -8,6 +8,7 @@ import GlassCard from '../components/GlassCard.astro';
 import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 
 const features = [
   {
@@ -99,6 +100,7 @@ const faqItems = [
     serviceType="SEO & AEO"
     description="SEO για e-shop και εταιρικά sites: on-page, technical και περιεχόμενο, μαζί με βελτιστοποίηση για AI αναζήτηση (AEO/GEO)."
   />
+  <BreadcrumbSchema items={[{ name: 'Υπηρεσίες', path: '/services' }, { name: 'SEO & AEO' }]} />
 
   <!-- Hero -->
   <section class="seo-hero">
