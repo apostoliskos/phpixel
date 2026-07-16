@@ -31,7 +31,7 @@ const updated = updatedDate && updatedDate !== publishDate ? fmt(updatedDate) : 
     {(published || updated) && (
       <span class="author-block__dates">
         {published && <>Δημοσιεύτηκε: <time>{published}</time></>}
-        {updated && <> · Ενημερώθηκε: <time>{updated}</time></>}
+        {updated && <> | Ενημερώθηκε: <time>{updated}</time></>}
       </span>
     )}
   </div>

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PreFooterCta from '../../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 import { projects, type Project } from '../../data/portfolio';
 import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
@@ -28,7 +27,7 @@ const next = projects[(idx + 1) % projects.length];
 ---
 
 <BaseLayout
-  title={`${project.name} — Case Study | phpixel`}
+  title={`${project.name} Case Study | phpixel`}
   description={project.tagline}
   image={project.hero}
   darkHero={true}
@@ -66,7 +65,7 @@ const next = projects[(idx + 1) % projects.length];
       </a>
 
       <div class="cs-hero__content reveal">
-        <span class="cs-hero__category">{project.category} · {project.year}</span>
+        <span class="cs-hero__category">{project.category} | {project.year}</span>
         <h1 class="cs-hero__title">{project.name}</h1>
         <p class="cs-hero__tagline">{project.tagline}</p>
 
@@ -161,7 +160,7 @@ const next = projects[(idx + 1) % projects.length];
           <span class="cs-eyebrow">Τι κάναμε</span>
           <h2 class="cs-h2">Υπηρεσίες & τεχνολογίες.</h2>
           <p class="cs-sub">
-            Από τη στρατηγική και τον σχεδιασμό μέχρι το launch — όλα από μία
+            Από τη στρατηγική και τον σχεδιασμό μέχρι το launch, όλα από μία
             ομάδα, χωρίς διασκορπισμένα tools.
           </p>
         </div>
@@ -215,7 +214,7 @@ const next = projects[(idx + 1) % projects.length];
           <p class="cs-quote__text">“{project.quote.text}”</p>
           <footer class="cs-quote__footer">
             <strong>{project.quote.author}</strong>
-            {project.quote.role && <span>· {project.quote.role}</span>}
+            {project.quote.role && <span>, {project.quote.role}</span>}
           </footer>
         </blockquote>
       </div>
@@ -244,8 +243,6 @@ const next = projects[(idx + 1) % projects.length];
     </div>
   </section>
 
-  <!-- ============== CTA ============== -->
-  <PreFooterCta />
 </BaseLayout>
 
 <style>

@@ -4,7 +4,6 @@ export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 import { SHOW_TEAM } from '../config';
 import { publicImageExists } from '../utils/publicImages';
@@ -38,7 +37,7 @@ const founderImageExists = publicImageExists(founderImage);
 
 <BaseLayout
   title="Ποιοι Είμαστε | phpixel"
-  description="Η phpixel είναι μικρή — επίτηδες. Ένας υπεύθυνος με 10+ χρόνια στο e-commerce και επιλεγμένοι συνεργάτες ανά project. Μιλάς με αυτόν που φτιάχνει τη δουλειά."
+  description="Η phpixel είναι μικρή, επίτηδες. Ένας υπεύθυνος με 10+ χρόνια στο e-commerce και επιλεγμένοι συνεργάτες ανά project. Μιλάς με αυτόν που φτιάχνει τη δουλειά."
 >
 
   <!-- Hero -->
@@ -52,7 +51,7 @@ const founderImageExists = publicImageExists(founderImage);
           <span class="accent-text">όχι τμήματα.</span>
         </h1>
         <p class="about-hero__sub">
-          Η phpixel είναι μικρή — επίτηδες. Χωρίς ενδιάμεσους project managers,
+          Η phpixel είναι μικρή, επίτηδες. Χωρίς ενδιάμεσους project managers,
           χωρίς tickets. Μιλάς με αυτόν που φτιάχνει τη δουλειά.
         </p>
       </div>
@@ -66,12 +65,12 @@ const founderImageExists = publicImageExists(founderImage);
         <SectionHeader title="Η Ιστορία μας" subtitle="Πώς ξεκίνησε" align="left" />
         <p>
           Η phpixel ξεκίνησε από έναν άνθρωπο με πάνω από δέκα χρόνια μέσα στο
-          e-commerce — πρώτα χτίζοντας και συντηρώντας μεγάλα ηλεκτρονικά καταστήματα
+          e-commerce. Πρώτα χτίζοντας και συντηρώντας μεγάλα ηλεκτρονικά καταστήματα
           ως developer, μετά δίπλα σε ελληνικές επιχειρήσεις που ήθελαν να πουλήσουν
           online χωρίς να γίνουν τεχνικοί.
         </p>
         <p>
-          Σήμερα δουλεύουμε έτσι: σε κάθε project υπάρχει ένας σταθερός υπεύθυνος —
+          Σήμερα δουλεύουμε έτσι: σε κάθε project υπάρχει ένας σταθερός υπεύθυνος,
           ο ίδιος από την πρώτη κουβέντα μέχρι το launch και μετά. Ανάλογα με το τι
           χρειάζεται η δουλειά, μπαίνουν στην ομάδα επιλεγμένοι συνεργάτες: designer,
           marketer, κειμενογράφος. Πληρώνεις για δουλειά, όχι για οργανόγραμμα.
@@ -115,7 +114,7 @@ const founderImageExists = publicImageExists(founderImage);
                 <Icon name="ic:baseline-person" />
               </div>
             )}
-            <h3>Αποστόλης Κωστόπουλος — Ιδρυτής</h3>
+            <h3>Αποστόλης Κωστόπουλος, Ιδρυτής</h3>
             <p>10+ χρόνια στο e-commerce</p>
           </div>
           <!-- TODO: συμπλήρωσε τους συνεργάτες πριν ενεργοποιήσεις το SHOW_TEAM -->
@@ -124,14 +123,14 @@ const founderImageExists = publicImageExists(founderImage);
               <Icon name="ic:baseline-person" />
             </div>
             <h3>[Όνομα συνεργάτη]</h3>
-            <p>[Ρόλος — π.χ. Designer]</p>
+            <p>[Ρόλος, π.χ. Designer]</p>
           </div>
           <div class="team-card team-card--todo reveal">
             <div class="team-card__photo team-card__photo--placeholder" aria-hidden="true">
               <Icon name="ic:baseline-person" />
             </div>
             <h3>[Όνομα συνεργάτη]</h3>
-            <p>[Ρόλος — π.χ. Marketer]</p>
+            <p>[Ρόλος, π.χ. Marketer]</p>
           </div>
         </div>
       </div>
@@ -158,8 +157,6 @@ const founderImageExists = publicImageExists(founderImage);
     </div>
   </section>
 
-  <!-- CTA -->
-  <PreFooterCta />
 
 </BaseLayout>
 

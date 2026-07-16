@@ -93,7 +93,7 @@ export const projects: Project[] = [
     name: 'Angela Yfantidou',
     tagline: 'Premium portfolio site για επαγγελματία τελετουργό γάμου.',
     description:
-      'Σχεδιάσαμε και υλοποιήσαμε ένα μοντέρνο, premium portfolio site για την Angela Yfantidou — επαγγελματία τελετουργό γάμου. Στόχος ήταν μια αισθητική που να αντικατοπτρίζει την κομψότητα και τη σοβαρότητα του brand, με τεχνική απόδοση που να βάζει το site στις κορυφαίες θέσεις των αναζητήσεων.',
+      'Σχεδιάσαμε και υλοποιήσαμε ένα μοντέρνο, premium portfolio site για την Angela Yfantidou, επαγγελματία τελετουργό γάμου. Στόχος ήταν μια αισθητική που να αντικατοπτρίζει την κομψότητα και τη σοβαρότητα του brand, με τεχνική απόδοση που να βάζει το site στις κορυφαίες θέσεις των αναζητήσεων.',
     industry: 'Wedding & Events',
     category: 'Website',
     year: 2025,
@@ -234,7 +234,7 @@ export const projects: Project[] = [
     ],
     metrics: [],
     highlights: [
-      'Online ραντεβού όποια ώρα βολεύει τον ασθενή — λιγότερα χαμένα τηλεφωνήματα',
+      'Online ραντεβού όποια ώρα βολεύει τον ασθενή, λιγότερα χαμένα τηλεφωνήματα',
       'Local SEO που φέρνει ασθενείς από Καρδίτσα & γύρω περιοχή',
       'GDPR-compliant: cookies, φόρμες, ιατρικά δεδομένα',
       'Responsive design για ασθενείς που μπαίνουν από κινητό',
@@ -252,7 +252,7 @@ export const projects: Project[] = [
     tagline:
       'Ολοκληρωμένο e-shop φυσικών καλλυντικών με πλήρες σύστημα filtering & email marketing.',
     description:
-      'Η Mian Natural Cosmetics χρειαζόταν ένα e-shop που να αναδεικνύει τη natural / sustainable ταυτότητά της και ταυτόχρονα να διαχειρίζεται έναν μεγάλο κατάλογο προϊόντων. Στήσαμε ολόκληρη την υποδομή — από τη δομή του καταλόγου και τα multi-attribute φίλτρα μέχρι τα αυτόματα email flows που φέρνουν τους πελάτες πίσω.',
+      'Η Mian Natural Cosmetics χρειαζόταν ένα e-shop που να αναδεικνύει τη natural / sustainable ταυτότητά της και ταυτόχρονα να διαχειρίζεται έναν μεγάλο κατάλογο προϊόντων. Στήσαμε ολόκληρη την υποδομή: από τη δομή του καταλόγου και τα multi-attribute φίλτρα μέχρι τα αυτόματα email flows που φέρνουν τους πελάτες πίσω.',
     industry: 'Beauty & Cosmetics',
     category: 'E-shop',
     year: 2024,
@@ -353,7 +353,7 @@ export const projects: Project[] = [
     highlights: [
       'Photo-led κατηγορίες που μειώνουν το decision fatigue',
       'Google Shopping feed με auto-sync τιμών & stock',
-      'Σύνδεση με ERP — μηδέν υπερπώληση',
+      'Σύνδεση με ERP, μηδέν υπερπώληση',
       'Σελίδες προϊόντων σχεδιασμένες για conversions',
     ],
     accent: '#2f6b4a',

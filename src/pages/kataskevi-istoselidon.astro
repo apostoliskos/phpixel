@@ -5,7 +5,6 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
@@ -14,7 +13,7 @@ const features = [
   {
     icon: 'ic:baseline-web',
     title: 'Custom σχεδιασμός',
-    desc: 'Σχεδιασμός πάνω στο brand σου — όχι έτοιμο template που έχουν άλλοι πενήντα.',
+    desc: 'Σχεδιασμός πάνω στο brand σου, όχι έτοιμο template που έχουν άλλοι πενήντα.',
     accent: 'var(--accent-blue)',
   },
   {
@@ -26,7 +25,7 @@ const features = [
   {
     icon: 'ic:baseline-speed',
     title: 'Ταχύτητα',
-    desc: 'Σελίδες που φορτώνουν αστραπιαία. Ο επισκέπτης δεν περιμένει — και η Google το μετράει.',
+    desc: 'Σελίδες που φορτώνουν αστραπιαία. Ο επισκέπτης δεν περιμένει, και η Google το μετράει.',
     accent: 'var(--accent-emerald)',
   },
   {
@@ -50,7 +49,7 @@ const features = [
   {
     icon: 'ic:baseline-edit',
     title: 'Έτοιμο για A/B δοκιμές',
-    desc: 'Δοκιμές σε τίτλους και κουμπιά, ώστε η σελίδα να βελτιώνεται με δεδομένα — όχι με εικασίες.',
+    desc: 'Δοκιμές σε τίτλους και κουμπιά, ώστε η σελίδα να βελτιώνεται με δεδομένα, όχι με εικασίες.',
     accent: 'var(--accent-violet)',
   },
   {
@@ -64,7 +63,7 @@ const features = [
 const pageTypes = [
   {
     name: 'Lead Generation',
-    desc: 'Σελίδες που μαζεύουν αιτήματα και ραντεβού — για υπηρεσίες και B2B.',
+    desc: 'Σελίδες που μαζεύουν αιτήματα και ραντεβού, για υπηρεσίες και B2B.',
   },
   {
     name: 'Product Launch',
@@ -72,18 +71,18 @@ const pageTypes = [
   },
   {
     name: 'Event & Promo',
-    desc: 'Σελίδες για events, προσφορές και καμπάνιες — με έναν στόχο τη φορά.',
+    desc: 'Σελίδες για events, προσφορές και καμπάνιες, με έναν στόχο τη φορά.',
   },
 ];
 
 const faqItems = [
   {
     q: 'Πόσο κοστίζει μια ιστοσελίδα;',
-    a: 'Εξαρτάται από το μέγεθος και το τι πρέπει να κάνει: πόσες σελίδες, πόσο custom ο σχεδιασμός, φόρμες, κρατήσεις, πολλές γλώσσες. Θα σου πούμε καθαρά τι χρειάζεσαι — και τι μπορείς να αφήσεις για αργότερα. Παίρνεις αναλυτική προσφορά χωρίς κρυφά κόστη.',
+    a: 'Εξαρτάται από το μέγεθος και το τι πρέπει να κάνει: πόσες σελίδες, πόσο custom ο σχεδιασμός, φόρμες, κρατήσεις, πολλές γλώσσες. Θα σου πούμε καθαρά τι χρειάζεσαι, και τι μπορείς να αφήσεις για αργότερα. Παίρνεις αναλυτική προσφορά χωρίς κρυφά κόστη.',
   },
   {
     q: 'Σε πόσο καιρό θα είναι έτοιμη;',
-    a: 'Συνήθως 2–4 εβδομάδες, ανάλογα με το περιεχόμενο και τον αριθμό των σελίδων. Θα έχεις preview link από νωρίς, για να βλέπεις την πρόοδο — όχι έκπληξη στο τέλος.',
+    a: 'Συνήθως 2–4 εβδομάδες, ανάλογα με το περιεχόμενο και τον αριθμό των σελίδων. Θα έχεις preview link από νωρίς, για να βλέπεις την πρόοδο, όχι έκπληξη στο τέλος.',
   },
   {
     q: 'Θα μπορώ να αλλάζω μόνος μου κείμενα και εικόνες;',
@@ -114,7 +113,7 @@ const faqItems = [
           <span class="accent-text">Landing Pages</span>
         </h1>
         <p class="lp-hero__sub">
-          Η ιστοσελίδα σου είναι συχνά η πρώτη εντύπωση — και δεν υπάρχει δεύτερη
+          Η ιστοσελίδα σου είναι συχνά η πρώτη εντύπωση, και δεν υπάρχει δεύτερη
           ευκαιρία γι’ αυτήν. Γι’ αυτό η δημιουργία ιστοσελίδας για εμάς σημαίνει
           σελίδες που φορτώνουν αστραπιαία, δείχνουν καθαρά τι προσφέρεις και οδηγούν
           τον επισκέπτη εκεί που θες: σε επικοινωνία, ραντεβού ή αγορά.
@@ -125,7 +124,7 @@ const faqItems = [
       <div class="lp-hero__platforms reveal" style="transition-delay: 0.2s">
         {pageTypes.map((p) => (
           <div class="platform-card">
-            <p class="platform-card__title">{p.name}</p>
+            <h3 class="platform-card__title">{p.name}</h3>
             <p>{p.desc}</p>
           </div>
         ))}
@@ -138,7 +137,7 @@ const faqItems = [
     <div class="container">
       <div class="reveal">
         <SectionHeader title="Τι περιλαμβάνει" subtitle="Ιστοσελίδες & Landing Pages">
-          Κάθε σελίδα που φτιάχνουμε έχει έναν σκοπό: να φέρνει πελάτες — όχι απλώς επισκέψεις.
+          Κάθε σελίδα που φτιάχνουμε έχει έναν σκοπό: να φέρνει πελάτες, όχι απλώς επισκέψεις.
         </SectionHeader>
       </div>
 
@@ -162,7 +161,7 @@ const faqItems = [
     <div class="container lp-corporate__inner reveal">
       <h3>Εταιρικές ιστοσελίδες</h3>
       <p>
-        Οι πελάτες σε ψάχνουν στην Google πριν σε πάρουν τηλέφωνο — και σε κρίνουν
+        Οι πελάτες σε ψάχνουν στην Google πριν σε πάρουν τηλέφωνο, και σε κρίνουν
         από αυτό που θα δουν. Μια εταιρική ιστοσελίδα από εμάς παρουσιάζει καθαρά τις
         υπηρεσίες και τη δουλειά σου, με δομή που καταλαβαίνει η Google και κείμενα
         που οδηγούν σε επικοινωνία. Χωρίς περιττά εφέ που βαραίνουν τη σελίδα.
@@ -173,8 +172,6 @@ const faqItems = [
   <!-- FAQ -->
   <FaqSection items={faqItems} title="Συχνές ερωτήσεις για ιστοσελίδες" />
 
-  <!-- CTA -->
-  <PreFooterCta />
 
 </BaseLayout>
 

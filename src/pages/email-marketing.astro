@@ -5,7 +5,6 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
@@ -14,7 +13,7 @@ const features = [
   {
     icon: 'ic:baseline-remove-shopping-cart',
     title: 'Εγκαταλελειμμένα καλάθια',
-    desc: 'Τα περισσότερα καλάθια μένουν στη μέση. Ένα σωστό αυτόματο email φέρνει πίσω ένα σημαντικό μέρος τους — διακριτικά, όχι εκβιαστικά.',
+    desc: 'Τα περισσότερα καλάθια μένουν στη μέση. Ένα σωστό αυτόματο email φέρνει πίσω ένα σημαντικό μέρος τους, διακριτικά, όχι εκβιαστικά.',
     accent: 'var(--accent-blue)',
   },
   {
@@ -26,7 +25,7 @@ const features = [
   {
     icon: 'ic:baseline-mail',
     title: 'Newsletters',
-    desc: 'Όχι spam — περιεχόμενο που ανοίγεται. Newsletters με λόγο ύπαρξης: νέα προϊόντα, προσφορές, ιστορίες.',
+    desc: 'Όχι spam, περιεχόμενο που ανοίγεται. Newsletters με λόγο ύπαρξης: νέα προϊόντα, προσφορές, ιστορίες.',
     accent: 'var(--accent-violet)',
   },
   {
@@ -43,8 +42,8 @@ const features = [
   },
   {
     icon: 'ic:baseline-verified-user',
-    title: 'GDPR — σωστά και νόμιμα',
-    desc: 'Συναίνεση, εύκολη διαγραφή, καθαρές λίστες. Προστατεύεις τους πελάτες σου — και το brand σου.',
+    title: 'GDPR: σωστά και νόμιμα',
+    desc: 'Συναίνεση, εύκολη διαγραφή, καθαρές λίστες. Προστατεύεις τους πελάτες σου και το brand σου.',
     accent: 'var(--accent-blue)',
   },
 ];
@@ -52,15 +51,15 @@ const features = [
 const faqItems = [
   {
     q: 'Χρειάζομαι μεγάλη λίστα για να αξίζει;',
-    a: 'Όχι. Οι αυτοματισμοί — καλάθι, welcome, follow-up — δουλεύουν από τον πρώτο εγγεγραμμένο, γιατί στέλνουν στη σωστή στιγμή, όχι σε πλήθος. Μια μικρή λίστα από πραγματικούς πελάτες αξίζει περισσότερο από χιλιάδες αγορασμένες διευθύνσεις — τις οποίες, παρεμπιπτόντως, δεν αγγίζουμε ποτέ.',
+    a: 'Όχι. Οι αυτοματισμοί (καλάθι, welcome, follow-up) δουλεύουν από τον πρώτο εγγεγραμμένο, γιατί στέλνουν στη σωστή στιγμή, όχι σε πλήθος. Μια μικρή λίστα από πραγματικούς πελάτες αξίζει περισσότερο από χιλιάδες αγορασμένες διευθύνσεις, τις οποίες παρεμπιπτόντως δεν αγγίζουμε ποτέ.',
   },
   {
     q: 'Με ποια εργαλεία δουλεύετε;',
-    a: 'Με όποιο ταιριάζει στο μέγεθος και το budget σου — έχουμε στήσει flows σε διάφορες πλατφόρμες, από απλές έως πιο προχωρημένες. Αν έχεις ήδη εργαλείο, συνεχίζουμε εκεί. Αν όχι, θα σου προτείνουμε κάτι που δεν πληρώνεις άδικα.',
+    a: 'Με όποιο ταιριάζει στο μέγεθος και το budget σου. Έχουμε στήσει flows σε διάφορες πλατφόρμες, από απλές έως πιο προχωρημένες. Αν έχεις ήδη εργαλείο, συνεχίζουμε εκεί. Αν όχι, θα σου προτείνουμε κάτι που δεν πληρώνεις άδικα.',
   },
   {
     q: 'Ποιος γράφει τα κείμενα των email;',
-    a: 'Εμείς — μαζί σου. Εσύ ξέρεις τους πελάτες σου και τα προϊόντα σου· εμείς ξέρουμε τι δουλεύει σε ένα email. Θα τα δεις και θα τα εγκρίνεις πριν φύγει οτιδήποτε.',
+    a: 'Εμείς, μαζί σου. Εσύ ξέρεις τους πελάτες σου και τα προϊόντα σου. Εμείς ξέρουμε τι δουλεύει σε ένα email. Θα τα δεις και θα τα εγκρίνεις πριν φύγει οτιδήποτε.',
   },
 ];
 ---
@@ -87,7 +86,7 @@ const faqItems = [
           <span class="accent-text">φέρνει πελάτες πίσω</span>
         </h1>
         <p class="em-hero__sub">
-          Το email είναι το πιο υποτιμημένο κανάλι του e-commerce — και συνήθως αυτό
+          Το email είναι το πιο υποτιμημένο κανάλι του e-commerce, και συνήθως αυτό
           με την καλύτερη απόδοση ανά ευρώ. Στήνουμε αυτοματισμούς που δουλεύουν στο
           παρασκήνιο: υπενθυμίζουν το ξεχασμένο καλάθι, καλωσορίζουν τον νέο πελάτη,
           ξαναφέρνουν τον παλιό.
@@ -101,7 +100,7 @@ const faqItems = [
     <div class="container">
       <div class="reveal">
         <SectionHeader title="Τι περιλαμβάνει" subtitle="Email Marketing">
-          Από την τεχνική βάση μέχρι τα κείμενα — αυτοματισμοί που στήνονται μία φορά και δουλεύουν κάθε μέρα.
+          Από την τεχνική βάση μέχρι τα κείμενα: αυτοματισμοί που στήνονται μία φορά και δουλεύουν κάθε μέρα.
         </SectionHeader>
       </div>
 
@@ -119,7 +118,7 @@ const faqItems = [
       </div>
 
       <p class="em-proof reveal">
-        Τρέχουν ήδη σε e-shops που έχουμε φτιάξει — δες τη
+        Τρέχουν ήδη σε e-shops που έχουμε φτιάξει. Δες τη
         <a href="/portfolio/mian-natural-cosmetics">Mian Natural Cosmetics</a> και την
         <a href="/portfolio/aporelli-artworks">Aporelli Artworks</a> στο portfolio.
       </p>
@@ -129,8 +128,6 @@ const faqItems = [
   <!-- FAQ -->
   <FaqSection items={faqItems} title="Συχνές ερωτήσεις για το email marketing" />
 
-  <!-- CTA -->
-  <PreFooterCta />
 
 </BaseLayout>
 

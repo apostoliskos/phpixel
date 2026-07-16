@@ -18,7 +18,7 @@ export interface Props {
 }
 
 const {
-  title = `${site.name} — ${site.tagline}`,
+  title = `${site.name} | ${site.tagline}`,
   description = site.description,
   image = '/social.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.site).toString(),
@@ -179,11 +179,7 @@ const currentPath = Astro.url.pathname;
           <span class="logo-text logo-text--footer">ph<span class="logo-accent">pixel</span></span>
           <p class="footer__tagline">{site.tagline}</p>
           <p class="footer__contact">
-            <a href={`tel:+30${site.contact.phone}`}>{site.contact.phoneDisplay}</a>
-            <span class="footer__contact-sep">·</span>
             <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-            <span class="footer__contact-sep">·</span>
-            <span>{site.contact.address}</span>
           </p>
           <div class="footer__socials">
             {footerSocials.map((social) => (
@@ -209,7 +205,7 @@ const currentPath = Astro.url.pathname;
       <div class="footer__bottom">
         <p>
           &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
-          <span class="footer__bottom-sep">·</span>
+          <span class="footer__bottom-sep">|</span>
           <button type="button" class="footer__cookie-settings" data-cookie-settings>Ρυθμίσεις cookies</button>
         </p>
       </div>

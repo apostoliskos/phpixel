@@ -5,7 +5,6 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GlassCard from '../components/GlassCard.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
@@ -26,7 +25,7 @@ const features = [
   {
     icon: 'ic:baseline-ads-click',
     title: 'Meta Ads',
-    desc: 'Facebook και Instagram για να σε ανακαλύψουν νέοι πελάτες — και remarketing για να ξαναδούν όσοι δεν αγόρασαν την πρώτη φορά.',
+    desc: 'Facebook και Instagram για να σε ανακαλύψουν νέοι πελάτες, και remarketing για να ξαναδούν όσοι δεν αγόρασαν την πρώτη φορά.',
     accent: 'var(--accent-violet)',
   },
   {
@@ -60,14 +59,14 @@ const channels = [
   },
   {
     name: 'Οργανικό περιεχόμενο',
-    desc: 'Σταθερή, καθαρή παρουσία στα κανάλια σου — υποστηρίζει τη διαφήμιση, δεν την αντικαθιστά.',
+    desc: 'Σταθερή, καθαρή παρουσία στα κανάλια σου: υποστηρίζει τη διαφήμιση, δεν την αντικαθιστά.',
   },
 ];
 
 const faqItems = [
   {
     q: 'Πόσο budget χρειάζομαι για διαφήμιση;',
-    a: 'Εξαρτάται από τον κλάδο και τον ανταγωνισμό — αλλά δεν χρειάζεσαι τεράστια ποσά για να ξεκινήσεις. Ξεκινάμε με λογικό δοκιμαστικό budget, βλέπουμε τι αποδίδει και κλιμακώνουμε αυτό που δουλεύει. Θα σου πούμε ειλικρινά αν το budget που σκέφτεσαι δεν φτάνει για τον στόχο σου.',
+    a: 'Εξαρτάται από τον κλάδο και τον ανταγωνισμό, αλλά δεν χρειάζεσαι τεράστια ποσά για να ξεκινήσεις. Ξεκινάμε με λογικό δοκιμαστικό budget, βλέπουμε τι αποδίδει και κλιμακώνουμε αυτό που δουλεύει. Θα σου πούμε ειλικρινά αν το budget που σκέφτεσαι δεν φτάνει για τον στόχο σου.',
   },
   {
     q: 'Σε πόσο καιρό θα δω αποτελέσματα;',
@@ -103,7 +102,7 @@ const faqItems = [
         </h1>
         <p class="smm-hero__sub">
           Δεν υποσχόμαστε «viral». Υποσχόμαστε να ξέρεις πάντα τι ξοδεύεις και τι σου
-          φέρνει πίσω. Αναλαμβάνουμε τη διαχείριση Google Ads και Meta καμπανιών —
+          φέρνει πίσω. Αναλαμβάνουμε τη διαχείριση Google Ads και Meta καμπανιών,
           και τις φροντίζουμε κάθε μήνα, όχι μόνο στο στήσιμο.
         </p>
       </div>
@@ -112,7 +111,7 @@ const faqItems = [
       <div class="smm-hero__platforms reveal" style="transition-delay: 0.2s">
         {channels.map((p) => (
           <div class="platform-card">
-            <p class="platform-card__title">{p.name}</p>
+            <h3 class="platform-card__title">{p.name}</h3>
             <p>{p.desc}</p>
           </div>
         ))}
@@ -125,7 +124,7 @@ const faqItems = [
     <div class="container">
       <div class="reveal">
         <SectionHeader title="Τι περιλαμβάνει" subtitle="Google Ads & Social">
-          Διαφήμιση με σχέδιο και μέτρηση — από το στήσιμο μέχρι τη συνεχή φροντίδα των καμπανιών.
+          Διαφήμιση με σχέδιο και μέτρηση: από το στήσιμο μέχρι τη συνεχή φροντίδα των καμπανιών.
         </SectionHeader>
       </div>
 
@@ -147,8 +146,6 @@ const faqItems = [
   <!-- FAQ -->
   <FaqSection items={faqItems} title="Συχνές ερωτήσεις για τη διαφήμιση" />
 
-  <!-- CTA -->
-  <PreFooterCta />
 
 </BaseLayout>
 

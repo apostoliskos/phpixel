@@ -9,7 +9,6 @@ import { projects } from '../data/portfolio';
 import { testimonials } from '../data/testimonials';
 import { SHOW_TESTIMONIALS } from '../config';
 import FaqSection from '../components/FaqSection.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import WebSiteSchema from '../components/schema/WebSiteSchema.astro';
 import { publicImageExists } from '../utils/publicImages';
 
@@ -18,7 +17,7 @@ const services = [
     icon: 'ic:baseline-shopping-cart',
     title: 'Κατασκευή E-shop',
     href: '/kataskevi-eshop',
-    desc: 'Ηλεκτρονικά καταστήματα που μετατρέπουν επισκέπτες σε πελάτες. WooCommerce ή custom κατασκευή — διαλέγουμε ό,τι ταιριάζει στο προϊόν σου, όχι ό,τι μας βολεύει.',
+    desc: 'Ηλεκτρονικά καταστήματα που μετατρέπουν επισκέπτες σε πελάτες. WooCommerce ή custom κατασκευή: διαλέγουμε ό,τι ταιριάζει στο προϊόν σου, όχι ό,τι μας βολεύει.',
     chips: ['WooCommerce', 'Custom', 'ERP', 'B2C & B2B'],
     variant: 'eshop',
   },
@@ -34,7 +33,7 @@ const services = [
     icon: 'ic:baseline-search',
     title: 'SEO & AEO',
     href: '/seo',
-    desc: 'Να σε βρίσκουν όσοι σε ψάχνουν — στην Google και στα AI εργαλεία που πλέον προτείνουν προϊόντα και επιχειρήσεις.',
+    desc: 'Να σε βρίσκουν όσοι σε ψάχνουν, στην Google και στα AI εργαλεία που πλέον προτείνουν προϊόντα και επιχειρήσεις.',
     chips: ['On-page', 'Technical', 'AEO/GEO'],
     variant: 'seo',
   },
@@ -50,7 +49,7 @@ const services = [
     icon: 'ic:baseline-ads-click',
     title: 'Google Ads & Social',
     href: '/diafimisi',
-    desc: 'Διαφήμιση με μετρήσιμο αποτέλεσμα. Ξέρεις τι ξοδεύεις — και τι σου φέρνει πίσω.',
+    desc: 'Διαφήμιση με μετρήσιμο αποτέλεσμα. Ξέρεις τι ξοδεύεις και τι σου φέρνει πίσω.',
     chips: ['Google Ads', 'Meta', 'Reporting'],
     variant: 'ads',
   },
@@ -68,7 +67,7 @@ const processSteps = [
   {
     num: '01',
     title: 'Γνωριμία',
-    desc: 'Μιλάμε για τους στόχους σου, βλέπουμε τον ανταγωνισμό και καταλαβαίνουμε τι πραγματικά χρειάζεσαι — και τι όχι.',
+    desc: 'Μιλάμε για τους στόχους σου, βλέπουμε τον ανταγωνισμό και καταλαβαίνουμε τι πραγματικά χρειάζεσαι και τι όχι.',
   },
   {
     num: '02',
@@ -78,7 +77,7 @@ const processSteps = [
   {
     num: '03',
     title: 'Κατασκευή',
-    desc: 'Καθαρός κώδικας, πρώτα το κινητό. Βλέπεις την πρόοδο σε κάθε βήμα — όχι έκπληξη στο τέλος.',
+    desc: 'Καθαρός κώδικας, πρώτα το κινητό. Βλέπεις την πρόοδο σε κάθε βήμα, χωρίς εκπλήξεις στο τέλος.',
   },
   {
     num: '04',
@@ -90,11 +89,11 @@ const processSteps = [
 const faqItems = [
   {
     q: 'Πόσο κοστίζει ένα e-shop;',
-    a: 'Εξαρτάται από το τι χρειάζεσαι: πόσα προϊόντα έχεις, αν θες σύνδεση με ERP, courier ή Skroutz, πόσο custom θα είναι ο σχεδιασμός. Στην ελληνική αγορά οι τιμές έχουν τεράστιο εύρος — γι’ αυτό δεν πετάμε νούμερα στα τυφλά. Θα δούμε μαζί τι πραγματικά χρειάζεσαι (και τι όχι) και θα πάρεις αναλυτική προσφορά χωρίς κρυφά κόστη. Η πρώτη κουβέντα είναι δωρεάν.',
+    a: 'Εξαρτάται από το τι χρειάζεσαι: πόσα προϊόντα έχεις, αν θες σύνδεση με ERP, courier ή Skroutz, πόσο custom θα είναι ο σχεδιασμός. Στην ελληνική αγορά οι τιμές έχουν τεράστιο εύρος, γι’ αυτό δεν πετάμε νούμερα στα τυφλά. Θα δούμε μαζί τι πραγματικά χρειάζεσαι (και τι όχι) και θα πάρεις αναλυτική προσφορά χωρίς κρυφά κόστη. Η πρώτη κουβέντα δεν σε δεσμεύει σε τίποτα.',
   },
   {
     q: 'Σε πόσο καιρό θα είναι έτοιμο;',
-    a: 'Ιστοσελίδα: συνήθως 2–4 εβδομάδες. E-shop: 3–6 εβδομάδες. Custom εφαρμογή: 1–3 μήνες. Θα σου πούμε ρεαλιστικό χρονοδιάγραμμα από την αρχή — όχι αυτό που θες να ακούσεις.',
+    a: 'Ιστοσελίδα: συνήθως 2–4 εβδομάδες. E-shop: 3–6 εβδομάδες. Custom εφαρμογή: 1–3 μήνες. Θα σου πούμε ρεαλιστικό χρονοδιάγραμμα από την αρχή, όχι αυτό που θες να ακούσεις.',
   },
   {
     q: 'Θα μπορώ να διαχειρίζομαι μόνος μου το περιεχόμενο;',
@@ -102,7 +101,7 @@ const faqItems = [
   },
   {
     q: 'Έχω ήδη e-shop που δεν αποδίδει. Το αναλαμβάνετε;',
-    a: 'Ναι — και είναι από τις πιο συχνές δουλειές μας. Ξεκινάμε με έναν έλεγχο σε ταχύτητα, SEO και εμπειρία αγοράς, και σου λέμε τι φταίει και τι αξίζει να διορθωθεί. Καμιά φορά δεν χρειάζεσαι καινούριο site· χρειάζεσαι το σωστό χέρι στο υπάρχον.',
+    a: 'Ναι, και είναι από τις πιο συχνές δουλειές μας. Ξεκινάμε με έναν έλεγχο σε ταχύτητα, SEO και εμπειρία αγοράς, και σου λέμε τι φταίει και τι αξίζει να διορθωθεί. Καμιά φορά δεν χρειάζεσαι καινούριο site, χρειάζεσαι το σωστό χέρι στο υπάρχον.',
   },
   {
     q: 'Συνδέεται το e-shop με το ERP ή το λογιστικό μου;',
@@ -110,15 +109,15 @@ const faqItems = [
   },
   {
     q: 'Τι γίνεται μετά το launch;',
-    a: 'Δεν εξαφανιζόμαστε. Αναλαμβάνουμε τη φροντίδα του site — ενημερώσεις, backups, ασφάλεια, φιλοξενία — με πακέτα υποστήριξης, ώστε να έχεις πάντα έναν άνθρωπο να παίρνει τηλέφωνο.',
+    a: 'Δεν εξαφανιζόμαστε. Αναλαμβάνουμε τη φροντίδα του site (ενημερώσεις, backups, ασφάλεια, φιλοξενία) με πακέτα υποστήριξης, ώστε να έχεις πάντα έναν άνθρωπο να παίρνει τηλέφωνο.',
   },
   {
     q: 'Κάνετε SEO;',
-    a: 'Κάθε site που φτιάχνουμε έχει γερές βάσεις SEO από την πρώτη μέρα. Προσφέρουμε και συνεχές SEO ως υπηρεσία — μαζί με βελτιστοποίηση για τις AI μηχανές αναζήτησης (AEO/GEO), εκεί όπου ψάχνουν όλο και περισσότεροι πελάτες σήμερα.',
+    a: 'Κάθε site που φτιάχνουμε έχει γερές βάσεις SEO από την πρώτη μέρα. Προσφέρουμε και συνεχές SEO ως υπηρεσία, μαζί με βελτιστοποίηση για τις AI μηχανές αναζήτησης (AEO/GEO), εκεί όπου ψάχνουν όλο και περισσότεροι πελάτες σήμερα.',
   },
   {
     q: 'Πού βρίσκεστε; Δουλεύετε πανελλαδικά;',
-    a: 'Η έδρα μας είναι στην Ελλάδα και δουλεύουμε με επιχειρήσεις σε όλη τη χώρα. Τα περισσότερα projects τρέχουν εξ ολοκλήρου online — κλήσεις, preview links, καθημερινή επικοινωνία.',
+    a: 'Η έδρα μας είναι στην Ελλάδα και δουλεύουμε με επιχειρήσεις σε όλη τη χώρα. Τα περισσότερα projects τρέχουν εξ ολοκλήρου online: κλήσεις, preview links, καθημερινή επικοινωνία.',
   },
 ];
 
@@ -128,7 +127,7 @@ const heroImageExists = publicImageExists(heroImage);
 
 <BaseLayout
   title="Κατασκευή E-shop & Ιστοσελίδων που Πουλάνε | phpixel"
-  description="Κατασκευή e-shop με WooCommerce ή custom, ιστοσελίδες, SEO και email marketing. Δουλεύουμε με επιχειρήσεις σε όλη την Ελλάδα — μιλάς με αυτόν που γράφει τον κώδικα."
+  description="Κατασκευή e-shop με WooCommerce ή custom, ιστοσελίδες, SEO και email marketing. Δουλεύουμε με επιχειρήσεις σε όλη την Ελλάδα. Μιλάς με αυτόν που γράφει τον κώδικα."
 >
   <WebSiteSchema />
 
@@ -137,16 +136,12 @@ const heroImageExists = publicImageExists(heroImage);
        ═══════════════════════════════════════════════ -->
   <section class="hero">
     <div class="container hero__container">
-      <div class="hero__badge reveal">
-        <span class="hero__badge-dot"></span>
-        Δεχόμαστε νέα projects
-      </div>
       <h1 class="hero__title reveal">
         Φτιάχνουμε e-shop και<br/>
         ιστοσελίδες που <em>πουλάνε</em>.
       </h1>
       <p class="hero__sub reveal">
-        Από την ιδέα μέχρι την πρώτη παραγγελία — και μετά. Σχεδιάζουμε, στήνουμε
+        Από την ιδέα μέχρι την πρώτη παραγγελία, και μετά. Σχεδιάζουμε, στήνουμε
         και φροντίζουμε την online παρουσία σου, για να ασχολείσαι εσύ με αυτό που
         ξέρεις καλύτερα: την επιχείρησή σου.
       </p>
@@ -200,8 +195,8 @@ const heroImageExists = publicImageExists(heroImage);
           <span>Μιλάς με αυτόν που γράφει τον κώδικα</span>
         </div>
         <div class="stats__item reveal">
-          <Icon name="ic:baseline-schedule" class="stats__icon" />
-          <span>Απάντηση εντός μίας εργάσιμης</span>
+          <Icon name="ic:baseline-receipt-long" class="stats__icon" />
+          <span>Προσφορά χωρίς κρυφά κόστη</span>
         </div>
       </div>
     </div>
@@ -272,7 +267,7 @@ const heroImageExists = publicImageExists(heroImage);
                 {src ? (
                   <img
                     src={src}
-                    alt={project.imageAlt ?? `Screenshot — ${project.name}`}
+                    alt={project.imageAlt ?? `Screenshot: ${project.name}`}
                     width="1200"
                     height="900"
                     loading="lazy"
@@ -348,7 +343,7 @@ const heroImageExists = publicImageExists(heroImage);
     <div class="container">
       <p class="tech__line">
         Δουλεύουμε με WordPress, WooCommerce, CS-Cart, Astro, React και Node.js. Αλλά το εργαλείο δεν κάνει
-        τη δουλειά — ο τρόπος που το χρησιμοποιείς, ναι. Γι' αυτό δεν διαλέγουμε τεχνολογίες από συνήθεια·
+        τη δουλειά. Ο τρόπος που το χρησιμοποιείς, ναι. Γι' αυτό δεν διαλέγουμε τεχνολογίες από συνήθεια,
         διαλέγουμε ό,τι ταιριάζει στο δικό σου έργο.
       </p>
     </div>
@@ -358,11 +353,6 @@ const heroImageExists = publicImageExists(heroImage);
        FAQ (με FAQPage schema)
        ═══════════════════════════════════════════════ -->
   <FaqSection items={faqItems} label="FAQ" title="Έχεις ερωτήσεις; Έχουμε απαντήσεις." />
-
-  <!-- ═══════════════════════════════════════════════
-       PRE-FOOTER CTA
-       ═══════════════════════════════════════════════ -->
-  <PreFooterCta />
 
 </BaseLayout>
 
@@ -405,28 +395,6 @@ const heroImageExists = publicImageExists(heroImage);
 
   .hero__container {
     max-width: 780px;
-  }
-
-  .hero__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.9rem 0.4rem 0.65rem;
-    background: var(--theme-surface-1);
-    border: 1px solid var(--theme-surface-2);
-    border-radius: 100px;
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--theme-on-bg);
-    margin-bottom: 1.75rem;
-  }
-
-  .hero__badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent-emerald);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
   }
 
   .hero__title {
@@ -488,6 +456,8 @@ const heroImageExists = publicImageExists(heroImage);
     font-size: 0.95rem;
     color: var(--theme-on-bg);
     opacity: 0.7;
+    text-decoration: underline;
+    text-underline-offset: 4px;
     transition: var(--theme-transition);
   }
 
@@ -646,9 +616,12 @@ const heroImageExists = publicImageExists(heroImage);
 
   .stats__item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 1.5rem;
+    justify-content: center;
+    text-align: center;
+    gap: 0.6rem;
+    padding: 1.5rem 1.25rem;
     background: var(--theme-surface-1);
     border-radius: 16px;
     font-weight: 600;
@@ -656,8 +629,8 @@ const heroImageExists = publicImageExists(heroImage);
   }
 
   .stats__icon {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     flex-shrink: 0;
     color: var(--accent-blue);
   }

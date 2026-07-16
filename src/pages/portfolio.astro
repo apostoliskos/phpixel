@@ -2,7 +2,6 @@
 export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import { Icon } from 'astro-icon/components';
 import { projects } from '../data/portfolio';
 import { publicImageExists } from '../utils/publicImages';
@@ -12,8 +11,8 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
 ---
 
 <BaseLayout
-  title="Portfolio — Έργα Ιστοσελίδων & E-shop | phpixel"
-  description="Δες ένα δείγμα από τα projects μας: e-shops, ιστοσελίδες και custom εφαρμογές για ελληνικές επιχειρήσεις. Όλα live — μπες και δες τα μόνος σου."
+  title="Portfolio: Έργα Ιστοσελίδων & E-shop | phpixel"
+  description="Δες ένα δείγμα από τα projects μας: e-shops, ιστοσελίδες και custom εφαρμογές για ελληνικές επιχειρήσεις. Όλα live. Μπες και δες τα μόνος σου."
 >
   <!-- Schema.org JSON-LD: CollectionPage -->
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
@@ -42,7 +41,7 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
           <span class="pf-hero__accent">μόνες τους.</span>
         </h1>
         <p class="pf-hero__sub">
-          Από premium sites μέχρι e-shops με μεγάλους καταλόγους — κάθε project
+          Από premium sites μέχρι e-shops με μεγάλους καταλόγους, κάθε project
           είναι live. Μπες, δες το, κρίνε μόνος σου.
         </p>
       </div>
@@ -94,7 +93,7 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
                 {src ? (
                   <img
                     src={src}
-                    alt={p.imageAlt ?? `Screenshot — ${p.name}`}
+                    alt={p.imageAlt ?? `Screenshot: ${p.name}`}
                     width="1200"
                     height="900"
                     loading={idx < 2 ? 'eager' : 'lazy'}
@@ -137,8 +136,6 @@ const categories = ['Όλα', ...Array.from(new Set(projects.map((p) => p.catego
     </div>
   </section>
 
-  <!-- ============== CTA ============== -->
-  <PreFooterCta />
 </BaseLayout>
 
 <!-- =========================================================== -->

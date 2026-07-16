@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="404 — Η Σελίδα Δεν Βρέθηκε | phpixel"
+  title="404: Η Σελίδα Δεν Βρέθηκε | phpixel"
   description="Η σελίδα που ψάχνεις δεν υπάρχει ή έχει μετακινηθεί."
 >
 
@@ -18,6 +18,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="error-desc">
           Η σελίδα που ψάχνεις δεν υπάρχει ή μετακόμισε αλλού.
         </p>
+        <img
+          src="/assets/images/error/travolta.gif"
+          alt="Ο Τζον Τραβόλτα κοιτάζει γύρω του μπερδεμένος"
+          width="498"
+          height="479"
+          class="error-gif"
+        />
         <div class="error-actions">
           <a href="/" class="btn btn--primary">Πίσω στην Αρχική</a>
           <a href="/services" class="btn btn--outline">Υπηρεσίες</a>
@@ -72,6 +79,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 1.1rem;
     opacity: 0.6;
     margin-bottom: 2rem;
+  }
+
+  .error-gif {
+    display: block;
+    width: min(300px, 70vw);
+    height: auto;
+    margin: 0 auto 2rem;
+    border-radius: 16px;
   }
 
   .error-actions {

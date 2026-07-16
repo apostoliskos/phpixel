@@ -4,7 +4,6 @@ export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import PreFooterCta from '../components/PreFooterCta.astro';
 import GlassCard from '../components/GlassCard.astro';
 import { Icon } from 'astro-icon/components';
 
@@ -24,7 +23,7 @@ const values = [
   {
     icon: 'ic:baseline-speed',
     title: 'Πρώτα η ταχύτητα',
-    desc: 'Σε έναν κόσμο που βιάζεται, κάθε δευτερόλεπτο μετράει. Φτιάχνουμε sites που «πετάνε» — βελτιστοποιημένα για ταχύτητα και SEO από την πρώτη γραμμή κώδικα.',
+    desc: 'Σε έναν κόσμο που βιάζεται, κάθε δευτερόλεπτο μετράει. Φτιάχνουμε sites που «πετάνε», βελτιστοποιημένα για ταχύτητα και SEO από την πρώτη γραμμή κώδικα.',
     accent: 'var(--accent-blue)',
   },
   {
@@ -40,7 +39,7 @@ const steps = [
     num: '01',
     icon: 'ic:baseline-chat',
     title: 'Γνωριμία & Ανάλυση',
-    desc: 'Ξεκινάμε με μια δωρεάν κουβέντα για να καταλάβουμε την επιχείρησή σου, τον κλάδο σου και τους στόχους σου. Η σωστή αρχή σημαίνει σωστό αποτέλεσμα.',
+    desc: 'Ξεκινάμε με μια κουβέντα γνωριμίας, χωρίς καμία δέσμευση, για να καταλάβουμε την επιχείρησή σου, τον κλάδο σου και τους στόχους σου. Η σωστή αρχή σημαίνει σωστό αποτέλεσμα.',
   },
   {
     num: '02',
@@ -70,13 +69,13 @@ const steps = [
     num: '06',
     icon: 'ic:baseline-support-agent',
     title: 'Μετά το launch',
-    desc: 'Δεν σε αφήνουμε. Φροντίδα, ενημερώσεις, backups και βελτιώσεις — το site σου έχει άνθρωπο.',
+    desc: 'Δεν σε αφήνουμε. Φροντίδα, ενημερώσεις, backups και βελτιώσεις. Το site σου έχει άνθρωπο.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Πώς Δουλεύουμε — Η Διαδικασία μας | phpixel"
+  title="Πώς Δουλεύουμε: Η Διαδικασία μας | phpixel"
   description="Από την πρώτη κουβέντα μέχρι το launch και μετά: πώς δουλεύουμε βήμα βήμα, με preview links, καθαρό χρονοδιάγραμμα και χωρίς εκπλήξεις."
 >
 
@@ -92,7 +91,7 @@ const steps = [
         </h1>
         <p class="hww-hero__sub">
           Η επικοινωνία είναι το Α και το Ω σε μια καλή συνεργασία.
-          Δες πώς δουλεύουμε — βήμα βήμα, χωρίς εκπλήξεις.
+          Δες πώς δουλεύουμε, βήμα βήμα, χωρίς εκπλήξεις.
         </p>
       </div>
     </div>
@@ -146,8 +145,6 @@ const steps = [
     </div>
   </section>
 
-  <!-- CTA -->
-  <PreFooterCta />
 
 </BaseLayout>
 
@@ -311,4 +308,3 @@ const steps = [
     .values-grid { grid-template-columns: 1fr; }
   }
 </style>
-        

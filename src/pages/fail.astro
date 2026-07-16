@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
 
 const c_status = Astro.cookies.get('form_status')?.value;
 
@@ -11,7 +12,7 @@ if (c_status !== 'sent') {
 
 <BaseLayout
   title="Αποτυχία Αποστολής | phpixel"
-  description="Κάτι πήγε στραβά. Δοκίμασε ξανά ή πάρε μας τηλέφωνο."
+  description="Κάτι πήγε στραβά. Δοκίμασε ξανά ή στείλε μας email."
 >
 
   <section class="status-page">
@@ -21,10 +22,10 @@ if (c_status !== 'sent') {
           <Icon name="ic:baseline-error" />
         </div>
         <h1>Κάτι πήγε στραβά</h1>
-        <p>Δεν μπορέσαμε να στείλουμε το μήνυμά σου. Δοκίμασε ξανά ή πάρε μας στο 697 738 3488.</p>
+        <p>Δεν μπορέσαμε να στείλουμε το μήνυμά σου. Δοκίμασε ξανά ή στείλε μας email στο {site.contact.email}.</p>
         <div class="status-actions">
           <a href="/contact" class="btn btn--primary">Δοκίμασε ξανά</a>
-          <a href="tel:+306977383488" class="btn btn--outline">Πάρε μας τηλέφωνο</a>
+          <a href={`mailto:${site.contact.email}`} class="btn btn--outline">Στείλε μας email</a>
         </div>
       </div>
     </div>
