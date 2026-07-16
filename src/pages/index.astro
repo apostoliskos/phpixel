@@ -346,7 +346,11 @@ const heroImageExists = publicImageExists(heroImage);
        ═══════════════════════════════════════════════ -->
   <section class="tech">
     <div class="container">
-      <p class="tech__line">Δουλεύουμε κυρίως με: WordPress · WooCommerce · CS-Cart · Astro · React · Node.js</p>
+      <p class="tech__line">
+        Δουλεύουμε με WordPress, WooCommerce, CS-Cart, Astro, React και Node.js. Αλλά το εργαλείο δεν κάνει
+        τη δουλειά — ο τρόπος που το χρησιμοποιείς, ναι. Γι' αυτό δεν διαλέγουμε τεχνολογίες από συνήθεια·
+        διαλέγουμε ό,τι ταιριάζει στο δικό σου έργο.
+      </p>
     </div>
   </section>
 
@@ -919,10 +923,13 @@ const heroImageExists = publicImageExists(heroImage);
   }
 
   .tech__line {
+    max-width: 62ch;
+    margin-inline: auto;
     text-align: center;
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.02em;
+    line-height: 1.7;
     opacity: 0.35;
   }
 
