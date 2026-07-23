@@ -1,0 +1,124 @@
+---
+// Ενότητα εσωτερικής διασύνδεσης («topic cluster»): συνδέει κάθε σελίδα
+// υπηρεσίας με σχετικές υπηρεσίες, case studies και άρθρα του blog.
+// Δέχεται τρεις προαιρετικούς πίνακες από { label, href }.
+import { Icon } from 'astro-icon/components';
+
+export interface RelatedLink {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  services?: RelatedLink[];
+  cases?: RelatedLink[];
+  articles?: RelatedLink[];
+  title?: string;
+}
+
+const {
+  services = [],
+  cases = [],
+  articles = [],
+  title = 'Δες επίσης',
+} = Astro.props;
+
+const groups = [
+  { kind: 'Υπηρεσία', items: services },
+  { kind: 'Case study', items: cases },
+  { kind: 'Άρθρο', items: articles },
+];
+
+const links = groups.flatMap((g) => g.items.map((item) => ({ ...item, kind: g.kind })));
+---
+
+{links.length > 0 && (
+  <section class="related" aria-label={title}>
+    <div class="container">
+      <h2 class="related__title reveal">{title}</h2>
+      <div class="related__grid">
+        {links.map((link, i) => (
+          <a
+            href={link.href}
+            class="related__card reveal"
+            style={`transition-delay: ${i * 0.05}s`}
+          >
+            <span class="related__kind">{link.kind}</span>
+            <span class="related__label">
+              {link.label}
+              <Icon name="ic:baseline-arrow-forward" class="related__arrow" />
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .related {
+    padding: var(--section-padding);
+  }
+
+  .related__title {
+    margin-bottom: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .related__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--theme-grid-gap);
+  }
+
+  .related__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--theme-shape-radius);
+    box-shadow: var(--glass-shadow);
+    color: inherit;
+    transition: var(--theme-transition);
+  }
+
+  .related__card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .related__kind {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .related__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--accent-blue);
+  }
+
+  .related__arrow {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .related__card:hover .related__arrow {
+    transform: translateX(4px);
+  }
+</style>

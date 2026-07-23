@@ -1,45 +1,33 @@
 ---
-
+// Skip link — πρώτο εστιάσιμο στοιχείο της σελίδας. Κρυμμένο οπτικά μέχρι να
+// πάρει focus (Tab), οπότε επιτρέπει σε πληκτρολόγιο/screen reader να
+// παρακάμψουν το navbar και να πάνε κατευθείαν στο <main id="content">.
 ---
 
-<a href="#content">Skip to main content</a>
+<a href="#content" class="skip-link">Μετάβαση στο περιεχόμενο</a>
 
 <style>
-	a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: fixed;
-		top: 0;
-		right: 0;
-		left: 0;
-		overflow-x: hidden;
-		text-align: center;
-		background-color: var(--color-white);
-		border-bottom: 1px solid transparent;
-		font-family: var(--font-display);
-		text-transform: uppercase;
-		font-size: 1em;
-		font-weight: 700;
-		background: var(--color-white);
-		z-index: 5;
+  .skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    padding: 0.75rem 1.25rem;
+    background: var(--theme-on-bg);
+    color: var(--theme-bg);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 0 0 var(--theme-shape-radius-sm) 0;
 
-		/* Visually hidden */
-		clip: rect(0 0 0 0);
-		clip-path: inset(50%);
-		height: 1px;
-		overflow: hidden;
-		position: absolute;
-		white-space: nowrap;
-		width: 1px;
-	}
-	a:focus {
-		width: 100vw;
-		height: 48px;
-		position: fixed;
-		clip: initial;
-		clip-path: initial;
-		background: var(--theme-on-bg);
-		color: var(--theme-bg);
-	}
+    /* Visually hidden μέχρι το focus */
+    transform: translateY(-120%);
+    transition: transform 0.2s ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--theme-bg);
+    outline-offset: -4px;
+  }
 </style>

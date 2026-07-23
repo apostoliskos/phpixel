@@ -6,6 +6,7 @@ import { footerLists, footerSocials } from '../config/footer';
 import { Icon } from 'astro-icon/components';
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import SkipLink from '../components/core/SkipLink.astro';
 
 import '../styles/index.css';
 
@@ -107,6 +108,9 @@ const currentPath = Astro.url.pathname;
   </head>
 
   <body>
+    <!-- Skip link: πρώτο εστιάσιμο στοιχείο, για πρόσβαση με πληκτρολόγιο -->
+    <SkipLink />
+
     <!-- ========== NAVBAR ========== -->
     <header class:list={['navbar', { 'navbar--dark-hero': darkHero }]} id="navbar">
       <div class="navbar__inner">

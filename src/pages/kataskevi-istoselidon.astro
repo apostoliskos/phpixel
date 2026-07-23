@@ -8,6 +8,7 @@ import GlassCard from '../components/GlassCard.astro';
 import FaqSection from '../components/FaqSection.astro';
 import ServiceSchema from '../components/schema/ServiceSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
+import RelatedLinks from '../components/sections/RelatedLinks.astro';
 
 const features = [
   {
@@ -168,6 +169,22 @@ const faqItems = [
       </p>
     </div>
   </section>
+
+  <!-- Εσωτερικά links (topic cluster) -->
+  <RelatedLinks
+    services={[
+      { label: 'Κατασκευή E-shop', href: '/kataskevi-eshop' },
+      { label: 'SEO & AEO', href: '/seo' },
+      { label: 'Google Ads & Social', href: '/diafimisi' },
+    ]}
+    cases={[
+      { label: 'Angela Yfantidou', href: '/portfolio/angela-yfantidou' },
+      { label: 'Αλάζω', href: '/portfolio/alazo' },
+    ]}
+    articles={[
+      { label: 'UX/UI Design και μετατροπές', href: '/blog/posts/ux-ui' },
+    ]}
+  />
 
   <!-- FAQ -->
   <FaqSection items={faqItems} title="Συχνές ερωτήσεις για ιστοσελίδες" />

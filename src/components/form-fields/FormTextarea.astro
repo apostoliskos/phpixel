@@ -6,7 +6,7 @@ const { label, name, placeholder, rows = 4, required} = Astro.props;
 <div class="form-field__container">
   {label && <label for={name}>{label}</label>}
   <p class="secondary_message">Στείλε μας τα σχόλια και τις ερωτήσεις σου. Θα σου απαντήσουμε το συντομότερο δυνατόν!</p>
-  <textarea name={name} placeholder={placeholder} rows={rows} required={required}></textarea>
+  <textarea id={name} name={name} placeholder={placeholder} rows={rows} required={required}></textarea>
 </div>
 
 <style>
